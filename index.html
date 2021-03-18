@@ -6,12 +6,60 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bookaholic</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <!-- fontawesom  -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 </head>
 
 <body>
-    <div id="app">
-        <register-form></register-form>
+    <my-header></my-header>
+
+    <div class="container">
+        <div id="text-content">
+            <p id="heading">Books Community</p>
+            <p id="sub-text">Connect bookaholics <br> around you.</p>
+            <button id="join-now-btn">Join Now</button>
+        </div>
+        <img id="homepage-img" src="images/homepage_img.png">
     </div>
+
+    <footer>
+        <div id="social">
+            <p id="social-heading">Bookaholic</p>
+            <ul id="social-list">
+                <li><i class="fab fa-facebook"></i></li>
+                <li><i class="fab fa-instagram"></i></li>
+                <li><i class="fab fa-linkedin"></i></li>
+            </ul>
+        </div>
+        <div id="support">
+            <ul id="support-list">
+                <li><a href="">Contact us</a></li>
+                <li><a href="">FAQ</a></li>
+                <li><a href="">ABC</a></li>
+                <li><a href="">XYZ</a></li>
+            </ul>
+        </div>
+        <div id="about">
+            <ul id="about-list">
+                <li><a href="">About us</a></li>
+                <li><a href="">Blog</a></li>
+                <li><a href="">Community</a></li>
+            </ul>
+        </div>
+        <div id="newsletter">
+            <h3>Newsletter Subscription</h3>
+            <div id="newsletter-wrapper">
+                <input type="text" placeholder="Subscribe to our newsletter">
+                <button>Subscribe</button>
+            </div>
+        </div>
+    </footer>
+
     <script src="js/app.js" type="module"></script>
 </body>
 

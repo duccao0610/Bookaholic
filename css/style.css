@@ -1,3 +1,86 @@
 body {
     margin: 0;
 }
+
+*{
+    font-family: "Montserrat";
+}
+.container {
+    display: flex;
+    justify-content: space-between;
+    margin: 0px 200px;
+}
+
+.container #text-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.container #homepage-img {
+
+}
+
+.container #text-content #heading {
+    background: linear-gradient(to right, #525252, #3D72B4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 48px;
+    font-weight: bolder;
+    margin-bottom: 0px;
+}
+
+.container #text-content #sub-text {
+    color: #666363;
+    font-size: 36px;
+    font-weight: normal;
+}
+
+.container #text-content #join-now-btn {
+    background: linear-gradient(to right, #525252, #3D72B4);
+    font-size: 32px;
+    border-radius: 10px;
+    border: none;
+    width: fit-content;
+    padding: 17px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+footer {
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    background: linear-gradient(to right,#A17E7E,#6B4141);
+}
+
+footer #social #social-heading {
+    background: linear-gradient(to right, #525252, #3D72B4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 28px;
+    font-weight: bolder;
+}
+
+footer #social ul {
+    padding: 0px;
+    display: flex;
+    justify-content: space-around;
+}
+footer #social li {
+    font-size: 30px;
+}
+
+footer #support li,#about li,#social li {
+    list-style: none;
+}
+
+footer #support a,#about a {
+    text-decoration: none;
+    color:black;
+} 
+
+footer #newsletter button {
+}

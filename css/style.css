@@ -99,6 +99,10 @@ footer #info-container #support a, #about a {
     font-weight: bold;
 }
 
+footer #info-container #newsletter input{
+    font-size:1rem ;
+}
+
 footer #info-container #newsletter input::placeholder {
     font-size: 0.6rem;
 }

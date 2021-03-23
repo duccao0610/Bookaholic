@@ -1,0 +1,42 @@
+*{
+    font-family: "Montserrat";
+}
+#form-container{
+    display:flex;
+    justify-content : space-around;
+}
+
+#form-container #register-form h2 {
+    text-align:center;
+    text-transform : uppercase;
+}
+
+#form-container #register-form #button-container{
+    display:flex;
+}
+
+#form-container #register-form #button-container #btn-register {
+    padding: 10px;
+    border-radius : 10px;
+    font-size : 25px;
+    color : #ffffff;
+    background : linear-gradient(to right,#525252,#3D72B4);
+}
+#form-container #register-form #button-container #btn-register:focus {
+    outline: none;
+}
+#form-container #register-form #button-container #btn-register:hover {
+    background : linear-gradient(to left,#525252,#3D72B4);
+}
+#form-container #register-form #button-container .checkbox-wrapper{
+    margin-left :21px;
+    display:flex;
+    justify-content :space-between;
+    align-items: center;
+}
+#form-container #register-form .checkbox-wrapper #strongText{   
+    text-decoration: none;
+    background: linear-gradient(to left, #a17e7e, #491B1B);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

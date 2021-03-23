@@ -10,7 +10,11 @@ $template.innerHTML = /*html*/`
             margin-bottom : 17px;
             border: none;
             border-radius : 14px;
+            padding :  0px 15px;
         }
+        .form-item:focus{
+            outline :none;
+        } 
         .form-item::placeholder {
             padding : 10px;
             color: #888383;

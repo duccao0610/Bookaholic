@@ -1,0 +1,52 @@
+*{
+    font-family: "Montserrat";
+}
+#form-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+#form-container #login-form h2 {
+    text-align: center;
+    text-transform: uppercase;
+}
+
+#form-container #login-form #button-container #option-container,#button-list {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+#form-container #login-form #button-container #option-container a{
+    text-decoration: none;
+    color: black;
+    font-weight: lighter;
+}
+#form-container #login-form #button-container #option-container #checkbox-wrapper label{
+    background: linear-gradient(to left, #a17e7e, #491B1B);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#form-container #login-form #button-container button {
+    border-radius: 10px;
+    font-size: 25px;
+    color: #fff;
+    padding: 10px;
+    border: none;
+}
+#form-container #login-form #button-container #btn-login {
+    background : linear-gradient(to right,#525252,#3D72B4);
+}
+#form-container #login-form #button-container #btn-login:hover {
+    background : linear-gradient(to left,#525252,#3D72B4);
+}
+
+#form-container #login-form #button-container #btn-register {
+    background: linear-gradient(to right, #a17e7e, #491B1B);
+}
+#form-container #login-form #button-container #btn-register:hover {
+    background: linear-gradient(to left, #a17e7e, #491B1B);
+}
+#form-container #login-form #button-container button:focus {
+    outline: none;
+}

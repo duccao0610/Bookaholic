@@ -1,42 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bookaholic</title>
-
-    <link rel="stylesheet" href="css/style.css">
-    <!-- Montserrat font  -->
-    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
-
-    <!-- fontawesome  -->
+const $template = document.createElement("template");
+$template.innerHTML = /*html*/`
+    <link rel="stylesheet" href="./css/footer.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-
-    <!-- Navigo -->
-    <script src="//unpkg.com/navigo@6"></script>
-
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
-</head>
-
-<body>
-    <div id="app">
-
-    </div>
-    <!-- <div class="container">
-        <div id="text-content">
-            <p id="heading">Books Community</p>
-            <p id="sub-text">Connect bookaholics <br> around you.</p>
-            <button id="join-now-btn">Join Now</button>
-        </div>
-        <img id="homepage-img" src="images/homepage_img.png">
-    </div>
-
-    <footer>
+    <div id="footer">
         <div id="info-container">
             <div id="social">
                 <h3 id="social-heading">Bookaholic</h3>
@@ -70,9 +37,16 @@
             </div>
         </div>
         <p id="copyright-text">Bookaholic , Copyright &copy; 2021</p>
-    </footer> -->
+    </div>
+`;
 
-    <script src="js/app.js" type="module"></script>
-</body>
+export default class MyFooter extends HTMLElement {
+    constructor() {
+        super();
 
-</html>
+        this.attachShadow({ mode: "open" });
+        this.shadowRoot.appendChild($template.content.cloneNode(true));
+    };
+};
+
+window.customElements.define("my-footer", MyFooter);

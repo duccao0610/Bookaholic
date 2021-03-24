@@ -1,3 +1,6 @@
+import { validateEmail, required } from "../utils.js";
+import { login } from "../models/user.js";
+
 const $template = document.createElement("template");
 $template.innerHTML = /*html*/`
     <link rel="stylesheet" href="./css/login-form.css">
@@ -12,7 +15,7 @@ $template.innerHTML = /*html*/`
                         <input type="checkbox" id="remember_checkbox">
                         <label for="remember_checkbox" id="policy_text">Remember Me</label><br>
                     </div>
-                    <a id="forgot-password" href="#">Forgot password ?</a>
+                    <a id="forgot-password" href="#">Forgot password?</a>
                 </div>
                 <div id="button-list">
                     <button id="btn-login">Login</button>
@@ -32,7 +35,32 @@ export default class LoginForm extends HTMLElement {
         this.shadowRoot.appendChild($template.content.cloneNode(true));
 
         this.$loginForm = this.shadowRoot.getElementById("login-form");
+        this.$checked = this.shadowRoot.getElementById("remember_checkbox");
+        this.$email = this.shadowRoot.getElementById("email");
+        this.$password = this.shadowRoot.getElementById("password");
     };
+
+    connectedCallback() {
+        this.$loginForm.onsubmit = (event) => {
+            event.preventDefault();
+
+            let email = this.$email.value;
+            let password = this.$password.value;
+
+            let isPassed =
+                (
+                    this.$email.validate(required, "Input your email") &&
+                    this.$email.validate(validateEmail, "Wrong email format")
+                ) &
+                this.$password.validate(required, "Input your password");
+
+            if (isPassed) {
+                login(email, password);
+            }
+
+
+        };
+    }
 };
 
 window.customElements.define("login-form", LoginForm);

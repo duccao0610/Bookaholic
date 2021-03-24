@@ -40,3 +40,49 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
+/* tablet */
+@media (max-width: 1023px) and (min-width: 720px){
+    #form-container {
+        margin: 0 15px;
+        margin-top: 10vh;
+    }
+    #form-container img {
+        width : 40%;
+        margin: auto;
+    }
+    #form-container #register-form #button-container .checkbox-wrapper{
+        word-wrap: break-word;
+    }
+
+    #form-container #register-form #button-container {
+        justify-content: space-around;
+    }
+    
+}
+
+
+
+/* mobile */
+@media (max-width: 719px){
+    #form-container {
+        flex-direction: column-reverse;
+    }
+    #form-container #register-form {
+        text-align: center;
+    }
+    #form-container #register-form #button-container {
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+    #form-container #register-form button {
+        width: 75%;
+        margin-bottom: 30px;
+    }
+
+    #form-container img {
+        width: 60%;
+        margin: auto;
+    }
+
+}

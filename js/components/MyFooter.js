@@ -18,7 +18,6 @@ $template.innerHTML = /*html*/`
                     <li><a href="">Contact us</a></li>
                     <li><a href="">FAQ</a></li>
                     <li><a href="">ABC</a></li>
-                    <li><a href="">XYZ</a></li>
                 </ul>
             </div>
             <div id="about">

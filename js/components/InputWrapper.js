@@ -7,10 +7,10 @@ $template.innerHTML = /*html*/`
             height : 57px;
             background : #D0C7C7;
             font-size : 20px;
-            margin-bottom : 17px;
+            margin-bottom : 5px;
             border: none;
-            border-radius : 14px;
-            padding :  0px 15px;
+            border-radius : 5px;
+            padding :  0px 10px;
         }
         .form-item:focus{
             outline :none;
@@ -19,6 +19,22 @@ $template.innerHTML = /*html*/`
             padding : 10px;
             color: #888383;
             font-size: 18px;
+        }
+        #error {
+            color :red;
+        }
+        @media (max-width: 719px){
+            .form-item{
+                width: 70%;
+                border-radius : 5px;
+                margin-bottom : 10px;
+            }
+        }
+        @media (max-width: 1023px) and (min-width: 720px){
+            .form-item {
+                width:90%;
+                border-radius :5px;
+            }
         }
     </style>
     <div class="input-container">
@@ -58,7 +74,26 @@ export default class InputWrapper extends HTMLElement {
                 this.$input.value = newValue;
                 break;
         }
+    };
+
+    get value() {
+        return this.$input.value;
     }
+
+    set error(message) {
+        this.setAttribute("error", message);
+    };
+
+    validate(condition, message) {
+        if (condition(this.value)) {
+            this.error = "";
+            return true;
+        } else {
+            this.error = message;
+            return false;
+        };
+    };
+
 }
 
 window.customElements.define("input-wrapper", InputWrapper);

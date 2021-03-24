@@ -4,7 +4,6 @@ $template.innerHTML = /*html*/`
     <link rel="stylesheet" href="./css/header.css">
     <div id="header">
         <img src="../images/logo.png" id="logo">
- 
         <nav id="nav-bar">
             <span class="nav-bar-item" id="home">Home</span>
             <span class="nav-bar-item" id="about">About</span>

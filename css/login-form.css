@@ -50,3 +50,48 @@
 #form-container #login-form #button-container button:focus {
     outline: none;
 }
+/* tablet */
+@media (max-width: 1023px) and (min-width: 720px){
+    #form-container {
+        margin-top: 10vh;
+    }
+    #form-container img {
+        width: 40%;
+    }
+}
+
+/* mobile */
+@media (max-width: 719px){
+    #form-container {
+        flex-direction: column-reverse;
+        text-align: center;
+    }
+    #form-container #login-form {
+        text-align: center;
+    }
+    #form-container #login-form h2 {
+        font-size: 20px;
+    }
+    #form-container #login-form #button-container #option-container,#button-list{
+        justify-content: space-around;
+    }
+    #form-container #login-form #button-container #option-container{
+        padding:  0 20px;
+    }
+    #form-container #login-form #button-container #button-list {
+        margin-bottom: 30px;
+        justify-content: space-around;
+    }
+    
+    #form-container #login-form #button-container button {
+        border-radius: 5px;
+        font-size: 20px;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+    }
+    #form-container img {
+        margin: auto;
+        width: 60%;
+    }
+}

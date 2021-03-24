@@ -78,4 +78,35 @@
     font-weight: bolder;
 }
 
+/* mobile */
+@media (max-width: 718px){
+    #footer {
+        margin-top: 5vh;
+    }
+    #footer #info-container {
+        display: block;
+        text-align: center;
+    }
 
+    #footer #info-container #social ul {
+        justify-content: space-around;
+    }
+    #footer #info-container #support ,#about {
+        display: inline-flex;
+        justify-self: flex-start;        
+        font-size: 20px;
+    }
+}
+
+/* tablet  */
+@media (max-width: 1023px) and (min-width: 720px){
+    
+    #footer #info-container{
+        padding: 1rem;
+        justify-content: space-between;
+        margin: 0;
+    }   
+    #footer #info-container #newsletter {
+        margin-left: 30px;
+    }
+}

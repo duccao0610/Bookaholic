@@ -1,3 +1,5 @@
+import { validateEmail, required } from "../utils.js";
+import { register } from "../models/user.js";
 
 const $template = document.createElement("template");
 $template.innerHTML = /*html*/`
@@ -33,8 +35,39 @@ export default class RegisterForm extends HTMLElement {
         this.$email = this.shadowRoot.getElementById("email");
         this.$password = this.shadowRoot.getElementById("password");
         this.$confirmPassword = this.shadowRoot.getElementById("confirm-password");
+        this.$checked = this.shadowRoot.getElementById("policy_checkbox");
     }
 
+    connectedCallback() {
+        this.$registerForm.onsubmit = (event) => {
+            event.preventDefault();
+
+            let name = this.$name.value;
+            let email = this.$email.value;
+            let password = this.$password.value;
+
+            function confirmPassword(value) {
+                return value == password;
+            }
+
+            let isPassed = this.$name.validate(required, "Input your name") &
+                (
+                    this.$email.validate(required, "Input your email") &&
+                    this.$email.validate(validateEmail, "Wrong email format")
+                ) &
+                this.$password.validate(required, "Input your password") &
+                (
+                    this.$confirmPassword.validate(confirmPassword, "Password did not match") &&
+                    this.$confirmPassword.validate(required, "Please confirm your password")
+                );
+
+            if (isPassed && this.$checked.checked == true) {
+                register(name, email, password);
+            } else if (isPassed) {
+                alert("Please agree our term of privacy policy");
+            }
+        }
+    }
 
 }
 

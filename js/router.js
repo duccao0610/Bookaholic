@@ -10,5 +10,5 @@ router.on("/login", function () {
 }).resolve();
 
 router.on(function () {
-    router.navigate("/login");
+    // router.navigate("/login");
 }).resolve();

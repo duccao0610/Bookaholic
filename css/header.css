@@ -5,11 +5,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin : 50px 100px 100px;
+    padding : 50px 100px 50px;
+    margin-bottom: 50px;
+    background: linear-gradient(to left, #a17e7e, #491B1B);
+    
 }
 #header #logo {
-    width: 212px;
-    height: 188px;
+    width: 159px;
+    height: 141px;
     cursor : pointer;
     transition: 1s ease-in-out;
 }
@@ -20,7 +23,7 @@
 #header #nav-bar .nav-bar-item {
     margin: 0 20px;
     font-size: 24px;
-    background: linear-gradient(to right, #a17e7e, #491B1B);
+    background : linear-gradient(to right,#525252,#3D72B4);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     border-style: none;
@@ -28,7 +31,7 @@
     height : fit-content;
 }
 #header #nav-bar .nav-bar-item:hover {
-    background: linear-gradient(to left, #a17e7e, #491B1B);
+    background : linear-gradient(to right,#525252,#3D72B4);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }

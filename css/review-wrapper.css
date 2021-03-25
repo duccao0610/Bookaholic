@@ -1,0 +1,34 @@
+*{
+    font-family: "Montserrat";
+}
+#review-wrapper {
+    width: 80%;
+    display: flex;
+    justify-content: flex-start;
+}
+#review-wrapper #identity {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 13px;
+}
+#review-wrapper #avatar {
+    height: 60px;
+}
+#review-wrapper #cropped-avatar {
+    width: 60px;
+    height: 60px;
+    overflow:hidden;   
+    position:relative;
+    border-radius: 50%;
+}
+#review-wrapper #review-content {
+    margin-left: 110px;
+}
+#review-wrapper #comment {
+    font-size: 13px;
+}
+#review-wrapper #review-date {
+    font-size: 11px;
+    color: grey;
+}

@@ -1,0 +1,55 @@
+*{
+    font-family: "Montserrat";
+}
+#book-info-wrapper {
+    display: flex;
+    justify-content: center;
+}
+#book-cover-container {
+    width: 300px;
+    height: 440px;
+}
+#book-cover-container #book-cover {
+    width: 300px;
+}
+#aside-right {
+    margin-left: 90px;
+    position: relative;
+    width: 40%;
+}
+#aside-right #book-title {
+    margin: auto;
+}
+#aside-right #author {
+    font-size: 13px;
+}
+#aside-right #status-container {
+    display: flex;
+    align-items: center;
+}
+#aside-right #status-container #status {
+    margin:auto;
+    margin-left: 5px;
+}
+#aside-right #intro {
+    margin: 13px auto;
+}
+button {
+    padding: 10px;
+    border-radius : 10px;
+    border: none;
+    font-size : 20px;
+    color : #ffffff;
+    display: block;
+}
+#aside-right #button-group {
+    position: absolute;
+    top: 300px;
+}
+#aside-right #button-add {
+    background : linear-gradient(to right,#525252,#3D72B4);
+    margin-bottom: 13px;
+}
+#aside-right #button-find-book {
+    background: linear-gradient(to right,#A17E7E,#6B4141);
+}

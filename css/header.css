@@ -11,6 +11,10 @@
     width: 212px;
     height: 188px;
     cursor : pointer;
+    transition: 1s ease-in-out;
+}
+#header #logo:hover {
+    transform: rotateY(180deg);
 }
 
 #header #nav-bar .nav-bar-item {

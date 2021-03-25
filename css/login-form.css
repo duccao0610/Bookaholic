@@ -5,6 +5,10 @@
     display: flex;
     justify-content: space-around;
 }
+#form-container #login-form {
+    margin: auto 0;
+}
+
 
 #form-container #login-form h2 {
     text-align: center;
@@ -33,12 +37,14 @@
     color: #fff;
     padding: 10px;
     border: none;
+    transition: 0.5s;
 }
 #form-container #login-form #button-container #btn-login {
     background : linear-gradient(to right,#525252,#3D72B4);
 }
 #form-container #login-form #button-container #btn-login:hover {
     background : linear-gradient(to left,#525252,#3D72B4);
+    transform: translate(-3px,-3px);
 }
 
 #form-container #login-form #button-container #btn-register {
@@ -46,6 +52,7 @@
 }
 #form-container #login-form #button-container #btn-register:hover {
     background: linear-gradient(to left, #a17e7e, #491B1B);
+    transform: translate(-3px,-3px);
 }
 #form-container #login-form #button-container button:focus {
     outline: none;

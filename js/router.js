@@ -9,6 +9,10 @@ router.on("/login", function () {
     $app.innerHTML = "<log-in-screen></log-in-screen>";
 }).resolve();
 
+router.on("/welcome", function () {
+    $app.innerHTML = "<welcome-screen></welcome-screen>";
+}).resolve();
+
 router.on(function () {
-    // router.navigate("/login");
+    router.navigate("/welcome");
 }).resolve();

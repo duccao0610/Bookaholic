@@ -6,6 +6,16 @@
     justify-content : space-around;
 }
 
+#form-container #register-form {
+    margin: auto 0;
+}
+#form-container img {
+    transition: 0.5s;
+}
+#form-container img:hover {
+    transform: translate(-5px,-10px);
+}
+
 #form-container #register-form h2 {
     text-align:center;
     text-transform : uppercase;
@@ -13,6 +23,7 @@
 
 #form-container #register-form #button-container{
     display:flex;
+    margin-top: 5px;
 }
 
 #form-container #register-form #button-container #btn-register {
@@ -21,12 +32,14 @@
     font-size : 25px;
     color : #ffffff;
     background : linear-gradient(to right,#525252,#3D72B4);
+    transition: 0.5s;
 }
 #form-container #register-form #button-container #btn-register:focus {
     outline: none;
 }
 #form-container #register-form #button-container #btn-register:hover {
     background : linear-gradient(to left,#525252,#3D72B4);
+    transform: translate(-3px,-3px);
 }
 #form-container #register-form #button-container .checkbox-wrapper{
     margin-left :21px;

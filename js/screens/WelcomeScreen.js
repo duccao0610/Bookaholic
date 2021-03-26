@@ -3,22 +3,22 @@ $template.innerHTML = /*html*/`
     <div id="welcome-screen">
         <my-header></my-header>
         <category-container books='[
-            {"src":"../images/book1.jpg","info":"The imperfections of Memory- Angelina Aludo"},
-            {"src":"../images/book2.jpg","info":"The little story book- Jean Lumier"},
-            {"src":"../images/book1.jpg","info":"The imperfections of Memory- Angelina Aludo"},
-            {"src":"../images/book2.jpg","info":"The little story book- Jean Lumier"}
+            {"src":"../images/book1.jpg","info":"The imperfections of Memory"},
+            {"src":"../images/book2.jpg","info":"The little story book"},
+            {"src":"../images/book1.jpg","info":"The imperfections of Memory"},
+            {"src":"../images/book2.jpg","info":"The little story book"}
         ]' name="Popular"></category-container>
         <category-container books='[
-            {"src":"../images/book1.jpg","info":"The imperfections of Memory- Angelina Aludo"},
-            {"src":"../images/book2.jpg","info":"The little story book- Jean Lumier"},
-            {"src":"../images/book1.jpg","info":"The imperfections of Memory- Angelina Aludo"},
-            {"src":"../images/book2.jpg","info":"The little story book- Jean Lumier"}
+            {"src":"../images/book1.jpg","info":"The imperfections of Memory"},
+            {"src":"../images/book2.jpg","info":"The little story book"},
+            {"src":"../images/book1.jpg","info":"The imperfections of Memory"},
+            {"src":"../images/book2.jpg","info":"The little story book"}
         ]' name="Novel"></category-container>
         <category-container books='[
-            {"src":"../images/book1.jpg","info":"The imperfections of Memory- Angelina Aludo"},
-            {"src":"../images/book2.jpg","info":"The little story book- Jean Lumier"},
-            {"src":"../images/book1.jpg","info":"The imperfections of Memory- Angelina Aludo"},
-            {"src":"../images/book2.jpg","info":"The little story book- Jean Lumier"}
+            {"src":"../images/book1.jpg","info":"The imperfections of Memory"},
+            {"src":"../images/book2.jpg","info":"The little story book"},
+            {"src":"../images/book1.jpg","info":"The imperfections of Memory"},
+            {"src":"../images/book2.jpg","info":"The little story book"}
         ]' name="Fiction"></category-container>
         <my-footer></my-footer>
     </div>

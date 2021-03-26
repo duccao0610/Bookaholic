@@ -9,6 +9,7 @@ export async function register(name, email, password) {
             password: md5(password)
         });
         alert("Register successful");
+        router.navigate("/login");
     } else {
         alert("This email already in used ");
     }
@@ -24,6 +25,7 @@ export async function login(email, password) {
     console.log(response);
     if (!response.empty) {
         alert("login success");
+        router.navigate("/welcome");
     } else {
         alert("Email or password not right.Please try again");
     }

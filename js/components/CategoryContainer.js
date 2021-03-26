@@ -19,6 +19,15 @@ $template.innerHTML = /*html*/`
             font-size : 30px;
             margin-left  :100px;
         }
+        @media (max-width: 719px){
+            #container #book-list {
+                flex-direction :column;
+            }
+            #container h2 {
+                font-size : 35px;
+                margin : auto;
+            }
+        }
         
     </style>
     <div id="container">
@@ -49,13 +58,14 @@ export default class CategoryContainer extends HTMLElement {
             for (let book of books) {
                 let $bookContainer = document.createElement("book-container");
                 $bookContainer.setAttribute("src", book.src);
-                $bookContainer.setAttribute("info", book.info);
+                $bookContainer.setAttribute("name", book.info);
                 this.$bookList.appendChild($bookContainer);
             }
         } else if (attrName == "name") {
             this.$name.innerHTML = newValue;
         }
-    }
+    };
+
 };
 
 window.customElements.define("category-container", CategoryContainer);

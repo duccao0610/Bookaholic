@@ -13,6 +13,11 @@ router.on("/welcome", function () {
     $app.innerHTML = "<welcome-screen></welcome-screen>";
 }).resolve();
 
+router.on("/detail", function () {
+    $app.innerHTML = "<review-screen></review-screen>";
+})
 router.on(function () {
-    router.navigate("/welcome");
+    router.navigate("/login");
 }).resolve();
+
+window.router = router;

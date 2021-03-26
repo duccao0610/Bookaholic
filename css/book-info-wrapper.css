@@ -1,16 +1,18 @@
 *{
     font-family: "Montserrat";
+    transition: 0.5s ease-out;
 }
 #book-info-wrapper {
+    width: fit-content;
+    margin: auto;
     display: flex;
     justify-content: center;
 }
-#book-cover-container {
+
+#book-cover {
     width: 300px;
     height: 440px;
-}
-#book-cover-container #book-cover {
-    width: 300px;
+    border-radius: 3px;
 }
 #aside-right {
     margin-left: 90px;
@@ -41,6 +43,10 @@ button {
     font-size : 20px;
     color : #ffffff;
     display: block;
+    cursor: pointer;
+}
+button:focus {
+    outline: none;
 }
 #aside-right #button-group {
     position: absolute;
@@ -50,6 +56,25 @@ button {
     background : linear-gradient(to right,#525252,#3D72B4);
     margin-bottom: 13px;
 }
+#aside-right #button-add:hover {
+    background : linear-gradient(to left,#525252,#3D72B4);
+
+}
 #aside-right #button-find-book {
     background: linear-gradient(to right,#A17E7E,#6B4141);
+}
+#aside-right #button-find-book:hover {
+    background: linear-gradient(to left,#A17E7E,#6B4141);
+
+}
+
+@media (max-width: 719px){
+    #book-info-wrapper {
+        transform:scale(0.7);
+    }
+
+    button{
+        font-size: 15px;
+    }
+
 }

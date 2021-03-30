@@ -24,9 +24,9 @@
     margin: 0 20px;
     font-size: 24px;
     font-weight: bold;
-    background : linear-gradient(to right,#525252,#3D72B4);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    /* background : linear-gradient(to right,#525252,#3D72B4); */
+    /* -webkit-background-clip: text; */
+    /* -webkit-text-fill-color: transparent; */
     border-style: none;
     cursor : pointer;
     height : fit-content;

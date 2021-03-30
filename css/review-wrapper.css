@@ -2,9 +2,9 @@
     font-family: "Montserrat";
 }
 #review-wrapper {
-    width: 80%;
     display: flex;
     justify-content: flex-start;
+    border-top: 0.5px solid black;
 }
 #review-wrapper #identity {
     display: flex;
@@ -31,4 +31,8 @@
 #review-wrapper #review-date {
     font-size: 11px;
     color: grey;
+}
+
+#review-wrapper #rating {
+    display: flex;
 }

@@ -3,24 +3,25 @@ import { getCurrentUser } from "../models/user.js";
 const $template = document.createElement("template");
 $template.innerHTML = /*html*/`
     <div id="welcome-screen">
-        <my-header id="header"></my-header>
+        <my-header></my-header>
+        <search-form></search-form>
         <category-container books='[
-            {"src":"../images/book1.jpg","info":"The imperfections of Memory"},
-            {"src":"../images/book2.jpg","info":"The little story book"},
-            {"src":"../images/book1.jpg","info":"The imperfections of Memory"},
-            {"src":"../images/book2.jpg","info":"The little story book"}
+            {"cover_img":"../images/book2.jpg","name":"The little story book"},
+            {"cover_img":"../images/book1.jpg","name":"The imperfections of Memory"},
+            {"cover_img":"../images/book1.jpg","name":"The imperfections of Memory"},
+            {"cover_img":"../images/book2.jpg","name":"The little story book"}
         ]' name="Popular"></category-container>
         <category-container books='[
-            {"src":"../images/book1.jpg","info":"The imperfections of Memory"},
-            {"src":"../images/book2.jpg","info":"The little story book"},
-            {"src":"../images/book1.jpg","info":"The imperfections of Memory"},
-            {"src":"../images/book2.jpg","info":"The little story book"}
+            {"cover_img":"../images/book1.jpg","name":"The imperfections of Memory"},
+            {"cover_img":"../images/book2.jpg","name":"The little story book"},
+            {"cover_img":"../images/book1.jpg","name":"The imperfections of Memory"},
+            {"cover_img":"../images/book2.jpg","name":"The little story book"}
         ]' name="Novel"></category-container>
         <category-container books='[
-            {"src":"../images/book1.jpg","info":"The imperfections of Memory"},
-            {"src":"../images/book2.jpg","info":"The little story book"},
-            {"src":"../images/book1.jpg","info":"The imperfections of Memory"},
-            {"src":"https://edit.org/images/cat/book-covers-big-2019101610.jpg","info":"My cover book"}
+            {"cover_img":"../images/book1.jpg","name":"The imperfections of Memory"},
+            {"cover_img":"../images/book2.jpg","name":"The little story book"},
+            {"cover_img":"../images/book1.jpg","name":"The imperfections of Memory"},
+            {"cover_img":"https://edit.org/images/cat/book-covers-big-2019101610.jpg","info":"My cover book"}
         ]' name="Fiction"></category-container>
         <my-footer></my-footer>
     </div>
@@ -35,7 +36,6 @@ export default class WelcomeScreen extends HTMLElement {
 
         this.attachShadow({ mode: "open" });
         this.shadowRoot.appendChild($template.content.cloneNode(true));
-        this.$header = this.shadowRoot.getElementById("header");
     };
 
     async connectedCallback() {

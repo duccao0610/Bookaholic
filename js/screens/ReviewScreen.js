@@ -4,6 +4,7 @@ const $template = document.createElement('template');
 $template.innerHTML = /*html*/`
     <link rel="stylesheet" href="./css/review-screen.css">
     <my-header></my-header>
+    <search-form></search-form>
     <div id="review-screen">
         <book-info-wrapper id="book-info"></book-info-wrapper>
         <div id="reviews">

@@ -31,7 +31,6 @@ export default class MyHeader extends HTMLElement {
     async connectedCallback() {
         try {
             this.currentUser = await getCurrentUser();
-            console.log(this.currentUser);
             this.$logInBtn.innerHTML = "Hi, " + this.currentUser.name;
         } catch (error) {
             console.log(error);
@@ -56,7 +55,11 @@ export default class MyHeader extends HTMLElement {
 
         //login
         this.$logInBtn.onclick = () => {
-            router.navigate("/login");
+            if (this.currentUser) {
+                console.log("HEHE");
+            } else {
+                router.navigate("/login");
+            }
         }
     }
 }

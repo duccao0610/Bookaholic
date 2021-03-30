@@ -5,10 +5,7 @@ $template.innerHTML = /*html*/`
             integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
         <link rel="stylesheet" href="./css/book-info-wrapper.css">
 
-
-        <div id="book-cover-container">
-            <img id="book-cover" src="https://images.squarespace-cdn.com/content/v1/55c934b2e4b07aa63f0469cb/1442861118190-0729GUG7PF44SAMYOUDA/ke17ZwdGBToddI8pDm48kBUDAxm-FLUF-OJf9moK1kV7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UT_TXfTUFcrrnRvtinoH4JYxq5g0UB9t65pVePltZrd1IKYY7Qu0iTZQJ-GJ4dsqLQ/ZackCover.jpg">
-        </div>
+        <img id="book-cover" src="">
         <div id="aside-right">
             <h2 id="book-title">Book's title</h2>
             <p id="author">Author</p>

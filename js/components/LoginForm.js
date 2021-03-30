@@ -38,6 +38,7 @@ export default class LoginForm extends HTMLElement {
         this.$checked = this.shadowRoot.getElementById("remember_checkbox");
         this.$email = this.shadowRoot.getElementById("email");
         this.$password = this.shadowRoot.getElementById("password");
+        this.$registerBtn = this.shadowRoot.getElementById("btn-register");
     };
 
     connectedCallback() {
@@ -57,8 +58,10 @@ export default class LoginForm extends HTMLElement {
             if (isPassed) {
                 login(email, password);
             }
+        };
 
-
+        this.$registerBtn.onclick = () => {
+            router.navigate("/register");
         };
     }
 };

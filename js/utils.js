@@ -13,3 +13,16 @@ export function required(value) {
     return value != "";
 }
 
+//get data
+export function getDataFromDoc(doc) {
+    return {
+        id: doc.id,
+        ...doc.data()
+    };
+};
+
+export function getDataFromDocs(docs) {
+    return docs.map((doc) => {
+        return getDataFromDoc(doc);
+    })
+}

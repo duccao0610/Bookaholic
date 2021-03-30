@@ -9,7 +9,11 @@
 #book-container p {
     margin-top: 0;
     margin-left: 30px;
-    font-weight: bold;
+    font-weight: bolder;
+    cursor: pointer;
+}
+#book-container p:hover {
+    text-decoration: underline;
 }
 
 #img-container {

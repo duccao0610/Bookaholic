@@ -16,8 +16,12 @@ router.on("/welcome", function () {
 router.on("/detail", function () {
     $app.innerHTML = "<review-screen></review-screen>";
 })
+
+router.on("/results", function () {
+    $app.innerHTML = "<search-results-screen></search-results-screen>";
+})
 router.on(function () {
-    router.navigate("/login");
+    router.navigate("/welcome");
 }).resolve();
 
 window.router = router;

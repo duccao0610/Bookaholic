@@ -14,6 +14,7 @@ $template.innerHTML = /*html*/`
         }
     </style>
     <my-header></my-header>
+    <search-form></search-form>
     <book-info-wrapper id="book-info"></book-info-wrapper>
     <div id="reviews">
 

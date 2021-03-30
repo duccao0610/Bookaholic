@@ -46,6 +46,7 @@
     }
     #header #nav-bar .nav-bar-item {
          margin : 0 10px ;
+         font-size: 20px;
     }
 }
 
@@ -61,7 +62,7 @@
         margin-top: 20px;
     }
     #header #nav-bar .nav-bar-item {
-        font-size: 35px;
+        font-size: 20px;
     }
 }
 

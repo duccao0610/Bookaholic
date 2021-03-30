@@ -9,7 +9,6 @@ export async function viewBookDetail(name) {
         .get();
 
     for (let doc of response.docs) {
-        console.log(doc.data());
         book.name = doc.data().name;
         book.author = doc.data().author;
         book.intro = doc.data().intro;
@@ -22,7 +21,6 @@ export async function viewBookDetail(name) {
     if (!response.empty) {
         console.log("found book");
         console.log("BOOK", book);
-        // router.navigate("/detail");
     } else {
         console.log("not found book");
     }
@@ -30,3 +28,13 @@ export async function viewBookDetail(name) {
     return getDataFromDoc(response.docs[0]);
 }
 
+export async function searchBook(name) {
+    let response = await firebase.firestore()
+        .collection("books")
+        .where("name", "==", name)
+        .get();
+
+    router.navigate("/results");
+    return getDataFromDocs(response.docs);
+
+}

@@ -11,6 +11,8 @@ import LoginScreen from "./screens/LoginScreen.js";
 import RegisterScreen from "./screens/RegisterScreen.js";
 import WelcomeScreen from "./screens/WelcomeScreen.js";
 import ReviewScreen from "./screens/ReviewScreen.js";
+import SearchForm from "./components/SearchForm.js";
+import SearchResultsScreen from "./screens/SearchResultsScreen.js";
 
 import "./router.js";
 

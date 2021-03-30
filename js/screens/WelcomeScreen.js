@@ -1,7 +1,9 @@
+import { getCurrentUser } from "../models/user.js";
+
 const $template = document.createElement("template");
 $template.innerHTML = /*html*/`
     <div id="welcome-screen">
-        <my-header></my-header>
+        <my-header id="header"></my-header>
         <category-container books='[
             {"src":"../images/book1.jpg","info":"The imperfections of Memory"},
             {"src":"../images/book2.jpg","info":"The little story book"},
@@ -18,7 +20,7 @@ $template.innerHTML = /*html*/`
             {"src":"../images/book1.jpg","info":"The imperfections of Memory"},
             {"src":"../images/book2.jpg","info":"The little story book"},
             {"src":"../images/book1.jpg","info":"The imperfections of Memory"},
-            {"src":"../images/book2.jpg","info":"The little story book"}
+            {"src":"https://edit.org/images/cat/book-covers-big-2019101610.jpg","info":"My cover book"}
         ]' name="Fiction"></category-container>
         <my-footer></my-footer>
     </div>
@@ -27,13 +29,22 @@ $template.innerHTML = /*html*/`
 // <book-container src="../images/book2.jpg" desc= "The little story book- Jean Lumier"></book-container>
 
 export default class WelcomeScreen extends HTMLElement {
+    currentUser = null;
     constructor() {
         super();
 
         this.attachShadow({ mode: "open" });
         this.shadowRoot.appendChild($template.content.cloneNode(true));
+        this.$header = this.shadowRoot.getElementById("header");
     };
 
+    async connectedCallback() {
+        try {
+            this.currentUser = await getCurrentUser();
+        } catch (error) {
+            router.navigate("/login");
+        }
+    }
 };
 
 window.customElements.define("welcome-screen", WelcomeScreen);

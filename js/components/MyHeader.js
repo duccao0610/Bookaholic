@@ -1,4 +1,6 @@
 import "../router.js";
+import { getCurrentUser } from "../models/user.js";
+
 const $template = document.createElement('template');
 $template.innerHTML = /*html*/`
     <link rel="stylesheet" href="./css/header.css">
@@ -15,6 +17,7 @@ $template.innerHTML = /*html*/`
 `;
 
 export default class MyHeader extends HTMLElement {
+    currentUser = null;
     constructor() {
         super();
         this.attachShadow({ mode: "open" });
@@ -25,20 +28,35 @@ export default class MyHeader extends HTMLElement {
         this.$homeBtn = this.shadowRoot.getElementById("home");
     };
 
-    connectedCallback() {
+    async connectedCallback() {
+        try {
+            this.currentUser = await getCurrentUser();
+            console.log(this.currentUser);
+            this.$logInBtn.innerHTML = "Hi, " + this.currentUser.name;
+        } catch (error) {
+            console.log(error);
+        }
+
         //logo click handle
         this.$logo.onclick = () => {
-            router.navigate("/welcome");
+            if (this.currentUser) {
+                router.navigate("/welcome");
+            } else {
+                router.navigate("/login");
+            }
         };
 
         this.$homeBtn.onclick = () => {
-            router.navigate("/welcome");
+            if (this.currentUser) {
+                router.navigate("/welcome");
+            } else {
+                router.navigate("/login");
+            }
         }
-
 
         //login
         this.$logInBtn.onclick = () => {
-            console.log("HEHE");
+            router.navigate("/login");
         }
     }
 }

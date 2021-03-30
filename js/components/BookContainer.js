@@ -39,8 +39,9 @@ export default class BookContainer extends HTMLElement {
     connectedCallback() {
         let name = this.$bookName.innerHTML;
         this.$bookName.onclick = () => {
-            viewBookDetail(name);
+            sessionStorage.setItem("selected", name);
             console.log(name);
+            router.navigate("/detail");
         }
     }
 

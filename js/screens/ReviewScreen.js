@@ -1,4 +1,4 @@
-import { book } from "../models/book.js";
+import { book, viewBookDetail } from "../models/book.js";
 
 const $template = document.createElement('template');
 $template.innerHTML = /*html*/`
@@ -6,10 +6,11 @@ $template.innerHTML = /*html*/`
         #reviews{
             display :flex;
             flex-direction : column;
-            justify-content : space-between;
             margin : auto;
             width : 50%;
+            padding-left : 70px;
             margin-top : 10vh;
+            border  : 1px solid black;
         }
     </style>
     <my-header></my-header>
@@ -31,7 +32,11 @@ export default class ReviewScreen extends HTMLElement {
 
     }
 
-    connectedCallback() {
+    async connectedCallback() {
+        //get selected book
+        let selectedBook = sessionStorage.getItem("selected");
+        let book = await viewBookDetail(selectedBook);
+
         this.$bookInfo.setAttribute("book-title", book.name);
         this.$bookInfo.setAttribute("author", book.author);
         this.$bookInfo.setAttribute("intro", book.intro);

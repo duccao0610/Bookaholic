@@ -1,3 +1,5 @@
+import { getDataFromDoc, getDataFromDocs } from "../utils.js";
+
 export let book = {
 };
 
@@ -20,9 +22,11 @@ export async function viewBookDetail(name) {
     if (!response.empty) {
         console.log("found book");
         console.log("BOOK", book);
-        router.navigate("/detail");
+        // router.navigate("/detail");
     } else {
         console.log("not found book");
     }
+
+    return getDataFromDoc(response.docs[0]);
 }
 

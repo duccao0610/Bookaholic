@@ -1,0 +1,28 @@
+#review-form {
+    width: 50%;
+}
+#review-form #input-review {
+    width: 90%;
+    height: 50px;
+    border: none;
+    font-family: "Montserrat";
+    /* border-radius: 10%; */
+    background-color: #C4C4C4;
+}
+#review-form #input-review:focus{
+    outline: none;
+}
+#review-form #button-send {
+    height: 54px;
+    background : linear-gradient(to right,#525252,#3D72B4);
+    border: none;
+    border-radius: 10%;
+    color: white;
+    font-family: "Montserrat";
+}
+#review-form #button-send:focus{
+    outline: none;
+}
+#review-form #button-send:hover{
+    background : linear-gradient(to left,#525252,#3D72B4);
+}

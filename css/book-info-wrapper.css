@@ -4,9 +4,9 @@
 }
 #book-info-wrapper {
     width: fit-content;
-    margin: auto;
+    /* margin: auto; */
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 #book-cover {

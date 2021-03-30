@@ -2,21 +2,14 @@ import { book, viewBookDetail } from "../models/book.js";
 
 const $template = document.createElement('template');
 $template.innerHTML = /*html*/`
-    <style>
-        #reviews{
-            display :flex;
-            flex-direction : column;
-            margin : auto;
-            width : 50%;
-            padding-left : 70px;
-            margin-top : 10vh;
-            border  : 1px solid black;
-        }
-    </style>
+    <link rel="stylesheet" href="./css/review-screen.css">
     <my-header></my-header>
-    <book-info-wrapper id="book-info"></book-info-wrapper>
-    <div id="reviews">
+    <div id="review-screen">
+        <book-info-wrapper id="book-info"></book-info-wrapper>
+        <div id="reviews">
 
+        </div>
+        <review-form></review-form>
     </div>
     <my-footer></my-footer>
 `;

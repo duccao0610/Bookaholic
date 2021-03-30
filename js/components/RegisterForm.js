@@ -3,6 +3,8 @@ import { register } from "../models/user.js";
 
 const $template = document.createElement("template");
 $template.innerHTML = /*html*/`
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css">
+
     <link rel="stylesheet" href="./css/register-form.css">
     <div id="form-container">
         <form id="register-form">

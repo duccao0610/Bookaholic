@@ -45,7 +45,7 @@ export default class ReviewWrapper extends HTMLElement {
                 this.$username.innerHTML = newValue;
                 break;
             case 'rating':
-                for (let i = 0; i < Number(newValue) + 0.5; i++) {
+                for (let i = 0; i < Number(newValue); i++) {
                     if (Number(newValue) - i != 0.5) {
                         let $fullStar = document.createElement('i');
                         $fullStar.classList.add('fas', 'fa-star');

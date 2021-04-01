@@ -31,38 +31,49 @@ export default class ReviewScreen extends HTMLElement {
     }
 
     async connectedCallback() {
+
         // get selected book
         let selectedBook = sessionStorage.getItem("selected");
         let book = await viewBookDetail(selectedBook);
+        sessionStorage.setItem('current-view-book-author', book.author);
+
 
         this.$bookInfo.setAttribute("book-title", book.name);
         this.$bookInfo.setAttribute("author", book.author);
         this.$bookInfo.setAttribute("intro", book.intro);
         this.$bookInfo.setAttribute("book-cover", book.cover_img);
 
-        // hiện các reviews
-        // let reviews = book.reviews;
-        // for (let review of reviews) {
-        //     let $review = document.createElement("review-wrapper");
-        //     $review.setAttribute("comment", review.comment);
-        //     $review.setAttribute("rating", review.rating);
-        //     $review.setAttribute("username", review.username);
-        //     this.$reviewList.appendChild($review);
+
+        let reviews = book.reviews;
+
+        for (let review of reviews) {
+            let $review = document.createElement("review-wrapper");
+            $review.setAttribute("comment", review.comment);
+            $review.setAttribute("rating", review.rating);
+            $review.setAttribute("username", review.username);
+            this.$reviewList.appendChild($review);
+        }
+
+        // // ẩn dòng review-form nếu user đã từng review
+        let currentUser = await getCurrentUser();
+        // for (let i = 0; i < reviews.length; i++) {
+        //     if (reviews[i].username == currentUser.name) {
+        //         this.$reviewForm.setAttribute("hidden", "true");
+        //         break;
+        //     }
         // }
 
         listenBooksStatusChanges(async (data) => {
             // hiện các reviews
-            for (let review of data.reviews) {
+            for (let i = reviews.length; i < data.reviews.length; i++) {
                 let $review = document.createElement("review-wrapper");
-                $review.setAttribute("comment", review.comment);
-                $review.setAttribute("rating", review.rating);
-                $review.setAttribute("username", review.username);
-                $review.setAttribute("review-date", review.date);
+                $review.setAttribute("comment", data.reviews[i].comment);
+                $review.setAttribute("rating", data.reviews[i].rating);
+                $review.setAttribute("username", data.reviews[i].username);
                 this.$reviewList.appendChild($review);
             }
-
+            console.log(data);
             // ẩn dòng review-form nếu user đã từng review
-            let currentUser = await getCurrentUser();
             for (let i = 0; i < data.reviews.length; i++) {
                 if (data.reviews[i].username == currentUser.name) {
                     this.$reviewForm.setAttribute("hidden", "true");
@@ -71,7 +82,6 @@ export default class ReviewScreen extends HTMLElement {
             }
         });
 
-        sessionStorage.setItem('current-view-book-author', book.author);
     }
 }
 

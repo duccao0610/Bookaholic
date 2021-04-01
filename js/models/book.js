@@ -105,16 +105,8 @@ export async function listenBooksStatusChanges(callback) {
         .get();
     let result = getDataFromDocs(response.docs)[0];
 
-    // firebase
-    //     .firestore()
-    //     .collection('books')
-    //     .doc(result.id)
-    //     .onSnapshot(function () {
-    //         callback();
-    //     })
+
     firebase.firestore().collection('books').doc(result.id).onSnapshot(function (snapshot) {
-        // let data = getDataFromDocs(snapshot.docs);
-        // callback(data);
         let data = getDataFromDoc(snapshot);
         callback(data);
     });

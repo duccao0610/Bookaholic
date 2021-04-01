@@ -30,10 +30,11 @@ export default class ReviewWrapper extends HTMLElement {
         this.$username = this.shadowRoot.getElementById("username");
         this.$rating = this.shadowRoot.getElementById("rating");
         this.$comment = this.shadowRoot.getElementById("comment");
+        this.$date = this.shadowRoot.getElementById("review-date");
     }
 
     static get observedAttributes() {
-        return ['avatar', 'username', 'rating', 'comment'];
+        return ['avatar', 'username', 'rating', 'comment', 'review-date'];
     }
 
     attributeChangedCallback(attrName, oldValue, newValue) {
@@ -59,6 +60,9 @@ export default class ReviewWrapper extends HTMLElement {
                 break;
             case 'comment':
                 this.$comment.innerHTML = newValue;
+                break;
+            case 'review-date':
+                this.$date.innerHTML = newValue;
                 break;
         }
     }

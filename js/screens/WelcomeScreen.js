@@ -21,7 +21,7 @@ $template.innerHTML = /*html*/`
             {"cover_img":"../images/book1.jpg","name":"The imperfections of Memory"},
             {"cover_img":"../images/book2.jpg","name":"The little story book"},
             {"cover_img":"../images/book1.jpg","name":"The imperfections of Memory"},
-            {"cover_img":"https://edit.org/images/cat/book-covers-big-2019101610.jpg","info":"My cover book"}
+            {"cover_img":"https://edit.org/images/cat/book-covers-big-2019101610.jpg","name":"My cover book"}
         ]' name="Fiction"></category-container>
         <my-footer></my-footer>
     </div>

@@ -63,5 +63,3 @@ export async function getCurrentUser() {
     let currentUser = await getUserByToken(token);
     return currentUser;
 }
-
-

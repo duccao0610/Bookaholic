@@ -2,17 +2,20 @@
     width: 50%;
 }
 #review-form #input-review {
-    width: 90%;
+    width: 89%;
     height: 50px;
     border: none;
     font-family: "Montserrat";
-    /* border-radius: 10%; */
     background-color: #C4C4C4;
+    word-wrap: break-word;
+    margin-right: 1%;  
+    resize: none;  
 }
 #review-form #input-review:focus{
     outline: none;
 }
 #review-form #button-send {
+    width: 9%;
     height: 54px;
     background : linear-gradient(to right,#525252,#3D72B4);
     border: none;
@@ -25,4 +28,8 @@
 }
 #review-form #button-send:hover{
     background : linear-gradient(to left,#525252,#3D72B4);
+}
+
+#review-form #input-container {
+    display: flex;
 }

@@ -16,7 +16,7 @@ export default class SearchResultsScreen extends HTMLElement {
         this.$results = this.shadowRoot.getElementById("results");
     };
 
-    async connectedCallback() {
+    connectedCallback() {
         let results = localStorage.getItem("results");
         let searchValue = localStorage.getItem("search-value");
         console.log(results);
@@ -25,10 +25,10 @@ export default class SearchResultsScreen extends HTMLElement {
             response = "No result with [ " + searchValue + " ]";
         } else {
             response = JSON.parse(results).length + " Result(s) with [ " + searchValue + " ]";
+            this.$results.setAttribute("name", response);
+            this.$results.setAttribute("books", results);
         }
 
-        this.$results.setAttribute("name", response);
-        this.$results.setAttribute("books", results);
 
     }
 };

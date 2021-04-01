@@ -10,7 +10,7 @@ $template.innerHTML = /*html*/`
         <div id="reviews">
 
         </div>
-        <review-form></review-form>
+        <review-form id="form"></review-form>
     </div>
     <my-footer></my-footer>
 `;

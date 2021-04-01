@@ -1,12 +1,12 @@
 #review-form {
     width: 50%;
+    border-top: 1px solid black;
 }
 #review-form #input-review {
     width: 90%;
     height: 50px;
     border: none;
     font-family: "Montserrat";
-    /* border-radius: 10%; */
     background-color: #C4C4C4;
 }
 #review-form #input-review:focus{
@@ -25,4 +25,14 @@
 }
 #review-form #button-send:hover{
     background : linear-gradient(to left,#525252,#3D72B4);
+}
+@media (max-width: 719px){
+    #review-form {
+        width: fit-content;
+        display: flex;
+        padding: 20px;
+    }
+    #rating{
+        margin-left: 30px;
+    }
 }

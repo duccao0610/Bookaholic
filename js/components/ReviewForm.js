@@ -7,7 +7,7 @@ $template.innerHTML = /*html*/`
         <input id="input-review" type="text" placeholder="Write your review here">
         <button id="button-send">Send</button>
     </form>
-    <star-rating></star-rating>
+    <star-rating id="rating"></star-rating>
 `;
 
 export default class ReviewForm extends HTMLElement {

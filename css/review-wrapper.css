@@ -38,3 +38,8 @@
 #review-wrapper #rating {
     display: flex;
 }
+@media (max-width: 719px){
+    #review-wrapper {
+        width: inherit;
+    }
+}

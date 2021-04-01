@@ -1,10 +1,9 @@
 const $template = document.createElement('template');
 $template.innerHTML = /*html*/`
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="stylesheet" href="./css/book-info-wrapper.css">
     <div id="book-info-wrapper">
-        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-            integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-        <link rel="stylesheet" href="./css/book-info-wrapper.css">
-
         <img id="book-cover" src="">
         <div id="aside-right">
             <h2 id="book-title">Book's title</h2>

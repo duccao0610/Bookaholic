@@ -1,3 +1,4 @@
+import { getBooksByCategory, getPopularBook } from "../models/book.js";
 import { getCurrentUser } from "../models/user.js";
 
 const $template = document.createElement("template");
@@ -5,29 +6,12 @@ $template.innerHTML = /*html*/`
     <div id="welcome-screen">
         <my-header></my-header>
         <search-form></search-form>
-        <category-container books='[
-            {"cover_img":"../images/book2.jpg","name":"The little story book"},
-            {"cover_img":"../images/book1.jpg","name":"The imperfections of Memory"},
-            {"cover_img":"../images/book1.jpg","name":"The imperfections of Memory"},
-            {"cover_img":"../images/book2.jpg","name":"The little story book"}
-        ]' name="Popular"></category-container>
-        <category-container books='[
-            {"cover_img":"../images/book1.jpg","name":"The imperfections of Memory"},
-            {"cover_img":"../images/book2.jpg","name":"The little story book"},
-            {"cover_img":"../images/book1.jpg","name":"The imperfections of Memory"},
-            {"cover_img":"../images/book2.jpg","name":"The little story book"}
-        ]' name="Novel"></category-container>
-        <category-container books='[
-            {"cover_img":"../images/book1.jpg","name":"The imperfections of Memory"},
-            {"cover_img":"../images/book2.jpg","name":"The little story book"},
-            {"cover_img":"../images/book1.jpg","name":"The imperfections of Memory"},
-            {"cover_img":"https://edit.org/images/cat/book-covers-big-2019101610.jpg","info":"My cover book"}
-        ]' name="Fiction"></category-container>
+        <div id="categories-list">
+            <category-container id="popular" name="Popular"></category-container>
+        </div>
         <my-footer></my-footer>
     </div>
 `;
-{/* <book-container src="../images/book1.jpg" desc= "The imperfections of Memory- Angelina Aludo"></book-container> */ }
-// <book-container src="../images/book2.jpg" desc= "The little story book- Jean Lumier"></book-container>
 
 export default class WelcomeScreen extends HTMLElement {
     currentUser = null;
@@ -36,6 +20,8 @@ export default class WelcomeScreen extends HTMLElement {
 
         this.attachShadow({ mode: "open" });
         this.shadowRoot.appendChild($template.content.cloneNode(true));
+        this.$popular = this.shadowRoot.getElementById("popular");
+        this.$list = this.shadowRoot.getElementById("categories-list");
     };
 
     async connectedCallback() {
@@ -43,6 +29,20 @@ export default class WelcomeScreen extends HTMLElement {
             this.currentUser = await getCurrentUser();
         } catch (error) {
             router.navigate("/login");
+        }
+
+        let popularBooks = await getPopularBook();
+        console.log(popularBooks);
+        this.$popular.setAttribute("books", JSON.stringify(popularBooks));
+
+        let categories = ["novel", "fiction", "fantasy"];
+        for (let category of categories) {
+            let books = await getBooksByCategory(category);
+            let $categoryContainer = document.createElement("category-container");
+            $categoryContainer.setAttribute("books", JSON.stringify(books));
+            $categoryContainer.setAttribute("name", category);
+            $categoryContainer.style.textTransform = "capitalize";
+            this.$list.appendChild($categoryContainer);
         }
     }
 };

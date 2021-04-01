@@ -4,7 +4,6 @@
 }
 #book-info-wrapper {
     width: fit-content;
-    /* margin: auto; */
     display: flex;
     justify-content: flex-start;
 }
@@ -70,11 +69,33 @@ button:focus {
 
 @media (max-width: 719px){
     #book-info-wrapper {
-        transform:scale(0.7);
+        /* transform:scale(0.9); */
+        margin: auto;
+        margin-bottom: 100px;
+        flex-direction: column;
     }
-
+    #book-info-wrapper #book-cover {
+        transform: scale(0.9);
+        align-self: center;
+    }
+    #aside-right #book-title {
+        text-align: center;
+        font-weight: bolder;
+        margin-top: 25px;
+    }
+    #book-info-wrapper #aside-right{
+        display: flex;
+        flex-direction: column;
+    }
+    #book-info-wrapper #aside-right #button-group {
+        position: static;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
     button{
+        width: 100px;
         font-size: 15px;
+        padding: 10px;
     }
-
 }

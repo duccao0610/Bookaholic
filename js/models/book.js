@@ -38,3 +38,28 @@ export async function searchBook(name) {
     return getDataFromDocs(response.docs);
 
 }
+
+export async function getPopularBook() {
+    let response = await firebase.firestore()
+        .collection("books")
+        .where("rating", ">=", 4)
+        .get()
+    let books = getDataFromDocs(response.docs);
+    let popularBooks = [];
+    for (let i = 0; i < books.length; i++) {
+        if (i <= 3) {
+            popularBooks.push(books[i]);
+        }
+    }
+
+    return popularBooks;
+}
+
+export async function getBooksByCategory(category) {
+    let response = await firebase.firestore()
+        .collection("books")
+        .where("categories", "array-contains", category)
+        .get();
+
+    return getDataFromDocs(response.docs);
+}

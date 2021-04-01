@@ -12,3 +12,20 @@
     margin-top : 10vh;
     /* border  : 1px solid black; */
 }
+
+@media (max-width: 719px){
+    #review-screen {
+        margin: 0;
+    }
+
+    #review-screen #reviews, #form {
+        margin:auto;
+    }
+    #review-screen #reviews{
+        margin-bottom: 10px;
+    }
+    #review-screen #form button {
+        width: inherit;
+    }
+    
+}

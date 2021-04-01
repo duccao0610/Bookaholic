@@ -21,6 +21,7 @@ $template.innerHTML = /*html*/`
         }
         @media (max-width: 719px){
             #container #book-list {
+                margin-top : 20px;
                 flex-direction :column;
             }
             #container h2 {
@@ -28,6 +29,7 @@ $template.innerHTML = /*html*/`
                 margin : auto;
             }
         }
+        
         
     </style>
     <div id="container">

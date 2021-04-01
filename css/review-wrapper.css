@@ -13,6 +13,7 @@
     flex-direction: column;
     align-items: center;
     font-size: 13px;
+    flex: 1;
 }
 #review-wrapper #avatar {
     height: 60px;
@@ -26,6 +27,7 @@
 }
 #review-wrapper #review-content {
     margin-left: 110px;
+    flex: 2;
 }
 #review-wrapper #comment {
     font-size: 13px;

@@ -1,65 +1,38 @@
-
-/* Ratings widget */
-.rate {
-    display: inline-block;
-    border: 0px;
-}
-
-/* Hide radio */
-.rate>input {
+input {
     display: none;
 }
 
-/* Order correctly by floating highest to the right */
-.rate>label {
-    float: right;
+#rating {
+    display: flex;
+    float: left;
+    flex-direction: row-reverse;
 }
 
-/* The star of the show */
-.rate>label:before {
-    display: inline-block;
-    font-size: 1.1rem;
-    padding: .3rem .2rem;
-    margin: 0;
+/*thêm màu cho sao đã chọn và các ngôi sao phía trước*/
+#rating>input:checked~label,
+#rating:not(:checked)>label:hover,
+#rating:not(:checked)>label:hover~label {
+    color: #FFD700;
+}
+
+/* Hover vào các sao phía trước ngôi sao đã chọn*/
+#rating>input:checked+label:hover,
+#rating>input:checked~label:hover,
+#rating>label:hover~input:checked~label,
+#rating>input:checked~label:hover~label {
+    color: #FFED85;
+}
+
+#star-rating {
+    display: flex;
+    align-items: baseline;
+}
+
+#star-rating #text {
+    font-size: 15px;
+}
+
+#star-rating label {
+    font-size: 15px;
     cursor: pointer;
-    font-family: FontAwesome;
-    content: "\f005";
-    /* full star */
-}
-
-/* Zero stars rating */
-.rate>label:last-child:before {
-    content: "\f006";
-    /* empty star outline */
-}
-
-/* Half star trick */
-.rate .half:before {
-    content: "\f089";
-    /* half star no outline */
-    position: absolute;
-    padding-right: 0;
-}
-
-/* Click + hover color */
-input:checked~label,
-/* color current and previous stars on checked */
-label:hover,
-label:hover~label {
-    color: #73B100;
-}
-
-/* color previous stars on hover */
-
-/* Hover highlights */
-input:checked+label:hover,
-input:checked~label:hover,
-/* highlight current and previous stars */
-input:checked~label:hover~label,
-/* highlight previous selected stars for new rating */
-label:hover~input:checked~label
-
-/* highlight previous selected stars */
-    {
-    color: #A6E72D;
 }

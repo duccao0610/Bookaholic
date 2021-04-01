@@ -34,7 +34,14 @@ export async function searchBook(name) {
         .where("name", "==", name)
         .get();
 
-    router.navigate("/results");
+
+    let route = router.navigate("/results");
+    if (route) {
+        location.reload();
+    } else {
+        router.navigate("/results");
+    }
+
     return getDataFromDocs(response.docs);
 
 }
@@ -62,4 +69,53 @@ export async function getBooksByCategory(category) {
         .get();
 
     return getDataFromDocs(response.docs);
+}
+export async function addReview(review) {
+    let title = sessionStorage.getItem('selected'); // setItem ở BookContainer
+    let author = sessionStorage.getItem('current-view-book-author'); // setItem ở ReviewScreen
+    let response = await firebase
+        .firestore()
+        .collection('books')
+        .where('name', '==', title)
+        .where('author', '==', author)
+        .get();
+    let result = getDataFromDocs(response.docs)[0];
+    result.reviews.push(review);
+    await firebase
+        .firestore()
+        .collection('books')
+        .doc(result.id)
+        .update({
+            reviews: firebase.firestore.FieldValue.arrayUnion(review)
+        });
+}
+
+export async function editReview() {
+
+}
+
+export async function listenBooksStatusChanges(callback) {
+    let title = sessionStorage.getItem('selected'); // setItem ở BookContainer
+    let author = sessionStorage.getItem('current-view-book-author'); // setItem ở ReviewScreen
+    let response = await firebase
+        .firestore()
+        .collection('books')
+        .where('name', '==', title)
+        .where('author', '==', author)
+        .get();
+    let result = getDataFromDocs(response.docs)[0];
+
+    // firebase
+    //     .firestore()
+    //     .collection('books')
+    //     .doc(result.id)
+    //     .onSnapshot(function () {
+    //         callback();
+    //     })
+    firebase.firestore().collection('books').doc(result.id).onSnapshot(function (snapshot) {
+        // let data = getDataFromDocs(snapshot.docs);
+        // callback(data);
+        let data = getDataFromDoc(snapshot);
+        callback(data);
+    });
 }

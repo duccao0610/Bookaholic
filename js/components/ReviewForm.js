@@ -48,7 +48,6 @@ $template.innerHTML = /*html*/`
             </div>
         </div>
     </form>
-    <star-rating id="rating"></star-rating>
 `;
 
 export default class ReviewForm extends HTMLElement {

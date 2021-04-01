@@ -1,4 +1,5 @@
 #review-form {
+    padding-top: 20px;
     width: 50%;
     border-top: 1px solid black;
 }
@@ -16,13 +17,14 @@
     outline: none;
 }
 #review-form #button-send {
-    width: 9%;
+    width: fit-content;
     height: 54px;
     background : linear-gradient(to right,#525252,#3D72B4);
     border: none;
     border-radius: 10%;
     color: white;
     font-family: "Montserrat";
+    padding : 0px 20px;
 }
 #review-form #button-send:focus{
     outline: none;
@@ -34,11 +36,18 @@
     #review-form {
         width: fit-content;
         display: flex;
+        flex-direction: column;
         padding: 20px;
+    }  
+
+    #review-form{
+        margin: auto;
     }
-    #rating{
-        margin-left: 30px;
+
+    #review-form #button-send{
+        padding: 0px 10px;
     }
+   
 }
 
 #review-form #input-container {

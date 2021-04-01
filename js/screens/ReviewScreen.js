@@ -11,7 +11,6 @@ $template.innerHTML = /*html*/`
     <div id="review-screen">
         <book-info-wrapper id="book-info"></book-info-wrapper>
         <div id="reviews">
-
         </div>
         <review-form id="review-form"></review-form>
     </div>

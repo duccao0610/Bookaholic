@@ -56,7 +56,7 @@ export default class MyHeader extends HTMLElement {
         //login
         this.$logInBtn.onclick = () => {
             if (this.currentUser) {
-                console.log("HEHE");
+                router.navigate("/shelves");
             } else {
                 router.navigate("/login");
             }

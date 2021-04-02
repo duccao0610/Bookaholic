@@ -20,8 +20,11 @@ router.on("/detail", function () {
 router.on("/results", function () {
     $app.innerHTML = "<search-results-screen></search-results-screen>";
 })
+router.on("/shelves", function () {
+    $app.innerHTML = "<shelves-screen></shelves-screen>";
+}).resolve();
 router.on(function () {
-    router.navigate("/welcome");
+    // router.navigate("/welcome");
 }).resolve();
 
 window.router = router;

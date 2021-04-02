@@ -15,6 +15,8 @@ import WelcomeScreen from "./screens/WelcomeScreen.js";
 import ReviewScreen from "./screens/ReviewScreen.js";
 import SearchForm from "./components/SearchForm.js";
 import SearchResultsScreen from "./screens/SearchResultsScreen.js";
+import ShelvesScreen from "./screens/ShelvesScreen.js";
+import ShelfWrapper from "./components/ShelfWrapper.js";
 
 import "./router.js";
 

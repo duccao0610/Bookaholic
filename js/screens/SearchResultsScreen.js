@@ -28,8 +28,6 @@ export default class SearchResultsScreen extends HTMLElement {
             this.$results.setAttribute("name", response);
             this.$results.setAttribute("books", results);
         }
-
-
     }
 };
 

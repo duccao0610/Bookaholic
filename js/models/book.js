@@ -111,3 +111,13 @@ export async function listenBooksStatusChanges(callback) {
         callback(data);
     });
 }
+
+export async function showBooksOnShelf(booksId) {
+    let response = await firebase
+        .firestore()
+        .collection('books')
+        .where('id', 'in', booksId)
+        .get();
+    let result = getDataFromDocs(response);
+    console.log(result);
+}

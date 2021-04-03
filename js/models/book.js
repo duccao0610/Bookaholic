@@ -1,4 +1,5 @@
 import { getDataFromDoc, getDataFromDocs } from "../utils.js";
+import { getCurrentUser } from "./user.js";
 
 export let book = {
 };
@@ -112,12 +113,3 @@ export async function listenBooksStatusChanges(callback) {
     });
 }
 
-export async function showBooksOnShelf(booksId) {
-    let response = await firebase
-        .firestore()
-        .collection('books')
-        .where('id', 'in', booksId)
-        .get();
-    let result = getDataFromDocs(response);
-    console.log(result);
-}

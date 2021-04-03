@@ -26,3 +26,7 @@ export function getDataFromDocs(docs) {
         return getDataFromDoc(doc);
     })
 }
+
+export function toTop() {
+    document.body.scrollTop = 0;
+}

@@ -1,3 +1,5 @@
+import { toTop } from "./utils.js";
+
 let router = new Navigo(null, true);
 let $app = document.getElementById("app");
 
@@ -14,6 +16,7 @@ router.on("/welcome", function () {
 }).resolve();
 
 router.on("/detail", function () {
+    toTop()
     $app.innerHTML = "<review-screen></review-screen>";
 })
 

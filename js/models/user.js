@@ -63,3 +63,37 @@ export async function getCurrentUser() {
     let currentUser = await getUserByToken(token);
     return currentUser;
 }
+
+export async function listenShelvesChanges(callback) {
+
+    let currentUser = await getCurrentUser();
+
+    firebase
+        .firestore()
+        .collection('users')
+        .doc(currentUser.id)
+        .onSnapshot(function (snapshot) {
+            let data = getDataFromDoc(snapshot);
+            callback(data);
+        });
+}
+
+export async function removeShelf(removedShelfName) {
+    let currentUser = await getCurrentUser();
+    let removedShelf;
+    for (let shelf of currentUser.shelves) {
+        console.log(shelf.shelfName);
+        if (shelf.shelfName == removedShelfName) {
+            removedShelf = shelf;
+            break;
+        }
+    }
+    // console.log(removedShelf);
+    firebase
+        .firestore()
+        .collection('users')
+        .doc(currentUser.id)
+        .update({
+            shelves: firebase.firestore.FieldValue.arrayRemove(removedShelf)
+        })
+}

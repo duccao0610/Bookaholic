@@ -46,7 +46,6 @@ export default class ShelvesScreen extends HTMLElement {
             this.$shelvesContainer.appendChild($shelfWrapper);
         }
 
-
         listenShelvesChanges(async (data) => {
             if (data.shelves.length > currentUser.shelves.length) {
                 let $shelfWrapper = document.createElement("shelf-wrapper");
@@ -54,9 +53,6 @@ export default class ShelvesScreen extends HTMLElement {
                 $shelfWrapper.setAttribute("books", JSON.stringify(data.shelves[data.shelves.length - 1].booksOnShelf));
                 this.$shelvesContainer.appendChild($shelfWrapper);
             }
-
-
-
             // this.$shelvesContainer.textContent = '';
 
             // for (let shelf of data.shelves) {
@@ -73,19 +69,17 @@ export default class ShelvesScreen extends HTMLElement {
             //     $shelfWrapper.setAttribute("books", JSON.stringify(books));
             //     this.$shelvesContainer.appendChild($shelfWrapper);
             // }
+        })
 
 
-        });
 
         this.$createShelf.onclick = async (event) => {
             event.preventDefault();
-
             for (let shelf of currentUser.shelves) {
                 if (this.$inputNewShelfName.value == shelf.shelfName) {
                     return alert("You already had this shelf");
                 }
             }
-
             if (this.$inputNewShelfName.value != "") {
                 let newShelf = {
                     booksOnShelf: [],

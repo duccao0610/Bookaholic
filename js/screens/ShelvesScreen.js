@@ -31,45 +31,52 @@ export default class ShelvesScreen extends HTMLElement {
     }
 
     async connectedCallback() {
-        // for (let shelf of currentUser.shelves) {
-        //     let bookData = [];
-        //     for (let book of shelf.booksOnShelf) {
-        //         let data = await book.get();
-        //         bookData.push(data);
-        //     }
-        //     let books = getDataFromDocs(bookData);
+        let currentUser = await getCurrentUser();
+        for (let shelf of currentUser.shelves) {
+            let bookData = [];
+            for (let book of shelf.booksOnShelf) {
+                let data = await book.get();
+                bookData.push(data);
+            }
+            let books = getDataFromDocs(bookData);
 
-        //     let $shelfWrapper = document.createElement("shelf-wrapper");
-        //     $shelfWrapper.setAttribute('shelf-name', shelf.shelfName);
-        //     $shelfWrapper.setAttribute("books", JSON.stringify(books));
-        //     this.$shelvesContainer.appendChild($shelfWrapper);
-        // }
+            let $shelfWrapper = document.createElement("shelf-wrapper");
+            $shelfWrapper.setAttribute('shelf-name', shelf.shelfName);
+            $shelfWrapper.setAttribute("books", JSON.stringify(books));
+            this.$shelvesContainer.appendChild($shelfWrapper);
+        }
 
 
         listenShelvesChanges(async (data) => {
-            // let $shelfWrapper = document.createElement("shelf-wrapper");
-            // $shelfWrapper.setAttribute('shelf-name', data.shelves[data.shelves.length - 1].shelfName);
-            // $shelfWrapper.setAttribute("books", JSON.stringify(data.shelves[data.shelves.length - 1].booksOnShelf));
-            // this.$shelvesContainer.appendChild($shelfWrapper);
-            this.$shelvesContainer.textContent = '';
-
-            for (let shelf of data.shelves) {
-
-                let bookData = [];
-                for (let book of shelf.booksOnShelf) {
-                    let data = await book.get();
-                    bookData.push(data);
-                }
-                let books = getDataFromDocs(bookData);
-
+            if (data.shelves.length > currentUser.shelves.length) {
                 let $shelfWrapper = document.createElement("shelf-wrapper");
-                $shelfWrapper.setAttribute('shelf-name', shelf.shelfName);
-                $shelfWrapper.setAttribute("books", JSON.stringify(books));
+                $shelfWrapper.setAttribute('shelf-name', data.shelves[data.shelves.length - 1].shelfName);
+                $shelfWrapper.setAttribute("books", JSON.stringify(data.shelves[data.shelves.length - 1].booksOnShelf));
                 this.$shelvesContainer.appendChild($shelfWrapper);
             }
+
+
+
+            // this.$shelvesContainer.textContent = '';
+
+            // for (let shelf of data.shelves) {
+
+            //     let bookData = [];
+            //     for (let book of shelf.booksOnShelf) {
+            //         let data = await book.get();
+            //         bookData.push(data);
+            //     }
+            //     let books = getDataFromDocs(bookData);
+
+            //     let $shelfWrapper = document.createElement("shelf-wrapper");
+            //     $shelfWrapper.setAttribute('shelf-name', shelf.shelfName);
+            //     $shelfWrapper.setAttribute("books", JSON.stringify(books));
+            //     this.$shelvesContainer.appendChild($shelfWrapper);
+            // }
+
+
         });
 
-        let currentUser = await getCurrentUser();
         this.$createShelf.onclick = async (event) => {
             event.preventDefault();
 
@@ -79,12 +86,10 @@ export default class ShelvesScreen extends HTMLElement {
                 }
             }
 
-
             if (this.$inputNewShelfName.value != "") {
                 let newShelf = {
                     booksOnShelf: [],
                     shelfName: this.$inputNewShelfName.value
-
                 }
 
                 await firebase
@@ -96,7 +101,6 @@ export default class ShelvesScreen extends HTMLElement {
                     });
 
                 this.$inputNewShelfName.value = "";
-
             }
         }
     }

@@ -43,7 +43,6 @@ export default class BookContainer extends HTMLElement {
             console.log(name);
             router.navigate("/detail");
         }
-
     };
 
 };

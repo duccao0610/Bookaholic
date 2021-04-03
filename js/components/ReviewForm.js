@@ -1,4 +1,4 @@
-import { addReview, editReview } from "../models/book.js";
+import { addReview } from "../models/book.js";
 import { getCurrentUser } from "../models/user.js";
 
 const $template = document.createElement('template');

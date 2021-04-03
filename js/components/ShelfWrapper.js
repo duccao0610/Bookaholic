@@ -79,6 +79,7 @@ export default class ShelfWrapper extends HTMLElement {
 
         this.$removeShelf.onclick = () => {
             removeShelf(this.$btnShelf.innerHTML);
+            this.$shelfWrapper.remove();
         }
     }
 

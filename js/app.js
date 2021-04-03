@@ -17,6 +17,7 @@ import SearchForm from "./components/SearchForm.js";
 import SearchResultsScreen from "./screens/SearchResultsScreen.js";
 import ShelvesScreen from "./screens/ShelvesScreen.js";
 import ShelfWrapper from "./components/ShelfWrapper.js";
+import AddBookForm from "./components/AddBookForm.js";
 
 import "./router.js";
 

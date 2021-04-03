@@ -16,7 +16,7 @@
 #aside-right {
     margin-left: 90px;
     position: relative;
-    width: 40%;
+    width: 70%;
 }
 #aside-right #book-title {
     margin: auto;
@@ -50,22 +50,36 @@ button:focus {
 #aside-right #button-group {
     position: absolute;
     top: 300px;
+    width: 200px;
 }
-#aside-right #button-add {
+#aside-right #button-group #btn-add-container {
+    display: flex;
+}
+#aside-right #button-group #btn-add-container #button-add {
     background : linear-gradient(to right,#525252,#3D72B4);
     margin-bottom: 13px;
+    height: 44px;
+    width: fit-content;
 }
-#aside-right #button-add:hover {
+#aside-right #button-group #btn-add-container #add-book-form {
+    position: absolute;
+    left: 195px;
+    top: 0;
+    border: solid black;
+    width: fit-content;
+    display: none;
+}
+#aside-right #btn-add-container #button-add:hover {
     background : linear-gradient(to left,#525252,#3D72B4);
 
 }
-#aside-right #button-find-book {
+#aside-right #button-group #button-find-book {
     background: linear-gradient(to right,#A17E7E,#6B4141);
 }
-#aside-right #button-find-book:hover {
+#aside-right #button-group #button-find-book:hover {
     background: linear-gradient(to left,#A17E7E,#6B4141);
-
 }
+
 
 @media (max-width: 719px){
     #book-info-wrapper {

@@ -42,6 +42,9 @@ export default class ReviewScreen extends HTMLElement {
         this.$bookInfo.setAttribute("intro", book.intro);
         this.$bookInfo.setAttribute("book-cover", book.cover_img);
 
+        let currentUser = await getCurrentUser();
+
+        this.$bookInfo.setAttribute("shelves", JSON.stringify(currentUser.shelves));
 
         let reviews = book.reviews;
 
@@ -54,7 +57,6 @@ export default class ReviewScreen extends HTMLElement {
         }
 
         // // ẩn dòng review-form nếu user đã từng review
-        let currentUser = await getCurrentUser();
         // for (let i = 0; i < reviews.length; i++) {
         //     if (reviews[i].username == currentUser.name) {
         //         this.$reviewForm.setAttribute("hidden", "true");
@@ -71,7 +73,6 @@ export default class ReviewScreen extends HTMLElement {
                 $review.setAttribute("username", data.reviews[i].username);
                 this.$reviewList.appendChild($review);
             }
-            console.log(data);
             // ẩn dòng review-form nếu user đã từng review
             for (let i = 0; i < data.reviews.length; i++) {
                 if (data.reviews[i].username == currentUser.name) {

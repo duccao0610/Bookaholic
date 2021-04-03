@@ -91,13 +91,17 @@ export async function addReview(review) {
         });
 }
 
-export async function editReview() {
-
-}
-
 export async function listenBooksStatusChanges(callback) {
     let title = sessionStorage.getItem('selected'); // setItem ở BookContainer
     let author = sessionStorage.getItem('current-view-book-author'); // setItem ở ReviewScreen
+    let currentViewingBook = await getCurrentViewingBook(title, author);
+    firebase.firestore().collection('books').doc(currentViewingBook.id).onSnapshot(function (snapshot) {
+        let data = getDataFromDoc(snapshot);
+        callback(data);
+    });
+}
+
+export async function getCurrentViewingBook(title, author) {
     let response = await firebase
         .firestore()
         .collection('books')
@@ -105,11 +109,23 @@ export async function listenBooksStatusChanges(callback) {
         .where('author', '==', author)
         .get();
     let result = getDataFromDocs(response.docs)[0];
-
-
-    firebase.firestore().collection('books').doc(result.id).onSnapshot(function (snapshot) {
-        let data = getDataFromDoc(snapshot);
-        callback(data);
-    });
+    return result;
 }
 
+export function getAllBookRefId(shelf) {
+    // let currentUser = await getCurrentUser();
+    // let allBookRefId = [];
+
+    // for (let shelf of currentUser.shelves) {
+    //     let books = [];
+    //     for (let book of shelf.booksOnShelf) {
+    //         books.push(book.id);
+    //     }
+    //     allBookRefId.push(books);
+    // }
+    let allBookRefId = [];
+    for (let book of shelf) {
+        allBookRefId.push(book.id);
+    }
+    return allBookRefId;
+}

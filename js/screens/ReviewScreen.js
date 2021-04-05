@@ -34,8 +34,6 @@ export default class ReviewScreen extends HTMLElement {
         // get selected book
         let selectedBook = sessionStorage.getItem("selected");
         let book = await viewBookDetail(selectedBook);
-        sessionStorage.setItem('current-view-book-author', book.author);
-
 
         this.$bookInfo.setAttribute("book-title", book.name);
         this.$bookInfo.setAttribute("author", book.author);
@@ -62,14 +60,6 @@ export default class ReviewScreen extends HTMLElement {
             $review.setAttribute("username", review.username);
             this.$reviewList.appendChild($review);
         }
-
-        // // ẩn dòng review-form nếu user đã từng review
-        // for (let i = 0; i < reviews.length; i++) {
-        //     if (reviews[i].username == currentUser.name) {
-        //         this.$reviewForm.setAttribute("hidden", "true");
-        //         break;
-        //     }
-        // }
 
         listenBooksStatusChanges(async (data) => {
             // hiện các reviews

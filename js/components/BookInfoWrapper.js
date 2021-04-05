@@ -1,5 +1,5 @@
-import { addBookToShelves, getCurrentUser } from "../models/user.js";
-import { getAllBookRefId, getCurrentViewingBook } from "../models/book.js";
+import { getCurrentUser } from "../models/user.js";
+import { getAllBookRefId, viewBookDetail } from "../models/book.js";
 import { getDataFromDocs, getDataFromDoc } from "../utils.js";
 
 const $template = document.createElement('template');
@@ -80,9 +80,8 @@ export default class BookInfoWrapper extends HTMLElement {
             case 'shelves':
                 // let shelves = JSON.parse(newValue);
 
-                let title = sessionStorage.getItem('selected'); // setItem ở BookContainer
-                let author = sessionStorage.getItem('current-view-book-author'); // setItem ở ReviewScreen
-                let currentViewingBook = await getCurrentViewingBook(title, author);
+                let bookId = sessionStorage.getItem('selected'); // setItem ở CategoryContainer
+                let currentViewingBook = await viewBookDetail(bookId);
 
                 let currentUser = await getCurrentUser();
                 for (let shelf of currentUser.shelves) {
@@ -92,7 +91,6 @@ export default class BookInfoWrapper extends HTMLElement {
                         name: shelf.shelfName,
                         value: shelf.shelfName
                     });
-                    // console.log(shelf.booksOnShelf);
                     let allBookRefId = getAllBookRefId(shelf.booksOnShelf);
                     if (allBookRefId.includes(currentViewingBook.id)) {
                         Object.assign($input, {

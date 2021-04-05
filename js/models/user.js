@@ -1,5 +1,4 @@
 import md5, { getDataFromDoc, getDataFromDocs } from "../utils.js";
-import { getCurrentViewingBook } from "./book.js";
 export async function register(name, email, password) {
     let response = await firebase.firestore().collection("users").where("email", "==", email).get();
     if (response.empty) {

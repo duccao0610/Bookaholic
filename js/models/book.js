@@ -4,29 +4,12 @@ import { getCurrentUser } from "./user.js";
 export let book = {
 };
 
-export async function viewBookDetail(name) {
+export async function viewBookDetail(id) {
     let response = await firebase.firestore().collection("books")
-        .where("name", "==", name)
+        .doc(id)
         .get();
 
-    for (let doc of response.docs) {
-        book.name = doc.data().name;
-        book.author = doc.data().author;
-        book.intro = doc.data().intro;
-        book.cover_img = doc.data().cover_img;
-        book.rating = doc.data().rating;
-        book.reviews = doc.data().reviews;
-        book.publish_day = doc.data().publish_day;
-    }
-
-    if (!response.empty) {
-        console.log("found book");
-        console.log("BOOK", book);
-    } else {
-        console.log("not found book");
-    }
-
-    return getDataFromDoc(response.docs[0]);
+    return getDataFromDoc(response);
 }
 
 export async function searchBook(name) {
@@ -92,37 +75,14 @@ export async function addReview(review) {
 }
 
 export async function listenBooksStatusChanges(callback) {
-    let title = sessionStorage.getItem('selected'); // setItem ở BookContainer
-    let author = sessionStorage.getItem('current-view-book-author'); // setItem ở ReviewScreen
-    let currentViewingBook = await getCurrentViewingBook(title, author);
-    firebase.firestore().collection('books').doc(currentViewingBook.id).onSnapshot(function (snapshot) {
+    let bookId = sessionStorage.getItem('selected'); // setItem ở BookContainer
+    firebase.firestore().collection('books').doc(bookId).onSnapshot(function (snapshot) {
         let data = getDataFromDoc(snapshot);
         callback(data);
     });
 }
 
-export async function getCurrentViewingBook(title, author) {
-    let response = await firebase
-        .firestore()
-        .collection('books')
-        .where('name', '==', title)
-        .where('author', '==', author)
-        .get();
-    let result = getDataFromDocs(response.docs)[0];
-    return result;
-}
-
 export function getAllBookRefId(shelf) {
-    // let currentUser = await getCurrentUser();
-    // let allBookRefId = [];
-
-    // for (let shelf of currentUser.shelves) {
-    //     let books = [];
-    //     for (let book of shelf.booksOnShelf) {
-    //         books.push(book.id);
-    //     }
-    //     allBookRefId.push(books);
-    // }
     let allBookRefId = [];
     for (let book of shelf) {
         allBookRefId.push(book.id);

@@ -98,3 +98,4 @@ export async function removeShelf(removedShelfName) {
             shelves: firebase.firestore.FieldValue.arrayRemove(removedShelf)
         })
 }
+

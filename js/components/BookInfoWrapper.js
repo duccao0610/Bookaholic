@@ -1,5 +1,5 @@
 import { getCurrentUser } from "../models/user.js";
-import { getAllBookRefId, getCurrentViewingBook } from "../models/book.js";
+import { getAllBookRefId, viewBookDetail } from "../models/book.js";
 import { getDataFromDocs, getDataFromDoc } from "../utils.js";
 
 const $template = document.createElement('template');
@@ -20,7 +20,9 @@ $template.innerHTML = /*html*/`
             <div id="button-group">
                 <div id="btn-add-container">
                     <button id="button-add">Add to bookshelf</button>
-                    <form id="add-book-form"></form>
+                    <form id="add-book-form">
+                        <button id="accept-add" type="submit">Ok</button>
+                    </form>
                 </div>
                 <button id="button-find-book">Find book</button>
             </div>
@@ -45,6 +47,7 @@ export default class BookInfoWrapper extends HTMLElement {
         this.$addBookForm = this.shadowRoot.getElementById('add-book-form');
         this.$btnGroup = this.shadowRoot.getElementById('button-group');
         this.$btnAdd = this.shadowRoot.getElementById('button-add');
+        this.$btnAccept = this.shadowRoot.getElementById("accept-add");
     }
 
     static get observedAttributes() {
@@ -77,9 +80,8 @@ export default class BookInfoWrapper extends HTMLElement {
             case 'shelves':
                 // let shelves = JSON.parse(newValue);
 
-                let title = sessionStorage.getItem('selected'); // setItem ở BookContainer
-                let author = sessionStorage.getItem('current-view-book-author'); // setItem ở ReviewScreen
-                let currentViewingBook = await getCurrentViewingBook(title, author);
+                let bookId = sessionStorage.getItem('selected'); // setItem ở CategoryContainer
+                let currentViewingBook = await viewBookDetail(bookId);
 
                 let currentUser = await getCurrentUser();
                 for (let shelf of currentUser.shelves) {
@@ -89,7 +91,6 @@ export default class BookInfoWrapper extends HTMLElement {
                         name: shelf.shelfName,
                         value: shelf.shelfName
                     });
-                    // console.log(shelf.booksOnShelf);
                     let allBookRefId = getAllBookRefId(shelf.booksOnShelf);
                     if (allBookRefId.includes(currentViewingBook.id)) {
                         Object.assign($input, {
@@ -98,15 +99,15 @@ export default class BookInfoWrapper extends HTMLElement {
                         });
                     }
 
-                    this.$addBookForm.appendChild($input);
+                    this.$addBookForm.insertBefore($input, this.$btnAccept);
 
                     let $label = document.createElement('label');
                     $label.setAttribute('for', shelf.shelfName);
                     $label.innerHTML = shelf.shelfName;
-                    this.$addBookForm.appendChild($label);
+                    this.$addBookForm.insertBefore($label, this.$btnAccept);
 
                     let $br = document.createElement('br');
-                    this.$addBookForm.appendChild($br);
+                    this.$addBookForm.insertBefore($br, this.$btnAccept);
                 }
         }
     }
@@ -118,6 +119,9 @@ export default class BookInfoWrapper extends HTMLElement {
             } else {
                 this.$addBookForm.style.display = 'inline-block';
             }
+        }
+        this.$btnAccept.onclick = (event) => {
+            event.preventDefault();
         }
     }
 }

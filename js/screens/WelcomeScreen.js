@@ -54,6 +54,7 @@ export default class WelcomeScreen extends HTMLElement {
             $categoryContainer.style.textTransform = "capitalize";
             this.$list.appendChild($categoryContainer);
         }
+
     }
 };
 

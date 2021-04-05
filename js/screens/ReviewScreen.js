@@ -47,7 +47,14 @@ export default class ReviewScreen extends HTMLElement {
         this.$bookInfo.setAttribute("shelves", JSON.stringify(currentUser.shelves));
 
         let reviews = book.reviews;
-
+        if (book.reviews == undefined) {
+            await firebase.firestore()
+                .collection("books")
+                .doc(book.id)
+                .update({
+                    reviews: []
+                });
+        }
         for (let review of reviews) {
             let $review = document.createElement("review-wrapper");
             $review.setAttribute("comment", review.comment);

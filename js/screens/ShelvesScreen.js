@@ -39,6 +39,7 @@ export default class ShelvesScreen extends HTMLElement {
                 bookData.push(data);
             }
             let books = getDataFromDocs(bookData);
+
             let $shelfWrapper = document.createElement("shelf-wrapper");
             $shelfWrapper.setAttribute('shelf-name', shelf.shelfName);
             $shelfWrapper.setAttribute("books", JSON.stringify(books));
@@ -69,7 +70,7 @@ export default class ShelvesScreen extends HTMLElement {
                     shelfName: this.$inputNewShelfName.value
                 }
 
-                createShelf();
+                createShelf(newShelf);
 
                 this.$inputNewShelfName.value = "";
             }

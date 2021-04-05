@@ -12,7 +12,7 @@ export async function addBook(newBook) {
             name: newBook.name,
             author: newBook.author,
             categories: newBook.categories,
-            coverImg: newBook.coverImg,
+            cover_img: newBook.coverImg,
             publish_day: newBook.publish_day,
             isChecked: false
         });

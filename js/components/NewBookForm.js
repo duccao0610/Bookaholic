@@ -61,6 +61,7 @@ export default class NewBookForm extends HTMLElement {
         this.$categories = this.shadowRoot.getElementById("categories");
         this.$coverImg = this.shadowRoot.getElementById("cover_img");
         this.$publish_day = this.shadowRoot.getElementById("publish_day");
+        this.$intro = this.shadowRoot.getElementById("intro");
     };
 
     connectedCallback() {
@@ -71,7 +72,8 @@ export default class NewBookForm extends HTMLElement {
                 author: this.$author.value,
                 categories: this.$categories.value.split(","),
                 cover_img: this.$coverImg.value,
-                publish_day: this.$publish_day.value
+                publish_day: this.$publish_day.value,
+                intro: this.$intro.value
             };
 
             let isPassed =
@@ -79,7 +81,8 @@ export default class NewBookForm extends HTMLElement {
                 this.$author.validate(required, "Not leave this field empty") &
                 this.$categories.validate(required, "Not leave this field empty") &
                 this.$coverImg.validate(required, "Not leave this field empty") &
-                this.$publish_day.validate(required, "Not leave this field empty")
+                this.$publish_day.validate(required, "Not leave this field empty") &
+                this.$intro.validate(required, "Not leave this field empty")
 
             if (isPassed) {
                 addBook(newBook);

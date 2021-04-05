@@ -1,4 +1,4 @@
-import { getCurrentUser } from "../models/user.js";
+import { addBookToShelves, getCurrentUser } from "../models/user.js";
 import { getAllBookRefId, getCurrentViewingBook } from "../models/book.js";
 import { getDataFromDocs, getDataFromDoc } from "../utils.js";
 
@@ -20,7 +20,9 @@ $template.innerHTML = /*html*/`
             <div id="button-group">
                 <div id="btn-add-container">
                     <button id="button-add">Add to bookshelf</button>
-                    <form id="add-book-form"></form>
+                    <form id="add-book-form">
+                        <button id="accept-add" type="submit">Ok</button>
+                    </form>
                 </div>
                 <button id="button-find-book">Find book</button>
             </div>
@@ -45,6 +47,7 @@ export default class BookInfoWrapper extends HTMLElement {
         this.$addBookForm = this.shadowRoot.getElementById('add-book-form');
         this.$btnGroup = this.shadowRoot.getElementById('button-group');
         this.$btnAdd = this.shadowRoot.getElementById('button-add');
+        this.$btnAccept = this.shadowRoot.getElementById("accept-add");
     }
 
     static get observedAttributes() {
@@ -98,15 +101,15 @@ export default class BookInfoWrapper extends HTMLElement {
                         });
                     }
 
-                    this.$addBookForm.appendChild($input);
+                    this.$addBookForm.insertBefore($input, this.$btnAccept);
 
                     let $label = document.createElement('label');
                     $label.setAttribute('for', shelf.shelfName);
                     $label.innerHTML = shelf.shelfName;
-                    this.$addBookForm.appendChild($label);
+                    this.$addBookForm.insertBefore($label, this.$btnAccept);
 
                     let $br = document.createElement('br');
-                    this.$addBookForm.appendChild($br);
+                    this.$addBookForm.insertBefore($br, this.$btnAccept);
                 }
         }
     }
@@ -118,6 +121,9 @@ export default class BookInfoWrapper extends HTMLElement {
             } else {
                 this.$addBookForm.style.display = 'inline-block';
             }
+        }
+        this.$btnAccept.onclick = (event) => {
+            event.preventDefault();
         }
     }
 }

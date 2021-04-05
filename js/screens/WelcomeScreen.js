@@ -3,9 +3,21 @@ import { getCurrentUser } from "../models/user.js";
 
 const $template = document.createElement("template");
 $template.innerHTML = /*html*/`
+    <style>
+        #new-book-form{
+            position : fixed;
+            left : 50%;
+            top : 50%;
+            transform: translate(-50%,-50%);
+            z-index : 10000;
+            display:none;
+        }
+    </style>
     <div id="welcome-screen">
         <my-header></my-header>
         <search-form></search-form>
+        <button id="new-btn">New</button>
+        <new-book-form id="new-book-form"></new-book-form>
         <div id="categories-list">
         </div>
         <my-footer></my-footer>
@@ -22,6 +34,8 @@ export default class WelcomeScreen extends HTMLElement {
         this.shadowRoot.appendChild($template.content.cloneNode(true));
         this.$popular = this.shadowRoot.getElementById("popular");
         this.$list = this.shadowRoot.getElementById("categories-list");
+        this.$newBtn = this.shadowRoot.getElementById("new-btn");
+        this.$newBookForm = this.shadowRoot.getElementById("new-book-form");
     };
 
     async connectedCallback() {
@@ -61,6 +75,14 @@ export default class WelcomeScreen extends HTMLElement {
             this.$list.appendChild($categoryContainer);
         }
 
+
+        this.$newBtn.onclick = (event) => {
+            // if (this.$newBookForm.style.display === "none") {
+            this.$newBookForm.style.display = "block";
+            // } else {
+            //     this.$newBookForm.style.display = "none";
+            // }
+        }
     }
 };
 

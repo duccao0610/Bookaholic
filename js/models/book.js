@@ -4,6 +4,20 @@ import { getCurrentUser } from "./user.js";
 export let book = {
 };
 
+
+export async function addBook(newBook) {
+    await firebase.firestore()
+        .collection("books")
+        .add({
+            name: newBook.name,
+            author: newBook.author,
+            categories: newBook.categories,
+            coverImg: newBook.coverImg,
+            publish_day: newBook.publish_day,
+            isChecked: false
+        });
+}
+
 export async function viewBookDetail(id) {
     let response = await firebase.firestore().collection("books")
         .doc(id)

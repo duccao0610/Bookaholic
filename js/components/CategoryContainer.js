@@ -58,11 +58,13 @@ export default class CategoryContainer extends HTMLElement {
         if (attrName == "books") {
             let books = JSON.parse(newValue);
             for (let book of books) {
-                let $bookContainer = document.createElement("book-container");
-                $bookContainer.setAttribute("src", book.cover_img);
-                $bookContainer.setAttribute("name", book.name);
-                $bookContainer.setAttribute("id", book.id);
-                this.$bookList.appendChild($bookContainer);
+                if (book.isChecked == true) {
+                    let $bookContainer = document.createElement("book-container");
+                    $bookContainer.setAttribute("src", book.cover_img);
+                    $bookContainer.setAttribute("name", book.name);
+                    $bookContainer.setAttribute("id", book.id);
+                    this.$bookList.appendChild($bookContainer);
+                }
             }
         } else if (attrName == "name") {
             this.$name.innerHTML = newValue;

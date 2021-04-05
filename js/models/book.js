@@ -32,9 +32,9 @@ export async function viewBookDetail(name) {
 export async function searchBook(name) {
     let response = await firebase.firestore()
         .collection("books")
-        .where("name", "==", name)
+        .where("name", ">=", name)
+        .where("name", "<=", name + '\uf8ff')
         .get();
-
 
     let route = router.navigate("/results");
     if (route) {

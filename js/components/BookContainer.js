@@ -22,7 +22,7 @@ export default class BookContainer extends HTMLElement {
     };
 
     static get observedAttributes() {
-        return ["src", "name"];
+        return ["src", "name", "id"];
     }
 
     attributeChangedCallback(attrName, oldValue, newValue) {
@@ -37,11 +37,11 @@ export default class BookContainer extends HTMLElement {
     };
 
     connectedCallback() {
-        let name = this.$bookName.innerHTML;
+        // let name = this.$bookName.innerHTML;
         this.$bookName.onclick = () => {
-            sessionStorage.setItem("selected", name);
-            console.log(name);
-            router.navigate("/detail");
+            sessionStorage.setItem("selected", this.id);
+            // console.log(name);
+            // router.navigate("/detail");
         }
     };
 

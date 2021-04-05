@@ -25,6 +25,17 @@ export default class WelcomeScreen extends HTMLElement {
     };
 
     async connectedCallback() {
+        let currentUser = await getCurrentUser();
+        if (currentUser.shelves == undefined) {
+            await firebase.firestore()
+                .collection("users")
+                .doc(currentUser.id)
+                .update({
+                    shelves: []
+                });
+        }
+
+
         try {
             this.currentUser = await getCurrentUser();
         } catch (error) {
@@ -32,7 +43,6 @@ export default class WelcomeScreen extends HTMLElement {
         }
 
         let popularBooks = await getPopularBook();
-        console.log(popularBooks);
         this.$popular.setAttribute("books", JSON.stringify(popularBooks));
 
         let categories = ["novel", "fiction", "fantasy"];
@@ -44,6 +54,7 @@ export default class WelcomeScreen extends HTMLElement {
             $categoryContainer.style.textTransform = "capitalize";
             this.$list.appendChild($categoryContainer);
         }
+
     }
 };
 

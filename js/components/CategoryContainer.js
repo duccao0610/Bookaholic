@@ -61,6 +61,7 @@ export default class CategoryContainer extends HTMLElement {
                 let $bookContainer = document.createElement("book-container");
                 $bookContainer.setAttribute("src", book.cover_img);
                 $bookContainer.setAttribute("name", book.name);
+                $bookContainer.setAttribute("id", book.id);
                 this.$bookList.appendChild($bookContainer);
             }
         } else if (attrName == "name") {

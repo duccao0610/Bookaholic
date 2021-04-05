@@ -7,13 +7,13 @@ $template.innerHTML = /*html*/`
         #container {
             display:flex;
             flex-direction : column;
-            margin-bottom : 50px;
+            margin-bottom : 50px;  
         }
-        #container #book-list{            
+        #container #book-list{     
             display:flex;
-            flex-wrap : wrap;
             justify-content : space-around;
             margin : 0 auto;
+            flex-wrap : wrap;
         }
         #container h2 {
             font-size : 30px;
@@ -58,16 +58,25 @@ export default class CategoryContainer extends HTMLElement {
         if (attrName == "books") {
             let books = JSON.parse(newValue);
             for (let book of books) {
-                let $bookContainer = document.createElement("book-container");
-                $bookContainer.setAttribute("src", book.cover_img);
-                $bookContainer.setAttribute("name", book.name);
-                $bookContainer.setAttribute("id", book.id);
-                this.$bookList.appendChild($bookContainer);
+                if (book.isChecked == true) {
+                    let $bookContainer = document.createElement("book-container");
+                    $bookContainer.setAttribute("src", book.cover_img);
+                    $bookContainer.setAttribute("name", book.name);
+                    $bookContainer.setAttribute("id", book.id);
+                    this.$bookList.appendChild($bookContainer);
+                }
             }
         } else if (attrName == "name") {
             this.$name.innerHTML = newValue;
         }
     };
+
+    // connectedCallback() {
+    //     let count = this.$bookList.childElementCount;
+    //     console.log("Child: " + this.$name.innerHTML, count);
+    //     if (count > 4) {
+    //     }
+    // }
 
 };
 

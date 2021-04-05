@@ -5,7 +5,7 @@ const $template = document.createElement('template');
 $template.innerHTML = /*html*/`
     
     <link rel="stylesheet" href="./css/review-screen.css">
-
+    
     <my-header></my-header>
     <search-form></search-form>
     <div id="review-screen">
@@ -34,8 +34,6 @@ export default class ReviewScreen extends HTMLElement {
         // get selected book
         let selectedBook = sessionStorage.getItem("selected");
         let book = await viewBookDetail(selectedBook);
-        sessionStorage.setItem('current-view-book-author', book.author);
-
 
         this.$bookInfo.setAttribute("book-title", book.name);
         this.$bookInfo.setAttribute("author", book.author);
@@ -63,14 +61,6 @@ export default class ReviewScreen extends HTMLElement {
             this.$reviewList.appendChild($review);
         }
 
-        // // ẩn dòng review-form nếu user đã từng review
-        // for (let i = 0; i < reviews.length; i++) {
-        //     if (reviews[i].username == currentUser.name) {
-        //         this.$reviewForm.setAttribute("hidden", "true");
-        //         break;
-        //     }
-        // }
-
         listenBooksStatusChanges(async (data) => {
             // hiện các reviews
             for (let i = reviews.length; i < data.reviews.length; i++) {
@@ -81,11 +71,17 @@ export default class ReviewScreen extends HTMLElement {
                 this.$reviewList.appendChild($review);
             }
             // ẩn dòng review-form nếu user đã từng review
+            let didReview = false;
             for (let i = 0; i < data.reviews.length; i++) {
                 if (data.reviews[i].username == currentUser.name) {
-                    this.$reviewForm.setAttribute("hidden", "true");
+                    didReview = true;
                     break;
                 }
+            }
+            console.log(data.reviews);
+            if (didReview == false || data.reviews.length == 0) {
+                this.$reviewForm.style.display = 'inline-block';
+                console.log(this.$reviewForm);
             }
         });
 

@@ -1,4 +1,4 @@
-import { getCurrentUser, listenShelvesChanges } from "../models/user.js";
+import { createShelf, getCurrentUser, listenShelvesChanges } from "../models/user.js";
 import { getDataFromDoc, getDataFromDocs } from "../utils.js";
 
 const $template = document.createElement('template');
@@ -53,22 +53,6 @@ export default class ShelvesScreen extends HTMLElement {
                 $shelfWrapper.setAttribute("books", JSON.stringify(data.shelves[data.shelves.length - 1].booksOnShelf));
                 this.$shelvesContainer.appendChild($shelfWrapper);
             }
-            // this.$shelvesContainer.textContent = '';
-
-            // for (let shelf of data.shelves) {
-
-            //     let bookData = [];
-            //     for (let book of shelf.booksOnShelf) {
-            //         let data = await book.get();
-            //         bookData.push(data);
-            //     }
-            //     let books = getDataFromDocs(bookData);
-
-            //     let $shelfWrapper = document.createElement("shelf-wrapper");
-            //     $shelfWrapper.setAttribute('shelf-name', shelf.shelfName);
-            //     $shelfWrapper.setAttribute("books", JSON.stringify(books));
-            //     this.$shelvesContainer.appendChild($shelfWrapper);
-            // }
         })
         this.$createShelf.onclick = async (event) => {
             event.preventDefault();
@@ -83,13 +67,7 @@ export default class ShelvesScreen extends HTMLElement {
                     shelfName: this.$inputNewShelfName.value
                 }
 
-                await firebase
-                    .firestore()
-                    .collection('users')
-                    .doc(currentUser.id)
-                    .update({
-                        shelves: firebase.firestore.FieldValue.arrayUnion(newShelf)
-                    });
+                createShelf(newShelf);
 
                 this.$inputNewShelfName.value = "";
             }

@@ -23,7 +23,6 @@ $template.innerHTML = /*html*/`
         <my-footer></my-footer>
     </div>
 `;
-{/* <category-container id="popular" name="Popular"></category-container> */ }
 
 export default class WelcomeScreen extends HTMLElement {
     currentUser = null;

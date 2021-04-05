@@ -61,6 +61,7 @@ export default class ShelfWrapper extends HTMLElement {
             let books = JSON.parse(newValue);
             for (let book of books) {
                 let $bookContainer = document.createElement("book-container");
+                $bookContainer.setAttribute("id", book.id);
                 $bookContainer.setAttribute("name", book.name);
                 $bookContainer.setAttribute("src", book.cover_img);
                 this.$bookList.appendChild($bookContainer);

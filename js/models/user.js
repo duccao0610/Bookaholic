@@ -1,4 +1,5 @@
 import md5, { getDataFromDoc, getDataFromDocs } from "../utils.js";
+import { viewBookDetail } from "./book.js";
 export async function register(name, email, password) {
     let response = await firebase.firestore().collection("users").where("email", "==", email).get();
     if (response.empty) {
@@ -89,7 +90,6 @@ export async function removeShelf(removedShelfName) {
             break;
         }
     }
-    // console.log(removedShelf);
     firebase
         .firestore()
         .collection('users')
@@ -99,3 +99,35 @@ export async function removeShelf(removedShelfName) {
         })
 }
 
+export async function addBookToShelves() {
+    let currentUser = await getCurrentUser();
+    let bookId = sessionStorage.getItem('selected');
+    let updatedShelves = sessionStorage.getItem('updatedShelves');
+    let bookRef = await firebase.firestore().doc(`books/${bookId}`);
+
+    for (let shelf of currentUser.shelves) {
+        if (updatedShelves.includes(shelf.shelfName)) {
+            shelf.booksOnShelf.push(bookRef);
+        }
+    }
+
+    await firebase
+        .firestore()
+        .collection('users')
+        .doc(currentUser.id)
+        .update({
+            shelves: currentUser.shelves
+        });
+}
+
+export async function createShelf(newShelf) {
+    let currentUser = getCurrentUser();
+    await firebase
+        .firestore()
+        .collection('users')
+        .doc(currentUser.id)
+        .update({
+            shelves: firebase.firestore.FieldValue.arrayUnion(newShelf)
+        });
+
+}

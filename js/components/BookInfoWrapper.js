@@ -1,4 +1,4 @@
-import { getCurrentUser } from "../models/user.js";
+import { addBookToShelves, getCurrentUser } from "../models/user.js";
 import { getAllBookRefId, viewBookDetail } from "../models/book.js";
 import { getDataFromDocs, getDataFromDoc } from "../utils.js";
 
@@ -91,6 +91,7 @@ export default class BookInfoWrapper extends HTMLElement {
                         name: shelf.shelfName,
                         value: shelf.shelfName
                     });
+                    $input.classList.add("shelf-checkbox");
                     let allBookRefId = getAllBookRefId(shelf.booksOnShelf);
                     if (allBookRefId.includes(currentViewingBook.id)) {
                         Object.assign($input, {
@@ -120,8 +121,19 @@ export default class BookInfoWrapper extends HTMLElement {
                 this.$addBookForm.style.display = 'inline-block';
             }
         }
-        this.$btnAccept.onclick = (event) => {
+        this.$btnAccept.onclick = async (event) => {
             event.preventDefault();
+
+            let updatedShelves = [];
+            let checkboxes = this.$addBookForm.querySelectorAll('input.shelf-checkbox[type="checkbox"]:checked');
+            for (let i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].disabled == false) {
+                    updatedShelves.push(checkboxes[i].value);
+                    checkboxes[i].disabled = true;
+                }
+            }
+            sessionStorage.setItem('updatedShelves', updatedShelves);
+            addBookToShelves();
         }
     }
 }

@@ -70,14 +70,6 @@ export default class CategoryContainer extends HTMLElement {
             this.$name.innerHTML = newValue;
         }
     };
-
-    // connectedCallback() {
-    //     let count = this.$bookList.childElementCount;
-    //     console.log("Child: " + this.$name.innerHTML, count);
-    //     if (count > 4) {
-    //     }
-    // }
-
 };
 
 window.customElements.define("category-container", CategoryContainer);

@@ -5,7 +5,7 @@ const $template = document.createElement('template');
 $template.innerHTML = /*html*/`
     
     <link rel="stylesheet" href="./css/review-screen.css">
-
+    
     <my-header></my-header>
     <search-form></search-form>
     <div id="review-screen">
@@ -71,11 +71,17 @@ export default class ReviewScreen extends HTMLElement {
                 this.$reviewList.appendChild($review);
             }
             // ẩn dòng review-form nếu user đã từng review
+            let didReview = false;
             for (let i = 0; i < data.reviews.length; i++) {
                 if (data.reviews[i].username == currentUser.name) {
-                    this.$reviewForm.setAttribute("hidden", "true");
+                    didReview = true;
                     break;
                 }
+            }
+            console.log(data.reviews);
+            if (didReview == false || data.reviews.length == 0) {
+                this.$reviewForm.style.display = 'inline-block';
+                console.log(this.$reviewForm);
             }
         });
 

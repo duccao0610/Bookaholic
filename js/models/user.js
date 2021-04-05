@@ -90,7 +90,6 @@ export async function removeShelf(removedShelfName) {
             break;
         }
     }
-    // console.log(removedShelf);
     firebase
         .firestore()
         .collection('users')

@@ -37,10 +37,8 @@ export default class BookContainer extends HTMLElement {
     };
 
     connectedCallback() {
-        // let name = this.$bookName.innerHTML;
         this.$bookName.onclick = () => {
             sessionStorage.setItem("selected", this.id);
-            // console.log(name);
             router.navigate("/detail");
         }
     };

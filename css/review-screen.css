@@ -13,6 +13,10 @@
     /* border  : 1px solid black; */
 }
 
+#review-form{
+    display :none;
+}
+
 @media (max-width: 719px){
     #review-screen {
         margin: 0;

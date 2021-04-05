@@ -7,11 +7,11 @@ $template.innerHTML = /*html*/`
         <my-header></my-header>
         <search-form></search-form>
         <div id="categories-list">
-            <category-container id="popular" name="Popular"></category-container>
         </div>
         <my-footer></my-footer>
     </div>
 `;
+{/* <category-container id="popular" name="Popular"></category-container> */ }
 
 export default class WelcomeScreen extends HTMLElement {
     currentUser = null;
@@ -43,7 +43,13 @@ export default class WelcomeScreen extends HTMLElement {
         }
 
         let popularBooks = await getPopularBook();
-        this.$popular.setAttribute("books", JSON.stringify(popularBooks));
+        let $popularContainer = document.createElement("category-container");
+        $popularContainer.setAttribute("books", JSON.stringify(popularBooks));
+        $popularContainer.setAttribute("name", "Popular");
+        this.$list.appendChild($popularContainer);
+
+
+        // this.$popular.setAttribute("books", JSON.stringify(popularBooks));
 
         let categories = ["novel", "fiction", "fantasy"];
         for (let category of categories) {

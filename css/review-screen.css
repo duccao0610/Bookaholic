@@ -16,6 +16,7 @@
 @media (max-width: 719px){
     #review-screen {
         margin: 0;
+        text-align: center;
     }
 
     #review-screen #reviews, #form {

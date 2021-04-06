@@ -66,7 +66,7 @@ export default class WelcomeScreen extends HTMLElement {
 
         // this.$popular.setAttribute("books", JSON.stringify(popularBooks));
 
-        let categories = ["novel", "fiction", "fantasy"];
+        let categories = ["novel", "fiction", "fantasy", "manga"];
         for (let category of categories) {
             let books = await getBooksByCategory(category);
             let booksToShow;

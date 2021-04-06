@@ -38,7 +38,7 @@ export function getRandomIndexes(arr) {
     } else {
         let random;
         do {
-            random = Math.floor(Math.random() * (arr.length - 1));
+            random = Math.floor(Math.random() * arr.length);
             if (randoms.includes(random) == false) {
                 randoms.push(random);
             }

@@ -35,6 +35,8 @@
 #aside-right #intro {
     margin: 13px 0;
     width: 40%;
+    text-align: left;
+
 }
 button {
     padding: 10px;
@@ -132,6 +134,13 @@ button:focus {
 }
  
 
+@media (max-width: 1023px) and (min-width: 719px){
+    #book-info-wrapper #aside-right #intro{
+        font-size: 13px;
+        width: 60%;
+    }
+}
+
 
 @media (max-width: 719px){
     #book-info-wrapper {
@@ -150,7 +159,6 @@ button:focus {
         margin-top: 25px;
     }
     #book-info-wrapper #aside-right{
-        margin-left: 0;
         margin: auto;
         display: flex;
         flex-direction: column;

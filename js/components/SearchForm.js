@@ -1,4 +1,4 @@
-import { searchBook } from "../models/book.js";
+import { getBooksByCategory, searchBookByName, searchBookByAuthor } from "../models/book.js";
 
 const $template = document.createElement("template");
 $template.innerHTML = /*html*/`
@@ -30,12 +30,22 @@ export default class SearchForm extends HTMLElement {
         this.$searchForm.onsubmit = async (event) => {
             event.preventDefault();
             let input = this.$input.value;
-            let results = await searchBook(input);
-            console.log(results);
-
-            localStorage.setItem("results", JSON.stringify(results));
+            let resultsName = await searchBookByName(input);
+            let resultsCategory = await getBooksByCategory(input);
+            let resultsAuthor = await searchBookByAuthor(input);
+            localStorage.setItem("resultsAuthor", JSON.stringify(resultsAuthor));
+            localStorage.setItem("resultsCategory", JSON.stringify(resultsCategory));
+            localStorage.setItem("resultsName", JSON.stringify(resultsName));
             localStorage.setItem("search-value", input);
 
+
+            //router
+            let route = router.navigate("/results");
+            if (route) {
+                location.reload();
+            } else {
+                router.navigate("/results");
+            }
         }
     }
 };

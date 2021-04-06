@@ -30,22 +30,23 @@ export async function viewBookDetail(id) {
     return getDataFromDoc(response);
 }
 
-export async function searchBook(name) {
+export async function searchBookByName(name) {
     let response = await firebase.firestore()
         .collection("books")
         .where("name", ">=", name.toUpperCase())
         .where("name", "<=", name.toUpperCase() + '\uf8ff')
         .get();
+    return getDataFromDocs(response.docs);
+}
 
-    let route = router.navigate("/results");
-    if (route) {
-        location.reload();
-    } else {
-        router.navigate("/results");
-    }
+export async function searchBookByAuthor(author) {
+    let response = await firebase.firestore()
+        .collection("books")
+        .where("author", ">=", author.toUpperCase())
+        .where("author", "<=", author.toUpperCase() + '\uf8ff')
+        .get();
 
     return getDataFromDocs(response.docs);
-
 }
 
 export async function getPopularBook() {
@@ -67,7 +68,7 @@ export async function getPopularBook() {
 export async function getBooksByCategory(category) {
     let response = await firebase.firestore()
         .collection("books")
-        .where("categories", "array-contains", category)
+        .where("categories", "array-contains", category.toUpperCase())
         .get();
 
     return getDataFromDocs(response.docs);

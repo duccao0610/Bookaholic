@@ -1,4 +1,3 @@
-import { searchBook } from "../models/book.js";
 
 const $template = document.createElement("template");
 $template.innerHTML = /*html*/`
@@ -17,9 +16,22 @@ export default class SearchResultsScreen extends HTMLElement {
     };
 
     connectedCallback() {
-        let results = localStorage.getItem("results");
+        //get search value
         let searchValue = localStorage.getItem("search-value");
+        //get results - string
+        let resultsName = localStorage.getItem("resultsName");
+        let resultsCategory = localStorage.getItem("resultsCategory");
+        let resultsAuthor = localStorage.getItem("resultsAuthor");
+
+
+        let resultNameArr = JSON.parse(resultsName);
+        let resultsCategoryArr = JSON.parse(resultsCategory);
+        let resultsAuthorArr = JSON.parse(resultsAuthor);
+        let resultsArr = resultNameArr.concat(resultsCategoryArr, resultsAuthorArr);
+
+        let results = JSON.stringify(resultsArr);
         console.log(results);
+
         let response = "";
         if (results.length == 0) {
             response = "No result with [ " + searchValue + " ]";

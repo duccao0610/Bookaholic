@@ -82,7 +82,7 @@ export default class NewBookForm extends HTMLElement {
             let newBook = {
                 name: this.$bookName.value,
                 author: this.$author.value,
-                categories: this.$categories.value.split(","),
+                categories: this.$categories.value.toUpperCase().split(","),
                 cover_img: this.$coverImg.value,
                 publish_day: this.$publish_day.value,
                 intro: this.$intro.value

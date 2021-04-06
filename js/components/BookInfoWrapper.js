@@ -1,5 +1,5 @@
 import { addBookToShelves, getCurrentUser } from "../models/user.js";
-import { getAllBookRefId, viewBookDetail } from "../models/book.js";
+import { getAllBookRefId, turnOffLending, turnOnLending, viewBookDetail } from "../models/book.js";
 import { getDataFromDocs, getDataFromDoc } from "../utils.js";
 
 const $template = document.createElement('template');
@@ -16,8 +16,12 @@ $template.innerHTML = /*html*/`
                 <i class="fas fa-circle"></i>
                 <h4 id="status">Status</h4>
             </div>
-            <p id="intro">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque, inventore iste ex veritatis ea porro saepe voluptate laborum eos! Veritatis a similique nobis atque doloribus dolorem voluptatum soluta quos. Corrupti?</p>            
+            <p id="intro"></p>            
             <div id="button-group">
+                <div id="switch-container">
+                    <p>Lend this book?</p>
+                    <input type="checkbox" id="switch" /><label id="slider" for="switch"></label>
+                </div>
                 <div id="btn-add-container">
                     <button id="button-add">Add to bookshelf</button>
                     <form id="add-book-form">
@@ -48,6 +52,7 @@ export default class BookInfoWrapper extends HTMLElement {
         this.$btnGroup = this.shadowRoot.getElementById('button-group');
         this.$btnAdd = this.shadowRoot.getElementById('button-add');
         this.$btnAccept = this.shadowRoot.getElementById("accept-add");
+        this.$lendSwitch = this.shadowRoot.getElementById("switch");
     }
 
     static get observedAttributes() {
@@ -69,7 +74,7 @@ export default class BookInfoWrapper extends HTMLElement {
                 if (newValue == 'available') {
                     this.$statusContainer.style.color = '#1CE949';
                     this.$status.innerHTML = 'Available';
-                } else {
+                } else if (newValue == 'unavailable') {
                     this.$statusContainer.style.color = '#e9271c';
                     this.$status.innerHTML = 'Unavailable';
                 }
@@ -78,8 +83,6 @@ export default class BookInfoWrapper extends HTMLElement {
                 this.$intro.innerHTML = newValue;
                 break;
             case 'shelves':
-                // let shelves = JSON.parse(newValue);
-
                 let bookId = sessionStorage.getItem('selected'); // setItem ở CategoryContainer
                 let currentViewingBook = await viewBookDetail(bookId);
 
@@ -110,10 +113,14 @@ export default class BookInfoWrapper extends HTMLElement {
                     let $br = document.createElement('br');
                     this.$addBookForm.insertBefore($br, this.$btnAccept);
                 }
+                break;
+            // case 'can-lend':
+            //     if (newValue == 'true') turnOnLending();
+            //     if (newValue == 'false') turnOffLending();
         }
     }
 
-    connectedCallback() {
+    async connectedCallback() {
         this.$btnAdd.onclick = () => {
             if (this.$addBookForm.style.display == 'inline-block') {
                 this.$addBookForm.style.display = 'none';
@@ -134,6 +141,18 @@ export default class BookInfoWrapper extends HTMLElement {
             }
             sessionStorage.setItem('updatedShelves', updatedShelves);
             addBookToShelves();
+        }
+
+        let bookId = sessionStorage.getItem('selected');
+        let currentViewingBook = await viewBookDetail(bookId);
+        let currentUser = await getCurrentUser();
+        if (currentViewingBook.owners.includes(currentUser.id)) {
+            this.$lendSwitch.checked = true;
+        }
+
+        this.$lendSwitch.onclick = () => {
+            if (this.$lendSwitch.checked == true) turnOnLending();
+            if (this.$lendSwitch.checked == false) turnOffLending();
         }
     }
 }

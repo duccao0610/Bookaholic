@@ -50,7 +50,7 @@ button:focus {
 }
 #aside-right #button-group {
     position: absolute;
-    top: 300px;
+    top: 282px;
     width: 200px;
     display: flex;
     flex-direction: column;
@@ -83,6 +83,54 @@ button:focus {
 #aside-right #button-group #button-find-book:hover {
     background: linear-gradient(to left,#A17E7E,#6B4141);
 }
+
+/* TOGGLE SWITCH */
+
+#switch{
+    height: 0;
+    width: 0;
+    visibility: hidden;
+}
+
+#slider {
+    cursor: pointer;
+    width: 60px;
+    height: 34px;
+    background: grey;
+    display: block;
+    border-radius: 100px;
+    position: relative;
+}
+
+#slider:after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 4px;
+    width: 26px;
+    height: 26px;
+    background: #fff;
+    border-radius: 90px;
+    transition: 0.4s;
+}
+
+#switch:checked + #slider {
+    background: #2196F3;
+}
+
+#switch:checked + #slider:after {
+    left: calc(100% - 5px);
+    transform: translateX(-100%);
+}
+
+/* Switch container */
+#switch-container {
+    display: flex;
+    width: 200px;
+    align-items: center;
+    justify-content: space-between;
+}
+ 
 
 
 @media (max-width: 719px){

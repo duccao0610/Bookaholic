@@ -1,4 +1,4 @@
-import { book, listenBooksStatusChanges, viewBookDetail } from "../models/book.js";
+import { book, listenBookInfoChanges, viewBookDetail } from "../models/book.js";
 import { getCurrentUser } from "../models/user.js";
 
 const $template = document.createElement('template');
@@ -32,45 +32,40 @@ export default class ReviewScreen extends HTMLElement {
     async connectedCallback() {
 
         // get selected book
-        let selectedBook = sessionStorage.getItem("selected");
-        let book = await viewBookDetail(selectedBook);
+        let selectedBookId = sessionStorage.getItem("selected");
+        let book = await viewBookDetail(selectedBookId);
 
+        // hiện thông tin book
         this.$bookInfo.setAttribute("book-title", book.name);
         this.$bookInfo.setAttribute("author", book.author);
         this.$bookInfo.setAttribute("intro", book.intro);
         this.$bookInfo.setAttribute("book-cover", book.cover_img);
 
         let currentUser = await getCurrentUser();
-
         this.$bookInfo.setAttribute("shelves", JSON.stringify(currentUser.shelves));
 
+        // hiện review lần load đầu tiên
         let reviews = book.reviews;
-        if (book.reviews == undefined) {
-            await firebase.firestore()
-                .collection("books")
-                .doc(book.id)
-                .update({
-                    reviews: []
-                });
-        }
         for (let review of reviews) {
             let $review = document.createElement("review-wrapper");
             $review.setAttribute("comment", review.comment);
             $review.setAttribute("rating", review.rating);
             $review.setAttribute("username", review.username);
+            $review.setAttribute("review-date", review.date);
             if (review.username == currentUser.name) {
                 $review.style.background = "red";
             }
             this.$reviewList.appendChild($review);
         }
 
-        listenBooksStatusChanges(async (data) => {
-            // hiện các reviews
+        listenBookInfoChanges(async (data) => {
+            // hiện các review mới thêm
             for (let i = reviews.length; i < data.reviews.length; i++) {
                 let $review = document.createElement("review-wrapper");
                 $review.setAttribute("comment", data.reviews[i].comment);
                 $review.setAttribute("rating", data.reviews[i].rating);
                 $review.setAttribute("username", data.reviews[i].username);
+                $review.setAttribute("review-date", data.reviews[i].date);
                 if (data.reviews[i].username == currentUser.name) {
                     $review.style.background = "red";
                 }
@@ -84,6 +79,13 @@ export default class ReviewScreen extends HTMLElement {
                     this.$reviewForm.setAttribute('did-review', 'true');
                     break;
                 }
+            }
+
+            // thay đổi trạng thái
+            if (data.owners.length == 0) {
+                this.$bookInfo.setAttribute("status", "unavailable");
+            } else {
+                this.$bookInfo.setAttribute("status", "available");
             }
         });
 

@@ -6,7 +6,8 @@ export async function register(name, email, password) {
         await firebase.firestore().collection("users").add({
             name: name,
             email: email,
-            password: md5(password)
+            password: md5(password),
+            owning: []
         });
         alert("Register successful");
         router.navigate("/login");

@@ -1,4 +1,4 @@
 const $template = document.createElement("template");
-$template.innerHTML =  /*html*/`
+$template.innerHTML = /*html*/`
     
 `;

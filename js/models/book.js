@@ -17,7 +17,8 @@ export async function addBook(newBook) {
             publish_day: newBook.publish_day,
             isChecked: false,
             reviews: [],
-            rating: 0
+            rating: 0,
+            owners: []
         });
 }
 
@@ -82,7 +83,7 @@ export async function addReview(review) {
         });
 }
 
-export async function listenBooksStatusChanges(callback) {
+export async function listenBookInfoChanges(callback) {
     let bookId = sessionStorage.getItem('selected'); // setItem ở BookContainer
     firebase.firestore().collection('books').doc(bookId).onSnapshot(function (snapshot) {
         let data = getDataFromDoc(snapshot);
@@ -96,4 +97,26 @@ export function getAllBookRefId(shelf) {
         allBookRefId.push(book.id);
     }
     return allBookRefId;
+}
+
+export async function turnOnLending() {
+    let currentUser = await getCurrentUser();
+    let currentViewingBookId = sessionStorage.getItem('selected');
+    await firebase.firestore().collection('books').doc(currentViewingBookId).update({
+        owners: firebase.firestore.FieldValue.arrayUnion(currentUser.id)
+    });
+}
+
+export async function turnOffLending() {
+    let currentUser = await getCurrentUser();
+    let currentViewingBookId = sessionStorage.getItem('selected');
+    let currentViewingBook = await viewBookDetail(currentViewingBookId);
+    for (let owner of currentViewingBook.owners) {
+        if (owner == currentUser.id) {
+            await firebase.firestore().collection('books').doc(currentViewingBookId).update({
+                owners: firebase.firestore.FieldValue.arrayRemove(currentUser.id)
+            });
+            break;
+        }
+    }
 }

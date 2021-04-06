@@ -25,9 +25,13 @@ $template.innerHTML = /*html*/`
         }
         @media (max-width: 719px){
             .form-item{
-                width: 70%;
+                width: fit-content;
+                height : 50%;
                 border-radius : 5px;
                 margin-bottom : 10px;
+            }
+            .form-item::placeholder {
+                font-size : 15px;
             }
         }
         @media (max-width: 1023px) and (min-width: 720px){

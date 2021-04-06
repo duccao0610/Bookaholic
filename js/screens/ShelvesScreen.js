@@ -54,9 +54,6 @@ export default class ShelvesScreen extends HTMLElement {
                 this.$shelvesContainer.appendChild($shelfWrapper);
             }
         })
-
-
-
         this.$createShelf.onclick = async (event) => {
             event.preventDefault();
             for (let shelf of currentUser.shelves) {

@@ -11,36 +11,48 @@ $template.innerHTML = /*html*/`
             align-items:center;
             border : 1px solid black;
             border-radius : 10px;
-            background :black;
+            background: linear-gradient(to left, #a17e7e, #491B1B);
             width:fit-content;
-            padding :50px;
+            padding :30px;
+            position : relative;
         }
         #container h3 {
             text-transform: uppercase;
-            color: white;
         }
         #container #btn-submit {
+            font-weight :15px;
             margin-top : 10px;
             padding: 10px;
             border-radius : 5px;
+            background : linear-gradient(to left,#525252,#3D72B4);
+        }
+        #container #btn-submit:hover{
+            background : linear-gradient(to right,#525252,#3D72B4);
         }
 
         #container #btn-close {
+            border-radius : 5px;
             position :absolute;
-            top : 10px;
+            top : 20px;
             right : 10px;
         }
 
+        @media (max-width: 719px){
+            #container h3 {
+                font-size : 15px;
+                text-align :center;
+            }
+        }
     </style>
     <div id="container">
         <form id='new-book-form'>
             <h3>Submit a book to Bookaholic's Community</h3>
-            <input-wrapper id= "name" placeholder= "book's name"></input-wrapper>
-            <input-wrapper id= "author" placeholder= "author"></input-wrapper>
-            <input-wrapper id= "categories" placeholder= "(novel,fantasy,..)"></input-wrapper>
-            <input-wrapper id= "intro" placeholder= "intro"></input-wrapper>
-            <input-wrapper id= "cover_img" placeholder= "book's cover URL"></input-wrapper>
-            <input-wrapper id= "publish_day" placeholder= "book's publish day"></input-wrapper>
+            <input-wrapper id= "name" placeholder= "book's name" class="item"></input-wrapper>
+            <input-wrapper id= "author" placeholder= "author" class="item"></input-wrapper>
+            <input-wrapper id= "categories" placeholder= "(novel,fantasy,..)" class="item"></input-wrapper>
+            <input-wrapper id= "intro" placeholder= "intro" class="item"></input-wrapper>
+            <input-wrapper id= "cover_img" placeholder= "book's cover URL" class="item"></input-wrapper>
+            <input-wrapper id= "publish_day" placeholder= "book's publish day" class="item"></input-wrapper>
             <button id="btn-submit">Submit</button>
             <button id="btn-close">X</button>
         </form>
@@ -87,6 +99,7 @@ export default class NewBookForm extends HTMLElement {
             if (isPassed) {
                 addBook(newBook);
                 alert("Submit a new book success");
+                this.style.display = "none";
             }
         }
 
@@ -95,7 +108,6 @@ export default class NewBookForm extends HTMLElement {
             this.style.display = "none";
         }
     }
-
 };
 
 window.customElements.define("new-book-form", NewBookForm);

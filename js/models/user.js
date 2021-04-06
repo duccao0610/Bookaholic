@@ -54,7 +54,7 @@ export async function getUserByToken(token) {
         .get();
 
     if (response.empty) {
-        router.navigate("/login");
+        // router.navigate("/login");
         throw new Error("User not exist");
     }
     return getDataFromDoc(response.docs[0]);
@@ -121,7 +121,7 @@ export async function addBookToShelves() {
 }
 
 export async function createShelf(newShelf) {
-    let currentUser = getCurrentUser();
+    let currentUser = await getCurrentUser();
     await firebase
         .firestore()
         .collection('users')

@@ -9,13 +9,15 @@ export async function addBook(newBook) {
     await firebase.firestore()
         .collection("books")
         .add({
-            name: newBook.name,
+            name: newBook.name.toUpperCase(),
             author: newBook.author,
             categories: newBook.categories,
             intro: newBook.intro,
             cover_img: newBook.cover_img,
             publish_day: newBook.publish_day,
-            isChecked: false
+            isChecked: false,
+            reviews: [],
+            rating: 0
         });
 }
 
@@ -30,8 +32,8 @@ export async function viewBookDetail(id) {
 export async function searchBook(name) {
     let response = await firebase.firestore()
         .collection("books")
-        .where("name", ">=", name)
-        .where("name", "<=", name + '\uf8ff')
+        .where("name", ">=", name.toUpperCase())
+        .where("name", "<=", name.toUpperCase() + '\uf8ff')
         .get();
 
     let route = router.navigate("/results");

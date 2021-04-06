@@ -62,6 +62,7 @@ export default class LoginForm extends HTMLElement {
 
         this.$registerBtn.onclick = () => {
             router.navigate("/register");
+            console.log("HUHU");
         };
     }
 };

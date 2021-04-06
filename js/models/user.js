@@ -54,7 +54,7 @@ export async function getUserByToken(token) {
         .get();
 
     if (response.empty) {
-        router.navigate("/login");
+        // router.navigate("/login");
         throw new Error("User not exist");
     }
     return getDataFromDoc(response.docs[0]);

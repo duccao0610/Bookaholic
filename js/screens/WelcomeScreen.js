@@ -25,6 +25,7 @@ $template.innerHTML = /*html*/`
     </div>
 `;
 
+
 export default class WelcomeScreen extends HTMLElement {
     currentUser = null;
     constructor() {

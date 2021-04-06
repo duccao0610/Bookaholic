@@ -30,3 +30,19 @@ export function getDataFromDocs(docs) {
 export function toTop() {
     document.body.scrollTop = 0;
 }
+
+export function getRandomIndexes(arr) {
+    let randoms = [];
+    if (arr.length < 4) {
+        return arr;
+    } else {
+        let random;
+        do {
+            random = Math.floor(Math.random() * (arr.length - 1));
+            if (randoms.includes(random) == false) {
+                randoms.push(random);
+            }
+        } while (randoms.length < 4);
+    }
+    return randoms;
+}

@@ -13,7 +13,7 @@ $template.innerHTML = /*html*/`
             border-radius : 10px;
             background :black;
             width:fit-content;
-            padding :50px;
+            padding :30px;
         }
         #container h3 {
             text-transform: uppercase;
@@ -27,7 +27,7 @@ $template.innerHTML = /*html*/`
 
         #container #btn-close {
             position :absolute;
-            top : 10px;
+            top : 50px;
             right : 10px;
         }
 

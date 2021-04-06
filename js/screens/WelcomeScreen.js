@@ -1,5 +1,6 @@
-import { getBooksByCategory, getPopularBook } from "../models/book.js";
+import { book, getBooksByCategory, getPopularBook } from "../models/book.js";
 import { getCurrentUser } from "../models/user.js";
+import { getRandomIndexes } from "../utils.js";
 
 const $template = document.createElement("template");
 $template.innerHTML = /*html*/`
@@ -67,8 +68,27 @@ export default class WelcomeScreen extends HTMLElement {
         let categories = ["novel", "fiction", "fantasy"];
         for (let category of categories) {
             let books = await getBooksByCategory(category);
+            let booksToShow;
+            //Chi hien thi 4 quyen sach RANDOM trong moi category
+            if (books.length > 4) {
+                do {
+                    booksToShow = [];
+                    let randoms = getRandomIndexes(books);
+                    console.log(randoms);
+                    for (let index of randoms) {
+                        if (books[index].isChecked == true) {
+                            booksToShow.push(books[index]);
+                        } else {
+                            break;
+                        }
+                    }
+                } while (booksToShow.length < 4)
+            } else {
+                booksToShow = books;
+            }
+
             let $categoryContainer = document.createElement("category-container");
-            $categoryContainer.setAttribute("books", JSON.stringify(books));
+            $categoryContainer.setAttribute("books", JSON.stringify(booksToShow));
             $categoryContainer.setAttribute("name", category);
             $categoryContainer.style.textTransform = "capitalize";
             this.$list.appendChild($categoryContainer);

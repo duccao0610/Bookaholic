@@ -121,7 +121,7 @@ export async function addBookToShelves() {
 }
 
 export async function createShelf(newShelf) {
-    let currentUser = getCurrentUser();
+    let currentUser = await getCurrentUser();
     await firebase
         .firestore()
         .collection('users')

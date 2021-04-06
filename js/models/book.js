@@ -15,7 +15,8 @@ export async function addBook(newBook) {
             intro: newBook.intro,
             cover_img: newBook.cover_img,
             publish_day: newBook.publish_day,
-            isChecked: false
+            isChecked: false,
+            reviews: []
         });
 }
 

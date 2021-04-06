@@ -70,20 +70,11 @@ export async function getBooksByCategory(category) {
     return getDataFromDocs(response.docs);
 }
 export async function addReview(review) {
-    let title = sessionStorage.getItem('selected'); // setItem ở BookContainer
-    let author = sessionStorage.getItem('current-view-book-author'); // setItem ở ReviewScreen
-    let response = await firebase
-        .firestore()
-        .collection('books')
-        .where('name', '==', title)
-        .where('author', '==', author)
-        .get();
-    let result = getDataFromDocs(response.docs)[0];
-    result.reviews.push(review);
+    let bookId = sessionStorage.getItem('selected'); // setItem ở BookContainer
     await firebase
         .firestore()
         .collection('books')
-        .doc(result.id)
+        .doc(bookId)
         .update({
             reviews: firebase.firestore.FieldValue.arrayUnion(review)
         });

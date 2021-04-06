@@ -59,7 +59,22 @@ export default class ReviewForm extends HTMLElement {
         this.$reviewForm = this.shadowRoot.getElementById('review-form');
     }
 
+    static get observedAttributes() {
+        return ['did-review'];
+    }
+
+    attributeChangedCallback(attrName, oldValue, newValue) {
+        if (attrName == 'did-review') {
+            if (newValue == "true") {
+                this.$reviewForm.style.display = 'none';
+            } else if (newValue == "false") {
+                this.$reviewForm.style.display = 'inline-block';
+            }
+        }
+    }
+
     connectedCallback() {
+
         this.$reviewForm.onsubmit = async (event) => {
             event.preventDefault();
 

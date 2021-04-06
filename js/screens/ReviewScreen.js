@@ -58,6 +58,9 @@ export default class ReviewScreen extends HTMLElement {
             $review.setAttribute("comment", review.comment);
             $review.setAttribute("rating", review.rating);
             $review.setAttribute("username", review.username);
+            if (review.username == currentUser.name) {
+                $review.style.background = "red";
+            }
             this.$reviewList.appendChild($review);
         }
 
@@ -68,20 +71,19 @@ export default class ReviewScreen extends HTMLElement {
                 $review.setAttribute("comment", data.reviews[i].comment);
                 $review.setAttribute("rating", data.reviews[i].rating);
                 $review.setAttribute("username", data.reviews[i].username);
-                this.$reviewList.appendChild($review);
+                if (data.reviews[i].username == currentUser.name) {
+                    $review.style.background = "red";
+                }
+                this.$reviewList.prepend($review);
             }
+            this.$reviewForm.setAttribute('did-review', 'false');
+
             // ẩn dòng review-form nếu user đã từng review
-            let didReview = false;
             for (let i = 0; i < data.reviews.length; i++) {
                 if (data.reviews[i].username == currentUser.name) {
-                    didReview = true;
+                    this.$reviewForm.setAttribute('did-review', 'true');
                     break;
                 }
-            }
-            console.log(data.reviews);
-            if (didReview == false || data.reviews.length == 0) {
-                this.$reviewForm.style.display = 'inline-block';
-                console.log(this.$reviewForm);
             }
         });
 

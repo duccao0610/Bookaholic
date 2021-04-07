@@ -65,16 +65,6 @@ export default class WelcomeScreen extends HTMLElement {
 
     async connectedCallback() {
         let currentUser = await getCurrentUser();
-        if (currentUser.shelves == undefined) {
-            await firebase.firestore()
-                .collection("users")
-                .doc(currentUser.id)
-                .update({
-                    shelves: []
-                });
-        }
-
-
         try {
             this.currentUser = await getCurrentUser();
         } catch (error) {

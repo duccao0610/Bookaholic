@@ -46,6 +46,7 @@ export default class OwnerList extends HTMLElement {
                 if (owner.id != currentUser.id) {
                     let $newOwner = document.createElement("user-address-container");
                     $newOwner.setAttribute("name", owner.name);
+                    $newOwner.setAttribute("address", JSON.stringify(owner.address));
                     this.$list.appendChild($newOwner);
                 }
             }

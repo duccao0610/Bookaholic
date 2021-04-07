@@ -12,7 +12,8 @@ export async function register(name, email, password) {
                 country: "",
                 city: "",
                 district: ""
-            }
+            },
+            shelves: []
         });
         alert("Register successful");
         router.navigate("/login");

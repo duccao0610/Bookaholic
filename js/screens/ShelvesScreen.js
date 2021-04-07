@@ -8,8 +8,8 @@ $template.innerHTML = /*html*/`
     <search-form></search-form>
     <div id="menu">
         <ul id="actions">
+            <li><a id="my-address" class="selected">My address</a></li>
             <li><a id="my-shelves">My shelves</a></li>
-            <li><a id="my-address">My address</a></li>
             <li><a id="btn-logout">Log out</a></li>
         </ul>
         <div id ="forms">
@@ -93,7 +93,7 @@ export default class ShelvesScreen extends HTMLElement {
 
         this.$shelvesAction.onclick = (event) => {
             event.preventDefault();
-            this.$shelves.style.display = "block";
+            this.$shelves.style.display = "flex";
             this.$address.style.display = "none";
 
             this.$shelvesAction.classList.add("selected");

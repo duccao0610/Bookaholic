@@ -6,25 +6,45 @@ $template.innerHTML = /*html*/`
         *{
             font-family: "Montserrat";
         }
+        #shelf-wrapper{
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            margin-bottom : 20px;
+        }
 
         #book-list{            
             display: none;
             flex-wrap : wrap;
-            justify-content: center;
+            justify-content:flex-start;
             margin : 0 auto;
+        }
+        #btn-group{
+            margin-bottom :10px;
+            align-self :flex-start;
+            display:flex;
+            position:relative;
         }
 
         #btn-shelf {
-            font-size: 25px;
-            margin-left: 70px;
-            background-color: white;
+            width:100px;
+            font-size: 20px;
+            font-weight :bold;
+            padding :10px;
+            background : linear-gradient(to left,#525252,#3D72B4);
+            border-radius :3px;
             border: none;
+        }
+        #btn-shelf:hover {
+            background : linear-gradient(to right,#525252,#3D72B4);
+        }
+        #remove-shelf{
         }
         #confirm-box {
             position:absolute;
-            top:20%;
-            left :50%;
-            transform :translate(-50%,-50%);
+            top:-100%;
+            left :100%;
+            transform : translate(50%);
             display:none;
             z-index:1000;
         }
@@ -41,10 +61,10 @@ $template.innerHTML = /*html*/`
         <div id="btn-group">
             <button id="btn-shelf"></button>
             <button id="remove-shelf">❌</button>
+            <confirm-box id="confirm-box" action="no"></confirm-box>
         </div>
         <div id="book-list"></div>
     </div>
-    <confirm-box id="confirm-box" action="no"></confirm-box>
 
 `;
 export default class ShelfWrapper extends HTMLElement {
@@ -92,9 +112,10 @@ export default class ShelfWrapper extends HTMLElement {
         this.$removeShelf.onclick = () => {
             // this.$shelfWrapper.remove();
             this.$confirmBox.setAttribute("action", "delete");
-            this.$confirmBox.setAttribute("question", "delete");
+            this.$confirmBox.setAttribute("question", this.$btnShelf.innerHTML);
             this.$confirmBox.style.display = "block";
-            sessionStorage.setItem("itemDelete", this.$btnShelf.innerHTML);
+            localStorage.setItem("itemDelete", this.$btnShelf.innerHTML);
+
         }
 
     }

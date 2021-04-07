@@ -2,14 +2,14 @@
     font-family: "Montserrat";
 }
 #menu {
-    position: relative;
+    /* position: relative; */
     display:flex;
     justify-content :flex-start;
     
 }
 #menu #actions {
     border-right:1px solid black;
-    height:200px;
+    height:inherit;
     width:fit-content;
     flex :1;
 }
@@ -34,22 +34,46 @@
     text-decoration : underline;
 }
 #menu #forms #shelves {
-    display:none;
+    position: relative;
+    display: none;
+    flex-direction: column;
+    align-items: center;
 }
 #menu #forms #shelves #create-shelf-form {
-    position:absolute;
-    top:10%;
-    left:40%;   
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+}
+#menu #forms #shelves #create-shelf-form #btn-create-shelf{
+    background : linear-gradient(to left,#525252,#3D72B4);
+    padding: 10px;
+    margin-bottom: 1vh;
+    border-radius: 3px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+#menu #forms #shelves #create-shelf-form #btn-create-shelf:hover{
+    background : linear-gradient(to right,#525252,#3D72B4);
+
+}
+#menu #forms #shelves #create-shelf-form #input-new-shelf-name{
+    padding: 10px;
 }
 #menu #forms #shelves #shelves-container{
+    width: 100%;
+    flex-wrap: wrap;
     margin-top : 100px;
+    margin-left: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 #menu #forms #address-form {
     width:500px;
     position:absolute;
     top : 50px;
     left : 100px;
-    display:none;
+    display:block;
 }
 .selected {
     background : linear-gradient(to left,#525252,#3D72B4);
@@ -57,7 +81,7 @@
 
 #confirm-box{
     position: absolute;
-    top :-50%;
+    top :50%;
     left: 40%;
     z-index: 1000;
     display: none;

@@ -10,7 +10,7 @@ $template.innerHTML = /*html*/`
             align-items:center;
             border : 1px solid black;
             border-radius : 5px;
-            width: 300px;
+            width: 350px;
         }
         #container #question-container{
             text-align:center;
@@ -18,11 +18,9 @@ $template.innerHTML = /*html*/`
             background: linear-gradient(to left, #a17e7e, #491B1B);
             color: white;
             font-weight :normal;
-            font-size : 20px;
+            font-size : 17px;
         }
-        #container #question-container{
-            text-transform : uppercase;
-        }
+       
         #container #button-container {
             padding: 20px 0px;
             display:flex;
@@ -76,18 +74,17 @@ export default class ConfirmBox extends HTMLElement {
     }
 
     attributeChangedCallback(attrName, oldValue, newValue) {
-        // if (attrName == "action") {
-        //     if (newValue == "delete") {
-        //         console.log("DELETE SHELF");
-        //     } else if (newValue == "logout") {
-        //         console.log("LOG OUT");
-        //     }
-        // } else
-        if (attrName == "question") {
+        if (attrName == "action") {
             if (newValue == "delete") {
-                this.$question.innerHTML = "Want to delete shelf?";
+                console.log("DELETE SHELF");
             } else if (newValue == "logout") {
+                console.log("LOG OUT");
+            }
+        } else if (attrName == "question") {
+            if (newValue == "logout") {
                 this.$question.innerHTML = "Want to log out ?";
+            } else {
+                this.$question.innerHTML = "Wanna delete [ " + newValue + " ] shelf ?";
             }
         }
     }
@@ -101,7 +98,7 @@ export default class ConfirmBox extends HTMLElement {
                 router.navigate("/login");
             } else if (this.getAttribute("action") == "delete") {
                 console.log("DELETE");
-                let a = sessionStorage.getItem("itemDelete");
+                let a = localStorage.getItem("itemDelete");
                 removeShelf(a);
                 this.style.display = "none";
             }

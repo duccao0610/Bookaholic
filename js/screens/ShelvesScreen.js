@@ -23,6 +23,7 @@ $template.innerHTML = /*html*/`
             </div>
             <address-form id="address-form"></address-form>
         </div>
+        <confirm-box id="confirm-box"></confirm-box>
     </div>
     <my-footer></my-footer>
 `;
@@ -42,6 +43,8 @@ export default class ShelvesScreen extends HTMLElement {
         this.$btnLogout = this.shadowRoot.getElementById("btn-logout");
         this.$shelves = this.shadowRoot.getElementById("shelves");
         this.$address = this.shadowRoot.getElementById("address-form");
+        this.$confirmBox = this.shadowRoot.getElementById("confirm-box");
+        this.$menu = this.shadowRoot.getElementById("menu");
 
     }
 
@@ -112,6 +115,11 @@ export default class ShelvesScreen extends HTMLElement {
             this.$btnLogout.classList.add("selected");
             this.$addressAction.classList.remove("selected");
             this.$shelvesAction.classList.remove("selected");
+
+
+            this.$confirmBox.setAttribute("action", "logout");
+            this.$confirmBox.setAttribute("question", "logout");
+            this.$confirmBox.style.display = "block";
         }
     }
 }

@@ -2,11 +2,13 @@
     font-family: "Montserrat";
 }
 #menu {
+    position: relative;
     display:flex;
     justify-content :flex-start;
+    
 }
 #menu #actions {
-    border-right:1px solid red;
+    border-right:1px solid black;
     height:200px;
     width:fit-content;
     flex :1;
@@ -51,4 +53,25 @@
 }
 .selected {
     background : linear-gradient(to left,#525252,#3D72B4);
+}
+
+#confirm-box{
+    position: absolute;
+    top :-50%;
+    left: 40%;
+    z-index: 1000;
+    display: none;
+}
+@media (max-width: 1023px) and (min-width: 719px){
+    #confirm-box{
+        top : -35%;
+        left: 33%;
+    }
+}
+
+@media (max-width: 718px){
+    #confirm-box{
+        top : -40%;
+        left : 24%;
+    }
 }

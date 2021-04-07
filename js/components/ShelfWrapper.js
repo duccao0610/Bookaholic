@@ -20,6 +20,14 @@ $template.innerHTML = /*html*/`
             background-color: white;
             border: none;
         }
+        #confirm-box {
+            position:absolute;
+            top:20%;
+            left :50%;
+            transform :translate(-50%,-50%);
+            display:none;
+            z-index:1000;
+        }
 
         @media (max-width: 719px){
             #book-list {
@@ -36,6 +44,8 @@ $template.innerHTML = /*html*/`
         </div>
         <div id="book-list"></div>
     </div>
+    <confirm-box id="confirm-box" action="no"></confirm-box>
+
 `;
 export default class ShelfWrapper extends HTMLElement {
     constructor() {
@@ -47,10 +57,11 @@ export default class ShelfWrapper extends HTMLElement {
         this.$shelfWrapper = this.shadowRoot.getElementById("shelf-wrapper");
         this.$bookList = this.shadowRoot.getElementById('book-list');
         this.$removeShelf = this.shadowRoot.getElementById('remove-shelf');
+        this.$confirmBox = this.shadowRoot.getElementById("confirm-box");
     }
 
     static get observedAttributes() {
-        return ['shelf-name', "books"];
+        return ['shelf-name', "books", "action"];
     }
 
     attributeChangedCallback(attrName, oldValue, newValue) {
@@ -79,9 +90,13 @@ export default class ShelfWrapper extends HTMLElement {
         }
 
         this.$removeShelf.onclick = () => {
-            removeShelf(this.$btnShelf.innerHTML);
-            this.$shelfWrapper.remove();
+            // this.$shelfWrapper.remove();
+            this.$confirmBox.setAttribute("action", "delete");
+            this.$confirmBox.setAttribute("question", "delete");
+            this.$confirmBox.style.display = "block";
+            sessionStorage.setItem("itemDelete", this.$btnShelf.innerHTML);
         }
+
     }
 
 

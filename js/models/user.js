@@ -141,3 +141,29 @@ export async function getBookOwners(book) {
 
     return getDataFromDocs(response.docs);
 }
+
+export async function turnOnLending(bookId) {
+    let currentUser = await getCurrentUser();
+    await firebase.firestore().collection('books').doc(bookId).update({
+        owners: firebase.firestore.FieldValue.arrayUnion(currentUser.id)
+    });
+    await firebase.firestore().collection('users').doc(currentUser.id).update({
+        owning: firebase.firestore.FieldValue.arrayUnion(bookId)
+    });
+}
+
+export async function turnOffLending(bookId) {
+    let currentUser = await getCurrentUser();
+    let currentViewingBook = await viewBookDetail(bookId);
+    for (let owner of currentViewingBook.owners) {
+        if (owner == currentUser.id) {
+            await firebase.firestore().collection('books').doc(bookId).update({
+                owners: firebase.firestore.FieldValue.arrayRemove(currentUser.id)
+            });
+            break;
+        }
+    }
+    await firebase.firestore().collection('users').doc(currentUser.id).update({
+        owning: firebase.firestore.FieldValue.arrayRemove(bookId)
+    });
+}

@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 import { addBookToShelves, getCurrentUser, getBookOwners } from "../models/user.js";
 import { getAllBookRefId, turnOffLending, turnOnLending, viewBookDetail } from "../models/book.js";
+=======
+import { addBookToShelves, getCurrentUser, turnOffLending, turnOnLending, } from "../models/user.js";
+import { getAllBookRefId, viewBookDetail } from "../models/book.js";
+>>>>>>> a040825152ddb42e1b84c1212f733c01eb62be2e
 import { getDataFromDocs, getDataFromDoc } from "../utils.js";
 
 const $template = document.createElement('template');
@@ -119,9 +124,6 @@ export default class BookInfoWrapper extends HTMLElement {
                     this.$addBookForm.insertBefore($br, this.$btnAccept);
                 }
                 break;
-            // case 'can-lend':
-            //     if (newValue == 'true') turnOnLending();
-            //     if (newValue == 'false') turnOffLending();
         }
     }
 
@@ -169,8 +171,8 @@ export default class BookInfoWrapper extends HTMLElement {
         }
 
         this.$lendSwitch.onclick = () => {
-            if (this.$lendSwitch.checked == true) turnOnLending();
-            if (this.$lendSwitch.checked == false) turnOffLending();
+            if (this.$lendSwitch.checked == true) turnOnLending(bookId);
+            if (this.$lendSwitch.checked == false) turnOffLending(bookId);
         }
     }
 }

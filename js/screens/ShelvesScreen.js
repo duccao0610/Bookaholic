@@ -4,21 +4,26 @@ import { getDataFromDoc, getDataFromDocs } from "../utils.js";
 const $template = document.createElement('template');
 $template.innerHTML = /*html*/`
     <link rel="stylesheet" href="./css/shelves-screen.css">
-    <style>
-
-    </style>
-
     <my-header></my-header>
     <search-form></search-form>
-    <form id="create-shelf-form">
-        <button id="btn-create-shelf">Create a new shelf</button>
-        <input id="input-new-shelf-name" placeholder="New shelf's name here">
-    </form>
-    <div id="shelves-container">
-
+    <div id="menu">
+        <ul id="actions">
+            <li><a id="my-shelves">My shelves</a></li>
+            <li><a id="my-address">My address</a></li>
+            <li><a id="btn-logout">Log out</a></li>
+        </ul>
+        <div id ="forms">
+            <div id="shelves">
+                <form id="create-shelf-form">
+                    <button id="btn-create-shelf">Create a new shelf</button>
+                    <input id="input-new-shelf-name" placeholder="New shelf's name here">
+                </form>
+                <div id="shelves-container">
+                </div>
+            </div>
+            <address-form id="address-form"></address-form>
+        </div>
     </div>
-
-    <address-form></address-form>
     <my-footer></my-footer>
 `;
 
@@ -31,6 +36,13 @@ export default class ShelvesScreen extends HTMLElement {
         this.$shelvesContainer = this.shadowRoot.getElementById('shelves-container');
         this.$createShelf = this.shadowRoot.getElementById('btn-create-shelf');
         this.$inputNewShelfName = this.shadowRoot.getElementById('input-new-shelf-name');
+
+        this.$shelvesAction = this.shadowRoot.getElementById("my-shelves");
+        this.$addressAction = this.shadowRoot.getElementById("my-address");
+        this.$btnLogout = this.shadowRoot.getElementById("btn-logout");
+        this.$shelves = this.shadowRoot.getElementById("shelves");
+        this.$address = this.shadowRoot.getElementById("address-form");
+
     }
 
     async connectedCallback() {
@@ -74,6 +86,32 @@ export default class ShelvesScreen extends HTMLElement {
 
                 this.$inputNewShelfName.value = "";
             }
+        }
+
+        this.$shelvesAction.onclick = (event) => {
+            event.preventDefault();
+            this.$shelves.style.display = "block";
+            this.$address.style.display = "none";
+
+            this.$shelvesAction.classList.add("selected");
+            this.$addressAction.classList.remove("selected");
+            this.$btnLogout.classList.remove("selected");
+        }
+
+        this.$addressAction.onclick = (event) => {
+            event.preventDefault();
+            this.$address.style.display = "block";
+            this.$shelves.style.display = "none";
+            this.$addressAction.classList.add("selected");
+            this.$shelvesAction.classList.remove("selected");
+            this.$btnLogout.classList.remove("selected");
+        }
+
+        this.$btnLogout.onclick = (event) => {
+            event.preventDefault();
+            this.$btnLogout.classList.add("selected");
+            this.$addressAction.classList.remove("selected");
+            this.$shelvesAction.classList.remove("selected");
         }
     }
 }

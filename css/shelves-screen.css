@@ -1,3 +1,54 @@
 *{
     font-family: "Montserrat";
 }
+#menu {
+    display:flex;
+    justify-content :flex-start;
+}
+#menu #actions {
+    border-right:1px solid red;
+    height:200px;
+    width:fit-content;
+    flex :1;
+}
+#menu #forms {
+    position :relative;
+    flex:5;
+}
+#menu li{
+    width:fit-content;
+    list-style:none;
+    font-size :20px;
+    font-weight :bold;
+    text-transform : uppercase;
+    cursor:pointer;
+    margin-bottom : 20px;
+}
+#menu a {
+    padding :5px;
+    border-radius : 5px;
+}
+#menu li:hover {
+    text-decoration : underline;
+}
+#menu #forms #shelves {
+    display:none;
+}
+#menu #forms #shelves #create-shelf-form {
+    position:absolute;
+    top:10%;
+    left:40%;   
+}
+#menu #forms #shelves #shelves-container{
+    margin-top : 100px;
+}
+#menu #forms #address-form {
+    width:500px;
+    position:absolute;
+    top : 50px;
+    left : 100px;
+    display:none;
+}
+.selected {
+    background : linear-gradient(to left,#525252,#3D72B4);
+}

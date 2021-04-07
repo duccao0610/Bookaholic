@@ -1,11 +1,10 @@
-import { book, listenBookInfoChanges, viewBookDetail } from "../models/book.js";
-import { getCurrentUser } from "../models/user.js";
+import { listenBookInfoChanges, viewBookDetail } from "../models/book.js";
+import { getCurrentUser, getBookOwners } from "../models/user.js";
 
 const $template = document.createElement('template');
 $template.innerHTML = /*html*/`
     
     <link rel="stylesheet" href="./css/review-screen.css">
-    
     <my-header></my-header>
     <search-form></search-form>
     <div id="review-screen">
@@ -26,7 +25,6 @@ export default class ReviewScreen extends HTMLElement {
         this.$bookInfo = this.shadowRoot.getElementById("book-info");
         this.$reviewList = this.shadowRoot.getElementById("reviews");
         this.$reviewForm = this.shadowRoot.getElementById("review-form");
-
     }
 
     async connectedCallback() {
@@ -34,6 +32,14 @@ export default class ReviewScreen extends HTMLElement {
         // get selected book
         let selectedBookId = sessionStorage.getItem("selected");
         let book = await viewBookDetail(selectedBookId);
+
+        // let owners = await getBookOwners(selectedBookId);
+        // console.log(typeof owners);
+        // for (let owner of owners) {
+        //     console.log(owner.name);
+        // }
+        // this.$ownerList.setAttribute("owners", JSON.stringify(owners));
+        // console.log(this.$ownerList);
 
         // hiện thông tin book
         this.$bookInfo.setAttribute("book-title", book.name);

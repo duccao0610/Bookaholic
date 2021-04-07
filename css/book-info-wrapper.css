@@ -9,6 +9,19 @@
     margin-top:  10vh;
 }
 
+#book-info-wrapper #owner-list{
+    text-align: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 100;
+    background: linear-gradient(to left, #a17e7e, #491B1B);
+    border: 1px solid black;
+    border-radius: 7px;
+    display: none;
+}
+
 #book-cover {
     width: 300px;
     height: 440px;
@@ -35,9 +48,8 @@
 }
 #aside-right #intro {
     margin: 13px 0;
-    width: 40%;
+    width: 50%;
     text-align: left;
-
 }
 button {
     padding: 10px;

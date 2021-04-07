@@ -16,7 +16,7 @@ router.on("/welcome", function () {
 }).resolve();
 
 router.on("/detail", function () {
-    toTop()
+    toTop();
     $app.innerHTML = "<review-screen></review-screen>";
 })
 

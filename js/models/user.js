@@ -133,6 +133,15 @@ export async function createShelf(newShelf) {
 
 }
 
+export async function getBookOwners(book) {
+    let response = await firebase.firestore()
+        .collection("users")
+        .where("owning", "array-contains", book)
+        .get();
+
+    return getDataFromDocs(response.docs);
+}
+
 export async function turnOnLending(bookId) {
     let currentUser = await getCurrentUser();
     await firebase.firestore().collection('books').doc(bookId).update({

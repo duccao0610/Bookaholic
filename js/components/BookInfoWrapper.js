@@ -1,5 +1,5 @@
-import { addBookToShelves, getCurrentUser, turnOffLending, turnOnLending, } from "../models/user.js";
-import { getAllBookRefId, viewBookDetail } from "../models/book.js";
+import { addBookToShelves, getCurrentUser, turnOffLending, turnOnLending, getBookOwners } from "../models/user.js";
+import { getAllBookRefId, viewBookDetail, listenBookInfoChanges } from "../models/book.js";
 import { getDataFromDocs, getDataFromDoc } from "../utils.js";
 
 const $template = document.createElement('template');
@@ -29,6 +29,7 @@ $template.innerHTML = /*html*/`
                     </form>
                 </div>
                 <button id="button-find-book">Find book</button>
+                <owner-list id="owner-list"></owner-list>
             </div>
         </div>
     </div>
@@ -53,6 +54,10 @@ export default class BookInfoWrapper extends HTMLElement {
         this.$btnAdd = this.shadowRoot.getElementById('button-add');
         this.$btnAccept = this.shadowRoot.getElementById("accept-add");
         this.$lendSwitch = this.shadowRoot.getElementById("switch");
+
+        this.$ownerList = this.shadowRoot.getElementById("owner-list");
+        this.$btnFind = this.shadowRoot.getElementById("button-find-book");
+
     }
 
     static get observedAttributes() {
@@ -118,6 +123,23 @@ export default class BookInfoWrapper extends HTMLElement {
     }
 
     async connectedCallback() {
+        let currentUser = await getCurrentUser();
+        listenBookInfoChanges(async (data) => {
+            let owners = await getBookOwners(data.id);
+            this.$ownerList.setAttribute("owners", JSON.stringify(owners));
+            this.$btnFind.onclick = (event) => {
+                event.preventDefault();
+                if (data.owners.length == 0) {
+                    alert("Nobody owns this book");
+                } else if (data.owners.length == 1 && data.owners[0] == currentUser.id) {
+                    alert("Only you own this book.");
+                } else {
+                    this.$ownerList.style.display = "block";
+                }
+            }
+        });
+
+
         this.$btnAdd.onclick = () => {
             if (this.$addBookForm.style.display == 'inline-block') {
                 this.$addBookForm.style.display = 'none';
@@ -140,9 +162,11 @@ export default class BookInfoWrapper extends HTMLElement {
             addBookToShelves();
         }
 
+
+
         let bookId = sessionStorage.getItem('selected');
         let currentViewingBook = await viewBookDetail(bookId);
-        let currentUser = await getCurrentUser();
+        // let currentUser = await getCurrentUser();
         if (currentViewingBook.owners.includes(currentUser.id)) {
             this.$lendSwitch.checked = true;
         }

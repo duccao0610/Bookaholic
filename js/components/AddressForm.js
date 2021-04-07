@@ -11,13 +11,12 @@ $template.innerHTML =  /*html*/`
             margin-left: 0;
             display: flex;
             flex-direction: column;
-            width: 20%;
         }
         #address-form-container {
             
         }
         input {
-            
+            margin-bottom :5px;
         }
     </style>
 

@@ -32,6 +32,11 @@ $template.innerHTML = /*html*/`
         #submit-btn:hover{
             background : linear-gradient(to right,#525252,#3D72B4);
         }
+        @media (max-width: 718px){
+            #submit-btn{
+                margin-bottom : 50px;
+            }
+        }
     </style>
     <div id="welcome-screen">
         <my-header></my-header>

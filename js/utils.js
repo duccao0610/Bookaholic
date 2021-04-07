@@ -28,7 +28,7 @@ export function getDataFromDocs(docs) {
 }
 
 export function toTop() {
-    document.body.scrollTop = 0;
+    document.scrollTop = "0px";
 }
 
 export function getRandomIndexes(arr) {

@@ -8,9 +8,7 @@
 #review-screen #reviews{
     display :flex;
     flex-direction : column;
-    /* margin : auto; */
     margin-top : 10vh;
-    /* border  : 1px solid black; */
 }
 
 @media (max-width: 719px){

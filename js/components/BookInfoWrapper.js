@@ -1,4 +1,4 @@
-import { addBookToShelves, getCurrentUser } from "../models/user.js";
+import { addBookToShelves, getCurrentUser, getBookOwners } from "../models/user.js";
 import { getAllBookRefId, turnOffLending, turnOnLending, viewBookDetail } from "../models/book.js";
 import { getDataFromDocs, getDataFromDoc } from "../utils.js";
 
@@ -29,6 +29,7 @@ $template.innerHTML = /*html*/`
                     </form>
                 </div>
                 <button id="button-find-book">Find book</button>
+                <owner-list id="owner-list"></owner-list>
             </div>
         </div>
     </div>
@@ -53,6 +54,10 @@ export default class BookInfoWrapper extends HTMLElement {
         this.$btnAdd = this.shadowRoot.getElementById('button-add');
         this.$btnAccept = this.shadowRoot.getElementById("accept-add");
         this.$lendSwitch = this.shadowRoot.getElementById("switch");
+
+        this.$ownerList = this.shadowRoot.getElementById("owner-list");
+        this.$btnFind = this.shadowRoot.getElementById("button-find-book");
+
     }
 
     static get observedAttributes() {
@@ -121,6 +126,14 @@ export default class BookInfoWrapper extends HTMLElement {
     }
 
     async connectedCallback() {
+        let selectedBookId = sessionStorage.getItem("selected");
+        let owners = await getBookOwners(selectedBookId);
+        for (let owner of owners) {
+            console.log(owner.name);
+        }
+        this.$ownerList.setAttribute("owners", JSON.stringify(owners));
+        console.log(this.$ownerList);
+
         this.$btnAdd.onclick = () => {
             if (this.$addBookForm.style.display == 'inline-block') {
                 this.$addBookForm.style.display = 'none';
@@ -141,6 +154,11 @@ export default class BookInfoWrapper extends HTMLElement {
             }
             sessionStorage.setItem('updatedShelves', updatedShelves);
             addBookToShelves();
+        }
+
+        this.$btnFind.onclick = (event) => {
+            event.preventDefault();
+            this.$ownerList.style.display = "block";
         }
 
         let bookId = sessionStorage.getItem('selected');

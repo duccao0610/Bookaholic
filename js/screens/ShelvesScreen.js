@@ -17,6 +17,8 @@ $template.innerHTML = /*html*/`
     <div id="shelves-container">
 
     </div>
+
+    <address-form></address-form>
     <my-footer></my-footer>
 `;
 

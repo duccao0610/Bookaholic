@@ -1,3 +1,6 @@
+import { getCurrentUser, updateAddress } from "../models/user.js";
+import { removeAccents } from "../utils.js";
+
 const $template = document.createElement("template");
 $template.innerHTML =  /*html*/`
     <style>
@@ -10,17 +13,23 @@ $template.innerHTML =  /*html*/`
             flex-direction: column;
             width: 20%;
         }
-        #form-container {
+        #address-form-container {
+            
+        }
+        input {
             
         }
     </style>
 
-    <div id="form-container">
+    <div id="address-form-container">
         <form>
-            <input id="country" placeholder="Country">
-            <input id="city" placeholder="City">
-            <input id="district" placeholder="District">
-            <button id="btn-save">Save</button>
+            <input id="country" placeholder="Country" disabled>
+            <input id="city" placeholder="City" disabled>
+            <input id="district" placeholder="District" disabled>
+            <div>
+                <button id="btn-edit" type="button">Edit</button>
+                <button id="btn-save" type="submit" disabled>Save</button>
+            </div>
         </form>
     </div>
 `;
@@ -31,12 +40,41 @@ export default class AddressForm extends HTMLElement {
         this.attachShadow({ mode: "open" });
         this.shadowRoot.appendChild($template.content.cloneNode(true));
 
+        this.$country = this.shadowRoot.getElementById("country");
+        this.$city = this.shadowRoot.getElementById("city");
+        this.$district = this.shadowRoot.getElementById("district");
         this.$btnSave = this.shadowRoot.getElementById("btn-save");
+        this.$btnEdit = this.shadowRoot.getElementById("btn-edit");
     }
 
-    connectedCallback() {
+    async connectedCallback() {
+        let currentUser = await getCurrentUser();
+        this.$country.value = currentUser.address.country;
+        this.$city.value = currentUser.address.city;
+        this.$district.value = currentUser.address.district;
+
         this.$btnSave.onclick = (event) => {
             event.preventDefault();
+            this.$country.disabled = true;
+            this.$city.disabled = true;
+            this.$district.disabled = true;
+            this.$btnEdit.disabled = false;
+            this.$btnSave.disabled = true;
+
+            let newAddress = {
+                country: removeAccents(this.$country.value).toUpperCase(),
+                city: removeAccents(this.$city.value).toUpperCase(),
+                district: removeAccents(this.$district.value).toUpperCase()
+            }
+
+            updateAddress(currentUser.id, newAddress);
+        }
+        this.$btnEdit.onclick = (event) => {
+            this.$country.disabled = false;
+            this.$city.disabled = false;
+            this.$district.disabled = false;
+            this.$btnEdit.disabled = true;
+            this.$btnSave.disabled = false;
         }
     }
 }

@@ -7,7 +7,12 @@ export async function register(name, email, password) {
             name: name,
             email: email,
             password: md5(password),
-            owning: []
+            owning: [],
+            address: {
+                country: "",
+                city: "",
+                district: ""
+            }
         });
         alert("Register successful");
         router.navigate("/login");
@@ -166,4 +171,14 @@ export async function turnOffLending(bookId) {
     await firebase.firestore().collection('users').doc(currentUser.id).update({
         owning: firebase.firestore.FieldValue.arrayRemove(bookId)
     });
+}
+
+export async function updateAddress(userId, newAddress) {
+    await firebase
+        .firestore()
+        .collection('users')
+        .doc(userId)
+        .update({
+            address: newAddress
+        });
 }

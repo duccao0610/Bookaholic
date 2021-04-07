@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-import { addBookToShelves, getCurrentUser, getBookOwners } from "../models/user.js";
-import { getAllBookRefId, turnOffLending, turnOnLending, viewBookDetail } from "../models/book.js";
-=======
-import { addBookToShelves, getCurrentUser, turnOffLending, turnOnLending, } from "../models/user.js";
-import { getAllBookRefId, viewBookDetail } from "../models/book.js";
->>>>>>> a040825152ddb42e1b84c1212f733c01eb62be2e
+import { addBookToShelves, getCurrentUser, turnOffLending, turnOnLending, getBookOwners } from "../models/user.js";
+import { getAllBookRefId, viewBookDetail, listenBookInfoChanges } from "../models/book.js";
 import { getDataFromDocs, getDataFromDoc } from "../utils.js";
 
 const $template = document.createElement('template');
@@ -128,13 +123,22 @@ export default class BookInfoWrapper extends HTMLElement {
     }
 
     async connectedCallback() {
-        let selectedBookId = sessionStorage.getItem("selected");
-        let owners = await getBookOwners(selectedBookId);
-        for (let owner of owners) {
-            console.log(owner.name);
-        }
-        this.$ownerList.setAttribute("owners", JSON.stringify(owners));
-        console.log(this.$ownerList);
+        let currentUser = await getCurrentUser();
+        listenBookInfoChanges(async (data) => {
+            let owners = await getBookOwners(data.id);
+            this.$ownerList.setAttribute("owners", JSON.stringify(owners));
+            this.$btnFind.onclick = (event) => {
+                event.preventDefault();
+                if (data.owners.length == 0) {
+                    alert("Nobody owns this book");
+                } else if (data.owners.length == 1 && data.owners[0] == currentUser.id) {
+                    alert("Only you own this book.");
+                } else {
+                    this.$ownerList.style.display = "block";
+                }
+            }
+        });
+
 
         this.$btnAdd.onclick = () => {
             if (this.$addBookForm.style.display == 'inline-block') {
@@ -158,14 +162,11 @@ export default class BookInfoWrapper extends HTMLElement {
             addBookToShelves();
         }
 
-        this.$btnFind.onclick = (event) => {
-            event.preventDefault();
-            this.$ownerList.style.display = "block";
-        }
+
 
         let bookId = sessionStorage.getItem('selected');
         let currentViewingBook = await viewBookDetail(bookId);
-        let currentUser = await getCurrentUser();
+        // let currentUser = await getCurrentUser();
         if (currentViewingBook.owners.includes(currentUser.id)) {
             this.$lendSwitch.checked = true;
         }

@@ -1,3 +1,5 @@
+import { listenBookInfoChanges } from "../models/book.js";
+import { getBookOwners, getCurrentUser } from "../models/user.js";
 const $template = document.createElement("template");
 $template.innerHTML = /*html*/`
     <style>
@@ -36,13 +38,16 @@ export default class OwnerList extends HTMLElement {
     static get observedAttributes() {
         return ["owners"];
     }
-    attributeChangedCallback(attrName, oldValue, newValue) {
+    async attributeChangedCallback(attrName, oldValue, newValue) {
+        let currentUser = await getCurrentUser();
         if (attrName == "owners") {
             let owners = JSON.parse(newValue);
             for (let owner of owners) {
-                let $newOwner = document.createElement("user-address-container");
-                $newOwner.setAttribute("name", owner.name);
-                this.$list.appendChild($newOwner);
+                if (owner.id != currentUser.id) {
+                    let $newOwner = document.createElement("user-address-container");
+                    $newOwner.setAttribute("name", owner.name);
+                    this.$list.appendChild($newOwner);
+                }
             }
         }
 
@@ -53,6 +58,12 @@ export default class OwnerList extends HTMLElement {
             event.preventDefault();
             this.style.display = "none";
         }
+
+        listenBookInfoChanges(async (data) => {
+            this.$list.innerHTML = "";
+            let owners = await getBookOwners(data.id);
+            this.$list.setAttribute("owners", JSON.stringify(owners));
+        })
     }
 }
 

@@ -100,3 +100,12 @@ export function getAllBookRefId(shelf) {
     return allBookRefId;
 }
 
+export async function isUnavailable(bookId) {
+    let response = await firebase
+        .firestore()
+        .collection("users")
+        .where("owning", "array-contains", bookId)
+        .get();
+
+    return response.empty;
+}

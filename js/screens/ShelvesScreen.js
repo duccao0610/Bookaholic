@@ -9,6 +9,7 @@ $template.innerHTML = /*html*/`
     </style>
 
     <my-header></my-header>
+    <search-form></search-form>
     <form id="create-shelf-form">
         <button id="btn-create-shelf">Create a new shelf</button>
         <input id="input-new-shelf-name" placeholder="New shelf's name here">

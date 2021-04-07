@@ -5,6 +5,13 @@ import { getRandomIndexes } from "../utils.js";
 const $template = document.createElement("template");
 $template.innerHTML = /*html*/`
     <style>
+        *{
+            font-family: "Montserrat";
+        }
+        #welcome-screen{
+            display:flex;
+            flex-direction : column;
+        }
         #new-book-form{
             position : fixed;
             left : 50%;
@@ -13,11 +20,23 @@ $template.innerHTML = /*html*/`
             z-index : 10000;
             display:none;
         }
+        #submit-btn{
+            padding : 10px;
+            font-size : 15px;
+            font-weight : bold;
+            margin: auto;
+            border-radius :10px;
+            background : linear-gradient(to left,#525252,#3D72B4);
+            color :white;
+        }
+        #submit-btn:hover{
+            background : linear-gradient(to right,#525252,#3D72B4);
+        }
     </style>
     <div id="welcome-screen">
         <my-header></my-header>
         <search-form></search-form>
-        <button id="new-btn">New</button>
+        <button id="submit-btn">SUBMIT NEW BOOK</button>
         <new-book-form id="new-book-form"></new-book-form>
         <div id="categories-list">
         </div>
@@ -35,7 +54,7 @@ export default class WelcomeScreen extends HTMLElement {
         this.shadowRoot.appendChild($template.content.cloneNode(true));
         this.$popular = this.shadowRoot.getElementById("popular");
         this.$list = this.shadowRoot.getElementById("categories-list");
-        this.$newBtn = this.shadowRoot.getElementById("new-btn");
+        this.$submitBtn = this.shadowRoot.getElementById("submit-btn");
         this.$newBookForm = this.shadowRoot.getElementById("new-book-form");
     };
 
@@ -96,7 +115,7 @@ export default class WelcomeScreen extends HTMLElement {
         }
 
 
-        this.$newBtn.onclick = (event) => {
+        this.$submitBtn.onclick = (event) => {
             // if (this.$newBookForm.style.display === "none") {
             this.$newBookForm.style.display = "block";
             // } else {

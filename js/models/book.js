@@ -10,7 +10,7 @@ export async function addBook(newBook) {
         .collection("books")
         .add({
             name: newBook.name.toUpperCase(),
-            author: newBook.author,
+            author: newBook.author.toUpperCase(),
             categories: newBook.categories,
             intro: newBook.intro,
             cover_img: newBook.cover_img,

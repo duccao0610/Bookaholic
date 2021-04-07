@@ -42,6 +42,7 @@ export default class OwnerList extends HTMLElement {
         let currentUser = await getCurrentUser();
         if (attrName == "owners") {
             let owners = JSON.parse(newValue);
+            owners.sort((a, b) => a.address.sortString.localeCompare(b.address.sortString));
             for (let owner of owners) {
                 if (owner.id != currentUser.id) {
                     let $newOwner = document.createElement("user-address-container");
@@ -51,7 +52,6 @@ export default class OwnerList extends HTMLElement {
                 }
             }
         }
-
     }
 
     connectedCallback() {
@@ -63,6 +63,8 @@ export default class OwnerList extends HTMLElement {
         listenBookInfoChanges(async (data) => {
             this.$list.innerHTML = "";
             let owners = await getBookOwners(data.id);
+            owners.sort((a, b) => a.address.sortString.localeCompare(b.address.sortString));
+            console.log(owners);
             this.$list.setAttribute("owners", JSON.stringify(owners));
         })
     }

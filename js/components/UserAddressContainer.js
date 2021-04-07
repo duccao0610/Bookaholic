@@ -6,21 +6,27 @@ $template.innerHTML = /*html*/`
             cursor: pointer;
             font-weight: normal;
             color :white;
-            padding : 20px 50px;
-        }
+            padding : 0;
+            font-size: 10px;
+            flex :1;
+        }   
         a:hover {
             text-decoration :underline;
         }
         #user-address{
+            text-align:left;
             display:flex;
             justify-content:space-around;
             align-items:center;
             border-top: 1px solid black;
+            padding-left: 35px;
         }
     </style>
     <div id="user-address">
         <a href="" id="name">Name</a>
-        <p id="address">Location</p>
+        <p id="country">Country</p>
+        <p id="city">City</p>
+        <p id="district">District</p>
     </div>
 `;
 
@@ -30,7 +36,9 @@ export default class UserAddressContainer extends HTMLElement {
         this.attachShadow({ mode: "open" });
         this.shadowRoot.appendChild($template.content.cloneNode(true));
         this.$name = this.shadowRoot.getElementById("name");
-        this.$address = this.shadowRoot.getElementById("address");
+        this.$country = this.shadowRoot.getElementById("country");
+        this.$city = this.shadowRoot.getElementById("city");
+        this.$district = this.shadowRoot.getElementById("district");
     };
 
     static get observedAttributes() {
@@ -41,7 +49,9 @@ export default class UserAddressContainer extends HTMLElement {
         if (attrName == "name") {
             this.$name.innerHTML = "User :  " + newValue;
         } else if (attrName == "address") {
-            this.$address.innerHTML = newValue;
+            this.$country.innerHTML = `${JSON.parse(newValue).country}`;
+            this.$city.innerHTML = `${JSON.parse(newValue).city}`;
+            this.$district.innerHTML = `${JSON.parse(newValue).district}`;
         }
     }
 

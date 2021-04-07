@@ -61,10 +61,14 @@ export default class AddressForm extends HTMLElement {
             this.$btnEdit.disabled = false;
             this.$btnSave.disabled = true;
 
+            let sortString = (removeAccents(this.$country.value).toUpperCase() + removeAccents(this.$city.value).toUpperCase() + removeAccents(this.$district.value).toUpperCase()).replace(/\s/g, '');
+            console.log(sortString);
+
             let newAddress = {
                 country: removeAccents(this.$country.value).toUpperCase(),
                 city: removeAccents(this.$city.value).toUpperCase(),
-                district: removeAccents(this.$district.value).toUpperCase()
+                district: removeAccents(this.$district.value).toUpperCase(),
+                sortString: sortString
             }
 
             updateAddress(currentUser.id, newAddress);

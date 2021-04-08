@@ -27,18 +27,20 @@ $template.innerHTML = /*html*/`
         }
 
         #btn-shelf {
-            width:100px;
+            width:200px;
             font-size: 20px;
             font-weight :bold;
             padding :10px;
             background : linear-gradient(to left,#525252,#3D72B4);
-            border-radius :3px;
+            border-radius :10px;
             border: none;
         }
         #btn-shelf:hover {
             background : linear-gradient(to right,#525252,#3D72B4);
         }
         #remove-shelf{
+            margin-left :5px;
+            border-radius : 3px;
         }
         #confirm-box {
             position:absolute;

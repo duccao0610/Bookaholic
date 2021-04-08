@@ -124,6 +124,7 @@ export default class BookInfoWrapper extends HTMLElement {
 
         listenBookInfoChanges(async (data) => {
             let owners = await getBookOwners(data.id);
+            console.log("HAHA owners", owners);
             this.$ownerList.setAttribute("owners", JSON.stringify(owners));
             this.$btnFind.onclick = (event) => {
                 event.preventDefault();

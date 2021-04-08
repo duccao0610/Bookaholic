@@ -31,11 +31,7 @@ $template.innerHTML = /*html*/`
         }
 
         #btn-shelf {
-<<<<<<< HEAD
-            width:200px;
-=======
             width:fit-content;
->>>>>>> 14db470054410d7dccb556cf4aef29040aba5325
             font-size: 20px;
             font-weight :bold;
             padding :10px;
@@ -158,6 +154,7 @@ export default class ShelfWrapper extends HTMLElement {
         this.$removeShelf.onclick = () => {
             // this.$btnCheck.style.display = "block";
             removeShelf(this.$btnShelf.innerHTML);
+            this.$shelfWrapper.remove();
         }
         this.$btnCheck.onclick = () => {
             this.setAttribute("is-deleted", "true");

@@ -27,7 +27,7 @@ router.on("/shelves", function () {
     $app.innerHTML = "<shelves-screen></shelves-screen>";
 }).resolve();
 router.on(function () {
-    router.navigate("/welcome");
+    router.navigate("/login");
 }).resolve();
 
 window.router = router;

@@ -15,13 +15,8 @@ $template.innerHTML = /*html*/`
         <div id ="forms">
             <div id="shelves">
                 <form id="create-shelf-form">
-<<<<<<< HEAD
-                    <button id="btn-create-shelf">Create a new shelf</button>
-                    <input id="input-new-shelf-name" placeholder="New shelf's name here" maxlength="15">
-=======
                     <input id="input-new-shelf-name" placeholder="New shelf's name here">
                     <button id="btn-create-shelf">Create a new shelf</button>
->>>>>>> 14db470054410d7dccb556cf4aef29040aba5325
                 </form>
                 <all-shelves-container id="all-shelves-container"></all-shelves-container>
             </div>

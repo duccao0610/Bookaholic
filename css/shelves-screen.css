@@ -36,7 +36,7 @@
 }
 #menu #forms #shelves #create-shelf-form {
     position:absolute;
-    top:10%;
+    top: 25px;;
     left:40%;   
 }
 #menu #forms #shelves #shelves-container{
@@ -51,4 +51,34 @@
 }
 .selected {
     background : linear-gradient(to left,#525252,#3D72B4);
+}
+
+#btn-create-shelf {
+    padding: 7px;
+    border-radius : 10px;
+    border: none;
+    font-size : 15px;
+    color : #ffffff;
+    cursor: pointer;
+    background : linear-gradient(to left,#525252,#3D72B4);
+}
+#btn-create-shelf:hover {
+    text-decoration: underline;
+}
+
+#input-new-shelf-name {
+    font-size : 15px;
+    height: 27px;
+    border-radius : 10px;
+    border: solid black 1px;
+}
+#input-new-shelf-name:focus {
+    outline: none;
+}
+
+button:active {
+    transform: translateY(4px);
+}
+button:focus{
+    outline: none;
 }

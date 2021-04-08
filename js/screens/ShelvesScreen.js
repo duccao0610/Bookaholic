@@ -15,8 +15,8 @@ $template.innerHTML = /*html*/`
         <div id ="forms">
             <div id="shelves">
                 <form id="create-shelf-form">
-                    <button id="btn-create-shelf">Create a new shelf</button>
                     <input id="input-new-shelf-name" placeholder="New shelf's name here">
+                    <button id="btn-create-shelf">Create a new shelf</button>
                 </form>
                 <div id="shelves-container">
                 </div>
@@ -82,7 +82,7 @@ export default class ShelvesScreen extends HTMLElement {
                     shelfName: this.$inputNewShelfName.value
                 }
 
-                createShelf(newShelf);
+                createShelf(currentUser, newShelf);
 
                 this.$inputNewShelfName.value = "";
             }

@@ -106,10 +106,9 @@ export async function removeShelf(removedShelfName) {
         })
 }
 
-export async function addBookToShelves() {
-    let currentUser = await getCurrentUser();
-    let bookId = sessionStorage.getItem('selected');
-    let updatedShelves = sessionStorage.getItem('updatedShelves');
+export async function addBookToShelves(currentUser, updatedShelves, bookId) {
+    // let bookId = sessionStorage.getItem('selected');
+    // let updatedShelves = sessionStorage.getItem('updatedShelves');
     let bookRef = await firebase.firestore().doc(`books/${bookId}`);
 
     for (let shelf of currentUser.shelves) {
@@ -127,8 +126,7 @@ export async function addBookToShelves() {
         });
 }
 
-export async function createShelf(newShelf) {
-    let currentUser = await getCurrentUser();
+export async function createShelf(currentUser, newShelf) {
     await firebase
         .firestore()
         .collection('users')
@@ -148,8 +146,7 @@ export async function getBookOwners(book) {
     return getDataFromDocs(response.docs);
 }
 
-export async function turnOnLending(bookId) {
-    let currentUser = await getCurrentUser();
+export async function turnOnLending(currentUser, bookId) {
     await firebase.firestore().collection('books').doc(bookId).update({
         owners: firebase.firestore.FieldValue.arrayUnion(currentUser.id)
     });
@@ -158,11 +155,10 @@ export async function turnOnLending(bookId) {
     });
 }
 
-export async function turnOffLending(bookId) {
-    let currentUser = await getCurrentUser();
-    let currentViewingBook = await viewBookDetail(bookId);
-    for (let owner of currentViewingBook.owners) {
-        if (owner == currentUser.id) {
+export async function turnOffLending(currentUser, bookId, currentViewingBook) {
+
+    for (let ownerId of currentViewingBook.owners) {
+        if (ownerId == currentUser.id) {
             await firebase.firestore().collection('books').doc(bookId).update({
                 owners: firebase.firestore.FieldValue.arrayRemove(currentUser.id)
             });

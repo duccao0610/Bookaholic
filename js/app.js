@@ -19,7 +19,7 @@ import ShelvesScreen from "./screens/ShelvesScreen.js";
 import ShelfWrapper from "./components/ShelfWrapper.js";
 import NewBookForm from "./components/NewBookForm.js";
 import AddressForm from "./components/AddressForm.js";
-
+import AllReviewsContainer from "./components/AllReviewsContainer.js";
 import UserAddressContainer from "./components/UserAddressContainer.js";
 import OwnerList from "./components/OwnerList.js";
 import "./router.js";

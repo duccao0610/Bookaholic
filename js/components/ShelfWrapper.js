@@ -7,6 +7,10 @@ $template.innerHTML = /*html*/`
             font-family: "Montserrat";
         }
 
+        #shelf-wrapper {
+            margin-top: 5px;
+        }
+
         #book-list{            
             display: none;
             flex-wrap : wrap;
@@ -15,10 +19,33 @@ $template.innerHTML = /*html*/`
         }
 
         #btn-shelf {
-            font-size: 25px;
+            font-size: 20px;
             margin-left: 70px;
             background-color: white;
             border: none;
+            cursor: pointer;
+            border: solid 1px;
+            border-radius: 5px;
+            padding: 5px;
+        }
+
+        #btn-shelf:hover{
+            text-decoration: underline;
+        }
+
+        #btn-shelf:focus, #remove-shelf:focus {
+            outline: none;
+        }
+
+        #remove-shelf {
+            font-size: 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:active {
+            transform: translateY(4px);
         }
 
         @media (max-width: 719px){
@@ -32,8 +59,9 @@ $template.innerHTML = /*html*/`
     <div id="shelf-wrapper">
         <div id="btn-group">
             <button id="btn-shelf"></button>
-            <button id="remove-shelf">❌</button>
+            <button id="remove-shelf">⛔</button>
         </div>
+        <button id="btn-check" style="display: none">Check delete</button>
         <div id="book-list"></div>
     </div>
 `;
@@ -47,10 +75,11 @@ export default class ShelfWrapper extends HTMLElement {
         this.$shelfWrapper = this.shadowRoot.getElementById("shelf-wrapper");
         this.$bookList = this.shadowRoot.getElementById('book-list');
         this.$removeShelf = this.shadowRoot.getElementById('remove-shelf');
+        this.$btnCheck = this.shadowRoot.getElementById("btn-check");
     }
 
     static get observedAttributes() {
-        return ['shelf-name', "books"];
+        return ['shelf-name', "books", "is-deleted"];
     }
 
     attributeChangedCallback(attrName, oldValue, newValue) {
@@ -67,6 +96,12 @@ export default class ShelfWrapper extends HTMLElement {
                 this.$bookList.appendChild($bookContainer);
             }
         }
+        if (attrName == 'is-deleted') {
+            if (newValue == 'true') {
+                removeShelf(this.$btnShelf.innerHTML);
+                this.$shelfWrapper.remove();
+            }
+        }
     }
 
     connectedCallback() {
@@ -79,8 +114,12 @@ export default class ShelfWrapper extends HTMLElement {
         }
 
         this.$removeShelf.onclick = () => {
-            removeShelf(this.$btnShelf.innerHTML);
-            this.$shelfWrapper.remove();
+            // removeShelf(this.$btnShelf.innerHTML);
+            // this.$shelfWrapper.remove();
+            this.$btnCheck.style.display = "block";
+        }
+        this.$btnCheck.onclick = () => {
+            this.setAttribute("is-deleted", "true");
         }
     }
 

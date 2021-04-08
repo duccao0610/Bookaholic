@@ -1,4 +1,3 @@
-import { viewBookDetail } from "../models/book.js";
 
 const $template = document.createElement("template");
 $template.innerHTML = /*html*/`

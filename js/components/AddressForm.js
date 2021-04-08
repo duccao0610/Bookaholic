@@ -12,11 +12,33 @@ $template.innerHTML =  /*html*/`
             display: flex;
             flex-direction: column;
         }
-        #address-form-container {
-            
-        }
+        
         input {
             margin-bottom :5px;
+            width: 40%;
+            padding: 10px;
+            border-radius: 5px;
+            background : #D0C7C7;
+            border: none;
+        }
+        button{
+            background : linear-gradient(to left,#525252,#3D72B4);
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            font-size: 15px;
+            padding: 10px;
+        }
+        button:disabled,button[disabled], input:disabled, input[disabled]{
+            opacity: 0.5;
+            color: black;
+        }
+        button:active {
+            transform: translateY(4px);
+        }
+        button:focus{
+            outline: none;
         }
     </style>
 

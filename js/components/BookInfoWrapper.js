@@ -1,6 +1,5 @@
 import { addBookToShelves, getCurrentUser, turnOffLending, turnOnLending, getBookOwners } from "../models/user.js";
 import { getAllBookRefId, viewBookDetail, listenBookInfoChanges } from "../models/book.js";
-import { getDataFromDocs, getDataFromDoc } from "../utils.js";
 
 const $template = document.createElement('template');
 $template.innerHTML = /*html*/`
@@ -25,7 +24,7 @@ $template.innerHTML = /*html*/`
                 <div id="btn-add-container">
                     <button id="button-add">Add to bookshelf</button>
                     <form id="add-book-form">
-                        <button id="accept-add" type="submit">Ok</button>
+                        <button id="accept-add" type="submit">Save</button>
                     </form>
                 </div>
                 <button id="button-find-book">Find book</button>
@@ -61,31 +60,27 @@ export default class BookInfoWrapper extends HTMLElement {
     }
 
     static get observedAttributes() {
-        return ['book-cover', 'book-title', 'author', 'status', 'intro', 'shelves'];
+        return ['book-cover', 'book-title', 'author', 'status', 'intro', 'shelves', 'book-info'];
     }
 
     async attributeChangedCallback(attrName, oldValue, newValue) {
         switch (attrName) {
-            case 'book-cover':
-                this.$bookCover.setAttribute('src', newValue);
-                break;
-            case 'book-title':
-                this.$bookTitle.innerHTML = newValue;
-                break;
-            case 'author':
-                this.$author.innerHTML = newValue;
+            case 'book-info':
+                let bookInfo = JSON.parse(newValue);
+                this.$bookCover.setAttribute('src', bookInfo.cover_img);
+                this.$bookTitle.innerHTML = bookInfo.name;
+                this.$author.innerHTML = bookInfo.author;
+                this.$intro.innerHTML = bookInfo.intro;
                 break;
             case 'status':
-                if (newValue == 'available') {
-                    this.$statusContainer.style.color = '#1CE949';
-                    this.$status.innerHTML = 'Available';
-                } else if (newValue == 'unavailable') {
-                    this.$statusContainer.style.color = '#e9271c';
-                    this.$status.innerHTML = 'Unavailable';
+                if (newValue == "avalable") {
+                    this.$status.innerHTML = "Available";
+                    this.$statusContainer.style.color = "Green";
                 }
-                break;
-            case 'intro':
-                this.$intro.innerHTML = newValue;
+                if (newValue == "unavailable") {
+                    this.$status.innerHTML = "Unavailable";
+                    this.$statusContainer.style.color = "Red";
+                }
                 break;
             case 'shelves':
                 let bookId = sessionStorage.getItem('selected'); // setItem ở CategoryContainer
@@ -124,6 +119,9 @@ export default class BookInfoWrapper extends HTMLElement {
 
     async connectedCallback() {
         let currentUser = await getCurrentUser();
+        let bookId = sessionStorage.getItem('selected');
+        let currentViewingBook = await viewBookDetail(bookId);
+
         listenBookInfoChanges(async (data) => {
             let owners = await getBookOwners(data.id);
             this.$ownerList.setAttribute("owners", JSON.stringify(owners));
@@ -137,9 +135,16 @@ export default class BookInfoWrapper extends HTMLElement {
                     this.$ownerList.style.display = "block";
                 }
             }
+
+            // thay đổi trạng thái available
+            if (data.owners.length == 0) {
+                this.setAttribute("status", "unavailable");
+            } else {
+                this.setAttribute("status", "available");
+            }
         });
 
-
+        // bấm hiển thị shelves để thêm book
         this.$btnAdd.onclick = () => {
             if (this.$addBookForm.style.display == 'inline-block') {
                 this.$addBookForm.style.display = 'none';
@@ -147,6 +152,7 @@ export default class BookInfoWrapper extends HTMLElement {
                 this.$addBookForm.style.display = 'inline-block';
             }
         }
+        // xác nhận thêm book vào shelf
         this.$btnAccept.onclick = async (event) => {
             event.preventDefault();
 
@@ -158,22 +164,15 @@ export default class BookInfoWrapper extends HTMLElement {
                     checkboxes[i].disabled = true;
                 }
             }
-            sessionStorage.setItem('updatedShelves', updatedShelves);
-            addBookToShelves();
+            addBookToShelves(currentUser, updatedShelves, bookId);
         }
-
-
-
-        let bookId = sessionStorage.getItem('selected');
-        let currentViewingBook = await viewBookDetail(bookId);
-        // let currentUser = await getCurrentUser();
         if (currentViewingBook.owners.includes(currentUser.id)) {
             this.$lendSwitch.checked = true;
         }
 
         this.$lendSwitch.onclick = () => {
-            if (this.$lendSwitch.checked == true) turnOnLending(bookId);
-            if (this.$lendSwitch.checked == false) turnOffLending(bookId);
+            if (this.$lendSwitch.checked == true) turnOnLending(currentUser, bookId);
+            if (this.$lendSwitch.checked == false) turnOffLending(currentUser, bookId, currentViewingBook);
         }
     }
 }

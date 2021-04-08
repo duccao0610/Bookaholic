@@ -84,6 +84,23 @@ export async function addReview(review) {
         });
 }
 
+export async function deleteReview(currentUser, book) {
+    let deletedReview;
+    for (let review of book.reviews) {
+        if (review.userId == currentUser.id) {
+            deletedReview = review;
+            break;
+        }
+    }
+    await firebase
+        .firestore()
+        .collection('books')
+        .doc(bookId)
+        .update({
+            reviews: firebase.firestore.FieldValue.arrayRemove(deletedReview)
+        });
+}
+
 export async function listenBookInfoChanges(callback) {
     let bookId = sessionStorage.getItem('selected'); // setItem ở BookContainer
     firebase.firestore().collection('books').doc(bookId).onSnapshot(function (snapshot) {

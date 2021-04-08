@@ -1,3 +1,5 @@
+import { deleteReview } from "../models/book.js";
+
 const $template = document.createElement('template');
 $template.innerHTML = /*html*/`
     <!-- fontawesome  -->
@@ -17,6 +19,7 @@ $template.innerHTML = /*html*/`
             <p id="comment">Book's comment here</p>
             <p id="review-date">Review date</p>
         </div>
+        <button id="btn-delete-review">⛔Delete</button>
     </div>
 `;
 
@@ -31,23 +34,21 @@ export default class ReviewWrapper extends HTMLElement {
         this.$rating = this.shadowRoot.getElementById("rating");
         this.$comment = this.shadowRoot.getElementById("comment");
         this.$date = this.shadowRoot.getElementById("review-date");
+        this.$reviewWrapper = this.shadowRoot.getElementById("review-wrapper");
+        this.$btnDeleteReview = this.shadowRoot.getElementById("btn-delete-review");
     }
 
     static get observedAttributes() {
-        return ['avatar', 'username', 'rating', 'comment', 'review-date'];
+        return ['avatar', 'username', 'rating', 'comment', 'review-date', 'own-review', 'review'];
     }
 
     attributeChangedCallback(attrName, oldValue, newValue) {
         switch (attrName) {
-            case 'avatar':
-                this.$avatar.setAttribute('src', newValue);
-                break;
-            case 'username':
-                this.$username.innerHTML = newValue;
-                break;
-            case 'rating':
-                for (let i = 0; i < Number(newValue); i++) {
-                    if (Number(newValue) - i != 0.5) {
+            case 'review':
+                let review = JSON.parse(newValue);
+                this.$username.innerHTML = review.username;
+                for (let i = 0; i < Number(review.rating); i++) {
+                    if (Number(review.rating) - i != 0.5) {
                         let $fullStar = document.createElement('i');
                         $fullStar.classList.add('fas', 'fa-star');
                         this.$rating.appendChild($fullStar);
@@ -57,13 +58,23 @@ export default class ReviewWrapper extends HTMLElement {
                         this.$rating.appendChild($halfStar);
                     }
                 }
+                this.$comment.innerHTML = review.comment;
+                this.$date.innerHTML = review.date;
                 break;
-            case 'comment':
-                this.$comment.innerHTML = newValue;
+            case 'own-review':
+                if (newValue == "true") {
+                    this.$btnDeleteReview.style.display = "inline-block";
+                }
                 break;
-            case 'review-date':
-                this.$date.innerHTML = newValue;
-                break;
+        }
+    }
+
+    async connectedCallback() {
+        let bookId = sessionStorage.getItem('selected');
+        let book = await viewBookDetail(bookId);
+        let currentUser = await getCurrentUser();
+        this.$btnDeleteReview.onclick = () => {
+            deleteReview(currentUser, book);
         }
     }
 }

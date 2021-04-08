@@ -73,7 +73,7 @@ export default class BookInfoWrapper extends HTMLElement {
                 this.$intro.innerHTML = bookInfo.intro;
                 break;
             case 'status':
-                if (newValue == "avalable") {
+                if (newValue == "available") {
                     this.$status.innerHTML = "Available";
                     this.$statusContainer.style.color = "Green";
                 }

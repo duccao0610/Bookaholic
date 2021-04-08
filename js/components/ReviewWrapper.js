@@ -1,5 +1,5 @@
-import { deleteReview } from "../models/book.js";
-
+import { deleteReview, viewBookDetail } from "../models/book.js";
+import { getCurrentUser } from "../models/user.js";
 const $template = document.createElement('template');
 $template.innerHTML = /*html*/`
     <!-- fontawesome  -->

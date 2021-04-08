@@ -95,7 +95,7 @@ export async function deleteReview(currentUser, book) {
     await firebase
         .firestore()
         .collection('books')
-        .doc(bookId)
+        .doc(book.id)
         .update({
             reviews: firebase.firestore.FieldValue.arrayRemove(deletedReview)
         });

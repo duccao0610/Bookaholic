@@ -109,8 +109,8 @@ button:focus{
 }
 @media (max-width: 1023px) and (min-width: 719px){
     #confirm-box{
-        top : -35%;
-        left: 33%;
+        top : 50%;
+        left: 40%;
     }
 }
 
@@ -118,5 +118,13 @@ button:focus{
     #confirm-box{
         top : -40%;
         left : 24%;
+    }
+
+    #menu #actions{
+        font-size: 10px;
+    }
+    #confirm-box{
+        left: 75px;
+        top :60%;
     }
 }

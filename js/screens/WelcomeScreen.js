@@ -89,7 +89,6 @@ export default class WelcomeScreen extends HTMLElement {
                 do {
                     booksToShow = [];
                     let randoms = getRandomIndexes(books);
-                    console.log(randoms);
                     for (let index of randoms) {
                         if (books[index].isChecked == true) {
                             booksToShow.push(books[index]);

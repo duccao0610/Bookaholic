@@ -52,7 +52,6 @@ export default class AllShelvesContainer extends HTMLElement {
             for (let shelf of data.shelves) {
                 let bookData = [];
                 for (let book of shelf.booksOnShelf) {
-                    console.log(book);
                     let data = await book.get();
                     bookData.push(data);
                 }

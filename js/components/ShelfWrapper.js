@@ -1,4 +1,4 @@
-import { removeShelf } from "../models/user.js";
+import { listenShelvesChanges, removeShelf } from "../models/user.js";
 
 const $template = document.createElement("template");
 $template.innerHTML = /*html*/`
@@ -88,7 +88,6 @@ $template.innerHTML = /*html*/`
         <div id="btn-group">
             <button id="btn-shelf"></button>
             <button id="remove-shelf">⛔</button>
-            <confirm-box id="confirm-box" action="no"></confirm-box>
         </div>
         <button id="btn-check" style="display: none">Check delete</button>
         <div id="book-list"></div>
@@ -109,12 +108,7 @@ export default class ShelfWrapper extends HTMLElement {
     }
 
     static get observedAttributes() {
-        return ['shelf-name', "books", "is-deleted"];
-        this.$confirmBox = this.shadowRoot.getElementById("confirm-box");
-    }
-
-    static get observedAttributes() {
-        return ['shelf-name', "books", "action"];
+        return ['shelf-name', "books", "action", "is-deleted", "delete-book"];
     }
 
     attributeChangedCallback(attrName, oldValue, newValue) {
@@ -128,6 +122,8 @@ export default class ShelfWrapper extends HTMLElement {
                 $bookContainer.setAttribute("id", book.id);
                 $bookContainer.setAttribute("name", book.name);
                 $bookContainer.setAttribute("src", book.cover_img);
+                $bookContainer.setAttribute("in-shelf-screen", "true");
+                $bookContainer.setAttribute("current-shelf", this.$btnShelf.innerHTML);
                 this.$bookList.appendChild($bookContainer);
             }
         }
@@ -135,6 +131,11 @@ export default class ShelfWrapper extends HTMLElement {
             if (newValue == 'true') {
                 removeShelf(this.$btnShelf.innerHTML);
                 this.$shelfWrapper.remove();
+            }
+        }
+        if (attrName == "delete-book") {
+            if (newValue == "true") {
+                this.$bookList.style.display = "flex";
             }
         }
     }
@@ -149,7 +150,8 @@ export default class ShelfWrapper extends HTMLElement {
         }
 
         this.$removeShelf.onclick = () => {
-            this.$btnCheck.style.display = "block";
+            // this.$btnCheck.style.display = "block";
+            removeShelf(this.$btnShelf.innerHTML);
         }
         this.$btnCheck.onclick = () => {
             this.setAttribute("is-deleted", "true");

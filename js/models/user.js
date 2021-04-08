@@ -126,6 +126,16 @@ export async function addBookToShelves(currentUser, updatedShelves, bookId) {
         });
 }
 
+export async function removeBookFromShelf(currentUser) {
+    await firebase
+        .firestore()
+        .collection('users')
+        .doc(currentUser.id)
+        .update({
+            shelves: currentUser.shelves
+        });
+}
+
 export async function createShelf(currentUser, newShelf) {
     await firebase
         .firestore()
@@ -146,7 +156,9 @@ export async function getBookOwners(book) {
     return getDataFromDocs(response.docs);
 }
 
-export async function turnOnLending(currentUser, bookId) {
+export async function turnOnLending() {
+    let currentUser = await getCurrentUser();
+    let bookId = sessionStorage.getItem('selected');
     await firebase.firestore().collection('books').doc(bookId).update({
         owners: firebase.firestore.FieldValue.arrayUnion(currentUser.id)
     });
@@ -155,8 +167,10 @@ export async function turnOnLending(currentUser, bookId) {
     });
 }
 
-export async function turnOffLending(currentUser, bookId, currentViewingBook) {
-
+export async function turnOffLending() {
+    let currentUser = await getCurrentUser();
+    let bookId = sessionStorage.getItem('selected');
+    let currentViewingBook = await viewBookDetail(bookId);
     for (let ownerId of currentViewingBook.owners) {
         if (ownerId == currentUser.id) {
             await firebase.firestore().collection('books').doc(bookId).update({

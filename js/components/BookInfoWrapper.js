@@ -142,6 +142,7 @@ export default class BookInfoWrapper extends HTMLElement {
             } else {
                 this.setAttribute("status", "available");
             }
+
         });
 
         // bấm hiển thị shelves để thêm book
@@ -169,11 +170,16 @@ export default class BookInfoWrapper extends HTMLElement {
         if (currentViewingBook.owners.includes(currentUser.id)) {
             this.$lendSwitch.checked = true;
         }
-
+        // toggle lending status
         this.$lendSwitch.onclick = () => {
-            if (this.$lendSwitch.checked == true) turnOnLending(currentUser, bookId);
-            if (this.$lendSwitch.checked == false) turnOffLending(currentUser, bookId, currentViewingBook);
+            if (this.$lendSwitch.checked == true) {
+                turnOnLending(currentUser, bookId);
+
+            } else if (this.$lendSwitch.checked == false) {
+                turnOffLending(currentUser, currentViewingBook);
+            }
         }
+
     }
 }
 

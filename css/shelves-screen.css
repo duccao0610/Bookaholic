@@ -37,7 +37,7 @@
     position: relative;
     display: none;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
 }
 #menu #forms #shelves #create-shelf-form {
     display: flex;
@@ -59,15 +59,7 @@
 #menu #forms #shelves #create-shelf-form #input-new-shelf-name{
     padding: 10px;
 }
-#menu #forms #shelves #shelves-container{
-    width: 100%;
-    flex-wrap: wrap;
-    margin-top : 100px;
-    margin-left: 50px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
+
 #menu #forms #address-form {
     width:500px;
     position:absolute;

@@ -8,6 +8,7 @@
     width: min-content;
     word-wrap: break-word;
     transition: 0.5s;
+    position: relative;
 }
 #book-container p {
     margin-top: 0;
@@ -65,4 +66,23 @@
     background: linear-gradient(45deg, #a17e7e, #491B1B);
 
     filter: blur(10px);
+}
+
+
+#btn-del-book-from-shelf {
+    display: none;
+    position: absolute;
+    top: 15px;
+    left: 210px;
+    z-index: 13;
+    background: none;
+    border: none;
+    padding: 3px;
+    cursor: pointer;
+}
+#btn-del-book-from-shelf:focus {
+    outline: none;
+}
+#btn-del-book-from-shelf:active{
+    transform: translateY(2px);
 }

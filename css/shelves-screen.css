@@ -37,7 +37,7 @@
     position: relative;
     display: none;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
 }
 #menu #forms #shelves #create-shelf-form {
     display: flex;
@@ -59,15 +59,7 @@
 #menu #forms #shelves #create-shelf-form #input-new-shelf-name{
     padding: 10px;
 }
-#menu #forms #shelves #shelves-container{
-    width: 100%;
-    flex-wrap: wrap;
-    margin-top : 100px;
-    margin-left: 50px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
+
 #menu #forms #address-form {
     width:500px;
     position:absolute;
@@ -79,6 +71,35 @@
     background : linear-gradient(to left,#525252,#3D72B4);
 }
 
+#btn-create-shelf {
+    padding: 7px;
+    border-radius : 10px;
+    border: none;
+    font-size : 15px;
+    color : #ffffff;
+    cursor: pointer;
+    background : linear-gradient(to left,#525252,#3D72B4);
+}
+#btn-create-shelf:hover {
+    text-decoration: underline;
+}
+
+#input-new-shelf-name {
+    font-size : 15px;
+    height: 27px;
+    border-radius : 10px;
+    border: solid black 1px;
+}
+#input-new-shelf-name:focus {
+    outline: none;
+}
+
+button:active {
+    transform: translateY(4px);
+}
+button:focus{
+    outline: none;
+}
 #confirm-box{
     position: absolute;
     top :50%;

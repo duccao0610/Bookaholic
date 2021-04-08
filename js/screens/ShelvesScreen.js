@@ -15,11 +15,15 @@ $template.innerHTML = /*html*/`
         <div id ="forms">
             <div id="shelves">
                 <form id="create-shelf-form">
+<<<<<<< HEAD
                     <button id="btn-create-shelf">Create a new shelf</button>
                     <input id="input-new-shelf-name" placeholder="New shelf's name here" maxlength="15">
+=======
+                    <input id="input-new-shelf-name" placeholder="New shelf's name here">
+                    <button id="btn-create-shelf">Create a new shelf</button>
+>>>>>>> 14db470054410d7dccb556cf4aef29040aba5325
                 </form>
-                <div id="shelves-container">
-                </div>
+                <all-shelves-container id="all-shelves-container"></all-shelves-container>
             </div>
             <address-form id="address-form"></address-form>
         </div>
@@ -37,6 +41,7 @@ export default class ShelvesScreen extends HTMLElement {
         this.$shelvesContainer = this.shadowRoot.getElementById('shelves-container');
         this.$createShelf = this.shadowRoot.getElementById('btn-create-shelf');
         this.$inputNewShelfName = this.shadowRoot.getElementById('input-new-shelf-name');
+        this.$allShelvesContainer = this.shadowRoot.getElementById("all-shelves-container");
 
         this.$shelvesAction = this.shadowRoot.getElementById("my-shelves");
         this.$addressAction = this.shadowRoot.getElementById("my-address");
@@ -50,28 +55,40 @@ export default class ShelvesScreen extends HTMLElement {
 
     async connectedCallback() {
         let currentUser = await getCurrentUser();
-        for (let shelf of currentUser.shelves) {
-            let bookData = [];
-            for (let book of shelf.booksOnShelf) {
-                let data = await book.get();
-                bookData.push(data);
-            }
-            let books = getDataFromDocs(bookData);
+        // let allShelves = [];
+        // for (let shelf of currentUser.shelves) {
+        //     let bookData = [];
+        //     for (let book of shelf.booksOnShelf) {
+        //         console.log(book);
+        //         let data = await book.get();
+        //         bookData.push(data);
+        //     }
+        //     let books = getDataFromDocs(bookData);
+        //     console.log(books);
 
-            let $shelfWrapper = document.createElement("shelf-wrapper");
-            $shelfWrapper.setAttribute('shelf-name', shelf.shelfName);
-            $shelfWrapper.setAttribute("books", JSON.stringify(books));
-            this.$shelvesContainer.appendChild($shelfWrapper);
-        }
+        //     let shelfData = { booksOnShelf: books, shelfName: shelf.shelfName }
+        //     allShelves.push(shelfData);
+        // }
+        // this.$allShelvesContainer.setAttribute("all-shelves", JSON.stringify(allShelves));
 
-        listenShelvesChanges(async (data) => {
-            if (data.shelves.length > currentUser.shelves.length) {
-                let $shelfWrapper = document.createElement("shelf-wrapper");
-                $shelfWrapper.setAttribute('shelf-name', data.shelves[data.shelves.length - 1].shelfName);
-                $shelfWrapper.setAttribute("books", JSON.stringify(data.shelves[data.shelves.length - 1].booksOnShelf));
-                this.$shelvesContainer.appendChild($shelfWrapper);
-            }
-        })
+        // listenShelvesChanges(async (data) => {
+        //     let allShelves = [];
+        //     for (let shelf of data.shelves) {
+        //         let bookData = [];
+        //         for (let book of shelf.booksOnShelf) {
+        //             console.log(book);
+        //             let data = await book.get();
+        //             bookData.push(data);
+        //         }
+        //         let books = getDataFromDocs(bookData);
+        //         console.log(books);
+
+        //         let shelfData = { booksOnShelf: books, shelfName: shelf.shelfName }
+        //         allShelves.push(shelfData);
+        //     }
+        //     this.$allShelvesContainer.setAttribute("all-shelves", JSON.stringify(allShelves));
+        // })
+
         this.$createShelf.onclick = async (event) => {
             event.preventDefault();
             for (let shelf of currentUser.shelves) {
@@ -85,7 +102,7 @@ export default class ShelvesScreen extends HTMLElement {
                     shelfName: this.$inputNewShelfName.value
                 }
 
-                createShelf(newShelf);
+                createShelf(currentUser, newShelf);
 
                 this.$inputNewShelfName.value = "";
             }

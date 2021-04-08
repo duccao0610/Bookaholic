@@ -4,8 +4,8 @@ import { getCurrentUser } from "../models/user.js";
 const $template = document.createElement('template');
 $template.innerHTML = /*html*/`
     <link rel="stylesheet" href="./css/review-form.css">
-    <link rel="stylesheet" href="https://i.icomoon.io/public/temp/5cef4fb803/staricon/style.css">
     <link rel="stylesheet" href="./css/star-rating.css">
+    <link rel="stylesheet" href="https://i.icomoon.io/public/temp/5b475e2a52/staricon/style.css">
 
     <form id="review-form">
         <div id="input-container">
@@ -95,7 +95,8 @@ export default class ReviewForm extends HTMLElement {
                 comment: comment,
                 rating: rating,
                 username: user.name,
-                date: date.toDateString()
+                date: date.toDateString(),
+                userId: user.id
             }
 
             // editReview();

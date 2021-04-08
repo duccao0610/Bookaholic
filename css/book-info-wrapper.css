@@ -81,13 +81,14 @@ button:focus {
 }
 #aside-right #button-group #btn-add-container #add-book-form {
     position: absolute;
-    left: 210px;
+    left: 250px;
     top: 0;
-    border: solid black;
+    border: solid black 1px;
     width: fit-content;
+    padding: 10px;
     display: none;
 }
-#aside-right #button-group #btn-add-container #button-add:hover {
+#aside-right #button-group #btn-add-container #button-add:hover, #accept-add:hover {
     background : linear-gradient(to left,#525252,#3D72B4);
 
 }
@@ -97,6 +98,14 @@ button:focus {
 }
 #aside-right #button-group #button-find-book:hover {
     background: linear-gradient(to left,#A17E7E,#6B4141);
+}
+
+#accept-add {
+    padding: 4px;
+    font-size: 1rem;
+    background : linear-gradient(to right,#525252,#3D72B4);
+    margin-top: 5px;
+    border-radius: 5px;
 }
 
 /* TOGGLE SWITCH */

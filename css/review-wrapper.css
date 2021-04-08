@@ -16,17 +16,20 @@
     flex: 1;
 }
 #review-wrapper #avatar {
-    height: 60px;
+    height: 55px;
 }
 #review-wrapper #cropped-avatar {
-    width: 60px;
-    height: 60px;
+    width: 55px;
+    height: 55px;
     overflow:hidden;   
     position:relative;
     border-radius: 50%;
 }
+#username {
+    margin-top: 5px;
+}
 #review-wrapper #review-content {
-    margin-left: 110px;
+    margin-left: 10px;
     flex: 2;
 }
 #review-wrapper #comment {
@@ -40,6 +43,25 @@
 #review-wrapper #rating {
     display: flex;
 }
+
+#btn-delete-review {
+    height: fit-content;
+    display: none;
+    font-size: 13px;
+    background: none;
+    border: solid black 1px;
+    border-radius: 5px;
+}
+#btn-delete-review:hover {
+    cursor: pointer;
+}
+#btn-delete-review:focus {
+    outline: none;
+}
+#btn-delete-review:active {
+    transform: translateY(4px);
+}
+
 @media (max-width: 719px){
     #review-wrapper {
         width: inherit;

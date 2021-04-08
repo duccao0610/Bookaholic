@@ -22,6 +22,7 @@ import AddressForm from "./components/AddressForm.js";
 import AllReviewsContainer from "./components/AllReviewsContainer.js";
 import UserAddressContainer from "./components/UserAddressContainer.js";
 import OwnerList from "./components/OwnerList.js";
+import ConfirmBox from "./components/ConfirmBox.js";
 import "./router.js";
 
 

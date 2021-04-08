@@ -8,8 +8,8 @@ $template.innerHTML = /*html*/`
     <search-form></search-form>
     <div id="menu">
         <ul id="actions">
+            <li><a id="my-address" class="selected">My address</a></li>
             <li><a id="my-shelves">My shelves</a></li>
-            <li><a id="my-address">My address</a></li>
             <li><a id="btn-logout">Log out</a></li>
         </ul>
         <div id ="forms">
@@ -23,6 +23,7 @@ $template.innerHTML = /*html*/`
             </div>
             <address-form id="address-form"></address-form>
         </div>
+        <confirm-box id="confirm-box"></confirm-box>
     </div>
     <my-footer></my-footer>
 `;
@@ -42,6 +43,8 @@ export default class ShelvesScreen extends HTMLElement {
         this.$btnLogout = this.shadowRoot.getElementById("btn-logout");
         this.$shelves = this.shadowRoot.getElementById("shelves");
         this.$address = this.shadowRoot.getElementById("address-form");
+        this.$confirmBox = this.shadowRoot.getElementById("confirm-box");
+        this.$menu = this.shadowRoot.getElementById("menu");
 
     }
 
@@ -90,7 +93,7 @@ export default class ShelvesScreen extends HTMLElement {
 
         this.$shelvesAction.onclick = (event) => {
             event.preventDefault();
-            this.$shelves.style.display = "block";
+            this.$shelves.style.display = "flex";
             this.$address.style.display = "none";
 
             this.$shelvesAction.classList.add("selected");
@@ -112,6 +115,11 @@ export default class ShelvesScreen extends HTMLElement {
             this.$btnLogout.classList.add("selected");
             this.$addressAction.classList.remove("selected");
             this.$shelvesAction.classList.remove("selected");
+
+
+            this.$confirmBox.setAttribute("action", "logout");
+            this.$confirmBox.setAttribute("question", "logout");
+            this.$confirmBox.style.display = "block";
         }
     }
 }

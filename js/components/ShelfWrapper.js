@@ -6,6 +6,12 @@ $template.innerHTML = /*html*/`
         *{
             font-family: "Montserrat";
         }
+        #shelf-wrapper{
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            margin-bottom : 20px;
+        }
 
         #shelf-wrapper {
             margin-top: 5px;
@@ -14,14 +20,23 @@ $template.innerHTML = /*html*/`
         #book-list{            
             display: none;
             flex-wrap : wrap;
-            justify-content: center;
+            justify-content:flex-start;
             margin : 0 auto;
+        }
+        #btn-group{
+            margin-bottom :10px;
+            align-self :flex-start;
+            display:flex;
+            position:relative;
         }
 
         #btn-shelf {
+            width:fit-content;
             font-size: 20px;
-            margin-left: 70px;
-            background-color: white;
+            font-weight :bold;
+            padding :10px;
+            background : linear-gradient(to left,#525252,#3D72B4);
+            border-radius :3px;
             border: none;
             cursor: pointer;
             border: solid 1px;
@@ -47,6 +62,19 @@ $template.innerHTML = /*html*/`
         button:active {
             transform: translateY(4px);
         }
+        #btn-shelf:hover {
+            background : linear-gradient(to right,#525252,#3D72B4);
+        }
+        #remove-shelf{
+        }
+        #confirm-box {
+            position:absolute;
+            top:-100%;
+            left :100%;
+            transform : translate(50%);
+            display:none;
+            z-index:1000;
+        }
 
         @media (max-width: 719px){
             #book-list {
@@ -60,10 +88,12 @@ $template.innerHTML = /*html*/`
         <div id="btn-group">
             <button id="btn-shelf"></button>
             <button id="remove-shelf">⛔</button>
+            <confirm-box id="confirm-box" action="no"></confirm-box>
         </div>
         <button id="btn-check" style="display: none">Check delete</button>
         <div id="book-list"></div>
     </div>
+
 `;
 export default class ShelfWrapper extends HTMLElement {
     constructor() {
@@ -80,6 +110,11 @@ export default class ShelfWrapper extends HTMLElement {
 
     static get observedAttributes() {
         return ['shelf-name', "books", "is-deleted"];
+        this.$confirmBox = this.shadowRoot.getElementById("confirm-box");
+    }
+
+    static get observedAttributes() {
+        return ['shelf-name', "books", "action"];
     }
 
     attributeChangedCallback(attrName, oldValue, newValue) {
@@ -114,16 +149,16 @@ export default class ShelfWrapper extends HTMLElement {
         }
 
         this.$removeShelf.onclick = () => {
-            // removeShelf(this.$btnShelf.innerHTML);
-            // this.$shelfWrapper.remove();
             this.$btnCheck.style.display = "block";
         }
         this.$btnCheck.onclick = () => {
             this.setAttribute("is-deleted", "true");
+            this.$confirmBox.setAttribute("action", "delete");
+            this.$confirmBox.setAttribute("question", this.$btnShelf.innerHTML);
+            this.$confirmBox.style.display = "block";
+            localStorage.setItem("itemDelete", this.$btnShelf.innerHTML);
         }
     }
-
-
 }
 
 window.customElements.define('shelf-wrapper', ShelfWrapper);

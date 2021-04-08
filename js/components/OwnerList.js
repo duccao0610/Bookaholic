@@ -6,7 +6,8 @@ $template.innerHTML = /*html*/`
         #owner-list{
             text-align :center;
             width :500px;
-            height:fit-content;
+            height : 300px;
+            overflow-y:scroll;
         }
         h3{
             text-transform: uppercase;
